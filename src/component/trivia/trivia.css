@@ -1,0 +1,32 @@
+#memotest-content #trivia-question-container {
+    font-size: 30px;
+    margin: 12px 0 0 20px;
+    color: #00a8ff;
+    border-left: 3px solid #00a8ff;
+    padding-left: 10px;
+    margin-left: 140px;
+    margin-bottom: 10px;
+}
+
+#memotest-content #trivia-question-container input.hint {
+    font-weight: normal;
+    color: #DFE0D9;
+    border: 0;
+    margin-bottom: 0;
+    padding-left: 0px;
+    font-size: 23px;
+    width: 93%;
+    background: transparent;
+    height: 22px;
+    opacity: 0.70;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 0px 10px 14px;
+}
+
+#trivia-pieces-container {
+    width: auto;
+}
+
+#memotest-pieces-container {
+    margin: auto;
+}

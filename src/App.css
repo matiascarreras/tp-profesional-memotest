@@ -1,0 +1,103 @@
+#memotest-content {
+    width: 915px;
+    height: 718px;
+    margin: 0 auto;
+    position: relative;
+}
+
+#memotest-content #menu {
+    height: 38px;
+    margin: 0;
+}
+
+#memotest-content #search {
+    font-size: 13px;
+    width: 222px;
+    height: 550px;
+    float: left;
+    padding: 15px 15px 15px 0;
+}
+
+#memotest-content #memotest{
+    width: 678px;
+    float: right;
+}
+
+#memotest-container #trivia {
+    width: 100%;
+    float: left;
+    margin-top: 20px;
+}
+
+#memotest-pieces-main {
+    height: 550px;
+    position: relative;
+}
+
+#memotest-content .control-panel {
+    width: 915px;
+    height: 40px;
+}
+
+#memotest-content #search-main-image, #memotest-content #search-main-text {
+    height: 600px;
+}
+
+#memotest-content .settings #settings-menu {
+    top: 38px;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    margin: 0 0 0 -1px;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: VerdanaRegular;
+    font-size: 14px;
+    color: #313131;
+}
+
+#memotest-content #settings-menu .memotest-size {
+    display: block;
+    position: relative;
+    z-index: 500;
+    margin: 0 1px;
+    height: 38px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    width: 148px;
+    float: left;
+    border: 1px solid black;
+    border-top: none;
+}
+
+#memotest-content #settings-menu a {
+    display: block;
+    height: 22px;
+    padding: 8px 5px;
+    color: #666;
+    text-decoration: none;
+    text-align: center;
+}
+
+.memotest-tick-chosen-size {
+    float: left;
+    margin: 3px 0 0 9px;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+}
+
+#memotest-content #settings-menu li.memotest-size span {
+    padding: 0;
+    display: block;
+}
+
+#memotest-content #settings-menu li.memotest-size:hover {
+    background-color: #b8ebf0;
+}
+
+#memotest-content #settings-menu li.memotest-size:hover a {
+    color: #159ead;
+}

@@ -1,0 +1,29 @@
+#memotest-pieces-main {
+    height: 550px;
+    position: relative;
+}
+
+#memotest-pieces-container {
+    width: auto;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#memotest-pieces-container, #trivia-pieces-container {
+    margin: auto;
+}
+
+#memotest-pieces-container.small {
+    height: 486px;
+}
+
+#memotest-pieces-container.medium {
+    height: 424px;
+}
+
+#memotest-pieces-container.large {
+    height: 424px;
+}

@@ -1,0 +1,33 @@
+.header{
+	background: url(../../images/header/logomemotitle.png) 0px center no-repeat;
+    background-size: auto 31px;
+    border: none;
+    padding: 5px 0;
+    vertical-align: middle;
+    position: relative;
+    text-align: left;
+}
+
+.header-title{
+	border-bottom: 2px #00a8ff solid;
+	color: #313131;
+	font-weight: normal;
+	margin-top: 10px;
+	margin-left: 0px;
+	padding-left: 34px;
+	padding-top: 14px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 25px;
+	margin: 10px 0 20px;
+	padding-bottom: 12px;
+}
+
+.header-beta-title{
+	display: inline-block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	color: #a8a8a8;
+	text-shadow: none;
+	position: relative;
+	left: 5px;
+}

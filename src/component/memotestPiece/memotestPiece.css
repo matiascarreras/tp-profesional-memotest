@@ -1,0 +1,24 @@
+#memotest-content .memotest-piece {
+    background-image: url(../../images/memotestPiece/dorso-big.png);
+    border: 1px solid #5E5E5E;
+    display: inline-block;
+    border-radius: 9px;
+}
+
+#memotest-pieces-container.small .memotest-piece,
+#trivia-pieces-container.small .memotest-piece{
+	width: 130px;
+    height: 130px;
+    margin: 15px;
+    background-size: 130px 130px;
+}
+
+#memotest-pieces-container.medium .memotest-piece,
+#memotest-pieces-container.large .memotest-piece, 
+#trivia-pieces-container.medium .memotest-piece,
+#trivia-pieces-container.large .memotest-piece{
+	width: 85px;
+	height: 85px;
+	margin: 10px;
+    background-size: 85px 85px;
+}

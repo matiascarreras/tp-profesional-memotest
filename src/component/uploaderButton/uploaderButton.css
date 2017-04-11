@@ -1,0 +1,94 @@
+.uploadFile {
+    background: none;
+    width: 96%;
+    height: 46px;
+    border: 2px solid #bdbdbd;
+    margin-bottom: 5px;
+    display: block;
+    float: left;
+    cursor: pointer;
+    margin-right: 5px;
+    z-index: 2;
+    position: relative;
+    border-radius: 8px;
+}
+
+.uploadFile:hover {
+    background-color: #00a8ff;
+    border-color: #00a8ff;
+}
+
+.uploadFile img {
+    float: left;
+    width: 28px;
+    height: 36px;
+    background-repeat: no-repeat;
+    background-size: 28px 36px;
+    margin: 6px 22px 5px 7px;
+    background-image: url(../../images/uploaderButton/localBtn.svg);
+}
+
+.uploadFile:hover img {
+    background-image: url(../../images/uploaderButton/localBtn-hover.svg);
+}
+
+.uploadFile.dropbox img {
+    background-image: url(../../images/uploaderButton/dropboxIcon.svg);
+}
+
+.uploadFile.dropbox:hover img {
+    background-image: url(../../images/uploaderButton/dropboxIcon-hover.svg);
+}
+
+.uploadFile.box img {
+    background-image: url(../../images/uploaderButton/boxIcon.svg);
+}
+
+.uploadFile.box:hover img {
+    background-image: url(../../images/uploaderButton/boxIcon-hover.svg);
+}
+
+.uploadFile.onedrive img {
+    background-image: url(../../images/uploaderButton/onedriveIcon.svg);
+}
+
+.uploadFile.onedrive:hover img {
+    background-image: url(../../images/uploaderButton/onedriveIcon.svg);
+}
+
+.uploadFile.gdrive img {
+    background-image: url(../../images/uploaderButton/driveIcon.svg);
+}
+
+.uploadFile.gdrive:hover img {
+    background-image: url(../../images/uploaderButton/driveIcon.svg);
+}
+
+.uploadFile #browse-local-file,
+.uploadFile #browse-dropbox-file,
+.uploadFile #browse-box-file,
+.uploadFile #browse-onedrive-file,
+.uploadFile #browse-gdrive-file {
+    float: left;
+    width: 135px;
+    padding: 14px 0;
+    color: #52585E;
+    font-size: 14px;
+    font-family: arial;
+    font-weight: bold;
+}
+
+#local-search-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    border: solid transparent;
+    border-width: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    direction: ltr;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}

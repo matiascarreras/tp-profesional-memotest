@@ -1,0 +1,50 @@
+.button-icon{
+    background-color: #ffffff;
+	background-repeat: no-repeat;
+	width: 111px;
+    height: 38px;
+	cursor: pointer;
+	font-family: 'roboto regular', Arial, Helvetica, sans-serif; */
+    font-size: 14px;
+    -webkit-appearance: none;
+	padding: 10px 8px 7px 45px;
+    text-align: left;
+    border: none;
+    font-weight: normal;
+    color: #313131;
+    float: left;
+    position: relative;
+}
+
+.button-icon.text{
+	background-image: url(../../images/iconButton/btn-text.png);
+}
+
+.button-icon.text.on{
+	background-image: url(../../images/iconButton/btn-text-on.png);
+	background-color: #00a8ff;
+	color: #ffffff;
+}
+
+.button-icon.image{
+	background-image: url(../../images/iconButton/btn-imagen.png);
+}
+
+.button-icon.image.on{
+	background-image: url(../../images/iconButton/btn-imagen-on.png);
+	background-color: #00a8ff;
+	color: #ffffff;
+}
+
+.button-icon.settings{
+	background-image: url(../../images/iconButton/btn-settings.png);
+	float: right;
+	list-style: none;
+	padding: 10px 0px 0px 41px;
+}
+
+.button-icon.settings.on{
+	background-image: url(../../images/iconButton/btn-settings-on.png);
+	background-color: #00a8ff;
+	color: #ffffff;
+}

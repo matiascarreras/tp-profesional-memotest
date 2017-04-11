@@ -1,0 +1,34 @@
+#local-search-content {
+    height: 321px;
+    width: 240px;
+    overflow: auto;
+    float: left;
+}
+
+.google-search-show-more {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto 5px auto;
+}
+
+.google-search-show-more .spanLink, .google-search-show-more .poweredBy {
+    display: inline-block;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+.spanLink {
+    cursor: pointer;
+}
+
+.google-search-show-more a{
+    color: #30b8c8;
+}
+
+.hide {
+    display: none;
+}
