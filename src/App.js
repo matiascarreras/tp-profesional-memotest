@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
-import Header from './component/header/header'
-import Search from './component/search/search'
-import Memotest from './component/memotest/memotest'
-import Trivia from './component/trivia/trivia'
-import TextButton from './component/textButton/textButton'
-import SwitchButton from './component/switchButton/switchButton'
+import Header from './components/header/header'
+import Search from './components/search/search'
+import Memotest from './components/memotest/memotest'
+import Trivia from './components/trivia/trivia'
+import TextButton from './components/textButton/textButton'
+import SwitchButton from './components/switchButton/switchButton'
 import './App.css';
 import iconTick from './images/icon-tick.png'
+import * as actions from './actions'
+import { connect } from 'react-redux'
+import { bindActionCreators} from 'redux'
+import * as constants from './constants/constants'
 
 class App extends Component {
 
@@ -14,9 +18,6 @@ class App extends Component {
     super()
     this.state = {
       showGridSizeMenu: false,
-      smallGridSizeSelected: true,
-      mediumGridSizeSelected: false,
-      largeGridSizeSelected: false, 
       isSwitchOn: false,
       showTrivia: false
     }
@@ -26,16 +27,8 @@ class App extends Component {
     this.setState({showGridSizeMenu:!this.state.showGridSizeMenu})
   }
 
-  showSmallGrid(){
-    this.setState({smallGridSizeSelected:true, mediumGridSizeSelected:false, largeGridSizeSelected:false})
-  }
-
-  showMediumGrid(){
-    this.setState({smallGridSizeSelected:false, mediumGridSizeSelected:true, largeGridSizeSelected:false})
-  }
-
-  showLargeGrid(){
-    this.setState({smallGridSizeSelected:false, mediumGridSizeSelected:false, largeGridSizeSelected:true})
+  changeGridSize(gridSize){
+    this.props.gridSizeActions.selectGridSize(gridSize)
   }
 
   handleSwitchClick(){
@@ -53,24 +46,11 @@ class App extends Component {
   }
 
   render() {
-
+    //@todo: psf: remove this error log from App.js
+    console.log(this.props);
+    
     let settingsBtnOn = this.state.showGridSizeMenu ? 'on' : '';
     let settingsBtnClasses = `${settingsBtnOn} button-icon settings`;
-
-    let showSmallSizeTick = this.state.smallGridSizeSelected ? '' : 'hide';
-    let smallTickClasses = `${showSmallSizeTick} memotest-tick-chosen-size`;
-
-    let showMediumSizeTick = this.state.mediumGridSizeSelected ? '' : 'hide';
-    let mediumTickClasses = `${showMediumSizeTick} memotest-tick-chosen-size`;
-
-    let showLargeSizeTick = this.state.largeGridSizeSelected ? '' : 'hide';
-    let largeTickClasses = `${showLargeSizeTick} memotest-tick-chosen-size`;
-
-    let smallSize = this.state.smallGridSizeSelected ? "small" : "";
-    let mediumSize = this.state.mediumGridSizeSelected ? "medium" : "";
-    let largeSize = this.state.largeGridSizeSelected ? "large" : "";
-
-    let memoteGridSizeClass = `${smallSize} ${mediumSize} ${largeSize}`;
 
     let showNextBtn = this.state.isSwitchOn ? "" : "hide";
     let nextBtnClass = `${showNextBtn} button-text blue`;
@@ -93,21 +73,21 @@ class App extends Component {
         <div id="menu" className={this.state.showTrivia ? "hide" : ""}>
           <li className={settingsBtnClasses} onClick={this.openGridSizeMenu.bind(this)}>Grid Size
             <ul id="settings-menu" className={this.state.showGridSizeMenu ? "" : "hide"}>
-              <li className="memotest-size size_1" onClick={this.showSmallGrid.bind(this)}>
+              <li className="memotest-size size_1" onClick={this.changeGridSize.bind(this, constants.SMALL_GRID_SIZE)}>
                 <a>
-                  <img src={iconTick} className={smallTickClasses} alt=""/>
+                  <img src={iconTick} className={this.props.gridSize.gridSize == constants.SMALL_GRID_SIZE ? "memotest-tick-chosen-size" : "memotest-tick-chosen-size hide"} alt=""/>
                   <span>6 pairs</span> 
                 </a>
               </li>
-              <li className="memotest-size size_2" onClick={this.showMediumGrid.bind(this)}>
+              <li className="memotest-size size_2" onClick={this.changeGridSize.bind(this, constants.MEDIUM_GRID_SIZE)}>
                 <a>
-                  <img src={iconTick} className={mediumTickClasses} alt=""/>
+                  <img src={iconTick} className={this.props.gridSize.gridSize == constants.MEDIUM_GRID_SIZE ? "memotest-tick-chosen-size" : "memotest-tick-chosen-size hide"} alt=""/>
                   <span>8 pairs</span>
                 </a>
               </li>
-              <li className="memotest-size size_3" onClick={this.showLargeGrid.bind(this)}>
+              <li className="memotest-size size_3" onClick={this.changeGridSize.bind(this, constants.LARGE_GRID_SIZE)}>
                 <a>
-                  <img src={iconTick} className={largeTickClasses} alt=""/>
+                  <img src={iconTick} className={this.props.gridSize.gridSize == constants.LARGE_GRID_SIZE ? "memotest-tick-chosen-size" : "memotest-tick-chosen-size hide"} alt=""/>
                   <span>12 pairs</span>
                 </a>
               </li>
@@ -115,8 +95,8 @@ class App extends Component {
           </li>
         </div>
         <Search hide={this.state.showTrivia}/>
-        <Memotest gridSize={memoteGridSizeClass} hide={this.state.showTrivia}/>
-        <Trivia gridSize={memoteGridSizeClass} hide={!this.state.showTrivia}/>
+        <Memotest gridSize={this.props.gridSize.gridSize} hide={this.state.showTrivia}/>
+        <Trivia gridSize={this.props.gridSize.gridSize} hide={!this.state.showTrivia}/>
         <div className={memotestControlPanelClass}>
           <SwitchButton text="Final Question" onClick={this.handleSwitchClick.bind(this)}/>
           <TextButton value="Next" id="button-next" class={nextBtnClass} onClick={this.handleNextBtnClick.bind(this)}/>
@@ -131,4 +111,14 @@ class App extends Component {
   }
 }
 
-export default App;
+function mapStateToProps(state){
+  return state;
+}
+
+function mapDispatchToProps(dispatch){
+  return { 
+    gridSizeActions: bindActionCreators(actions, dispatch),
+  } 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
