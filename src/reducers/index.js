@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux'
-import gridSize from './gridSize'
+import memotestReducer from './memotestReducer'
 
 const rootReducer = combineReducers({
-  gridSize: gridSize
+  memotest: memotestReducer
 })
 
 export default rootReducer

@@ -1,17 +1,16 @@
 #memotest-content #trivia-question-container {
-    font-size: 30px;
     margin: 12px 0 0 20px;
-    color: #00a8ff;
     border-left: 3px solid #00a8ff;
     padding-left: 10px;
     margin-left: 140px;
     margin-bottom: 10px;
 }
 
-#memotest-content #trivia-question-container input.hint {
+#memotest-content #trivia-question-container .triviaQuestion {
     font-weight: normal;
-    color: #DFE0D9;
+    color: #00a8ff;
     border: 0;
+    outline: none;
     margin-bottom: 0;
     padding-left: 0px;
     font-size: 23px;
@@ -25,8 +24,25 @@
 
 #trivia-pieces-container {
     width: auto;
+    margin-top: 5px;
+    text-align: center;
 }
 
-#memotest-pieces-container {
-    margin: auto;
+#trivia-pieces-container.small {
+    height: 486px;
+    padding: 0px 53px;
+}
+
+#trivia-pieces-container.medium {
+    height: 424px;
+    padding: 0px 191px;
+}
+
+#trivia-pieces-container.large {
+    height: 424px;
+    padding: 0px 84px;
+}
+
+#trivia-pieces-container .memotest-piece.selected{
+    border: 4px #00a8ff solid;
 }

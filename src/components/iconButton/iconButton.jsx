@@ -5,7 +5,10 @@ class IconButton extends Component {
 
   render() {
     return (
-    	<button className={this.props.class} onClick={this.props.onClick}>{this.props.text}</button>
+    	<button className={this.props.class} onClick={this.props.onClick}>
+    		{this.props.text}
+    		<img src={this.props.icon} alt=""/>
+    	</button>
     );
   }
 }

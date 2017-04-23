@@ -1,0 +1,53 @@
+#search-panel-local {
+    margin-top: 10px;
+}
+
+#local-search-content {
+    height: 321px;
+    width: 240px;
+    overflow: auto;
+    float: left;
+}
+
+.spanLink {
+    cursor: pointer;
+}
+
+.uploadFile {
+    margin-bottom: 5px;
+    display: block;
+    float: left;
+    margin-right: 5px;
+    z-index: 2;
+    position: relative;
+}
+
+#local-search-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    border: solid transparent;
+    border-width: 0;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    direction: ltr;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+}
+
+.uploadFile span {
+    float: left;
+    width: 165px;
+    padding: 15px 0;
+    color: #52585E;
+    font-size: 14px;
+    font-family: arial;
+    font-weight: bold;
+}
+
+.uploadFile:hover > span{
+    color: #ffffff;
+}
+

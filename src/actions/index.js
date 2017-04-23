@@ -1,8 +1,28 @@
-import * as types from '../constants/ActionTypes'
+import * as types from '../constants/actionTypes'
 
 export function selectGridSize(gridSize) {
   return { 
   	type: types.SELECT_GRID_SIZE,
   	gridSize: gridSize
+  }
+}
+
+export function toggleTriviaQuestion() {
+  return { 
+  	type: types.TOGGLE_TRIVIA_QUESTION,
+  }
+}
+
+export function saveTriviaQuestion(questionText) {
+  return { 
+  	type: types.SAVE_TRIVIA_QUESTION,
+  	questionText: questionText
+  }
+}
+
+export function saveTriviaCorrectAnswer(correctAnswer) {
+  return { 
+    type: types.SAVE_TRIVIA_CORRECT_ANSWER,
+    correctAnswer: correctAnswer
   }
 }

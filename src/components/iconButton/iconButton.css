@@ -1,50 +1,30 @@
 .button-icon{
     background-color: #ffffff;
-	background-repeat: no-repeat;
 	width: 111px;
     height: 38px;
 	cursor: pointer;
-	font-family: 'roboto regular', Arial, Helvetica, sans-serif; */
-    font-size: 14px;
+	font-family: 'roboto regular', Arial, Helvetica, sans-serif;
+    font-size: 13px;
     -webkit-appearance: none;
 	padding: 10px 8px 7px 45px;
     text-align: left;
     border: none;
     font-weight: normal;
     color: #313131;
-    float: left;
+    list-style: none;
+    outline: none;
+}
+
+.button-icon.on{
+	background-color: #00a8ff;
+	color: #ffffff;
+}
+
+.button-icon img {
+    height: 38px;
+    left: -45px;
+    top: -25px;
     position: relative;
+    background-repeat: no-repeat;
 }
 
-.button-icon.text{
-	background-image: url(../../images/iconButton/btn-text.png);
-}
-
-.button-icon.text.on{
-	background-image: url(../../images/iconButton/btn-text-on.png);
-	background-color: #00a8ff;
-	color: #ffffff;
-}
-
-.button-icon.image{
-	background-image: url(../../images/iconButton/btn-imagen.png);
-}
-
-.button-icon.image.on{
-	background-image: url(../../images/iconButton/btn-imagen-on.png);
-	background-color: #00a8ff;
-	color: #ffffff;
-}
-
-.button-icon.settings{
-	background-image: url(../../images/iconButton/btn-settings.png);
-	float: right;
-	list-style: none;
-	padding: 10px 0px 0px 41px;
-}
-
-.button-icon.settings.on{
-	background-image: url(../../images/iconButton/btn-settings-on.png);
-	background-color: #00a8ff;
-	color: #ffffff;
-}

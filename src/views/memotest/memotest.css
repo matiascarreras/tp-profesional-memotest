@@ -1,8 +1,3 @@
-#memotest-pieces-main {
-    height: 550px;
-    position: relative;
-}
-
 #memotest-pieces-container {
     width: auto;
     position: absolute;
@@ -12,8 +7,8 @@
     right: 0;
 }
 
-#memotest-pieces-container, #trivia-pieces-container {
-    margin: auto;
+#memotest-pieces-container{
+    margin-top: 5px;
 }
 
 #memotest-pieces-container.small {
@@ -22,8 +17,12 @@
 
 #memotest-pieces-container.medium {
     height: 424px;
+    padding: 10px 57px 0px 57px;
+    text-align: center;
 }
 
 #memotest-pieces-container.large {
     height: 424px;
+    padding-top: 10px;
+    text-align: center;
 }

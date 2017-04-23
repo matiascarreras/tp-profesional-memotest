@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './searchMainText.css';
-import FontPiece from '../fontPiece/fontPiece'
+import FontPiece from '../../components/fontPiece/fontPiece'
 
 class SearchMainText extends Component {
 

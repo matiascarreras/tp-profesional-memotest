@@ -8,6 +8,7 @@
 #memotest-content #menu {
     height: 38px;
     margin: 0;
+    float: right;
 }
 
 #memotest-content #search {
@@ -15,11 +16,11 @@
     width: 222px;
     height: 550px;
     float: left;
-    padding: 15px 15px 15px 0;
+    padding: 0px 15px 15px 0px;
 }
 
 #memotest-content #memotest{
-    width: 678px;
+    width: 648px;
     float: right;
 }
 
@@ -41,13 +42,14 @@
 
 #memotest-content #search-main-image, #memotest-content #search-main-text {
     height: 600px;
+    margin-top: 20px;
 }
 
-#memotest-content .settings #settings-menu {
-    top: 38px;
+#memotest-content #item-list {
+    top: -28px;
     background-color: white;
-    position: absolute;
-    left: 0;
+    position: relative;
+    left: -46px;
     margin: 0 0 0 -1px;
     padding: 0;
     list-style: none;
@@ -58,7 +60,7 @@
     color: #313131;
 }
 
-#memotest-content #settings-menu .memotest-size {
+#memotest-content #item-list .memotest-size {
     display: block;
     position: relative;
     z-index: 500;
@@ -66,13 +68,14 @@
     height: 38px;
     cursor: pointer;
     background-repeat: no-repeat;
-    width: 148px;
+    width: 109px;
     float: left;
     border: 1px solid black;
     border-top: none;
+    background-color: #ffffff;
 }
 
-#memotest-content #settings-menu a {
+#memotest-content #item-list a {
     display: block;
     height: 22px;
     padding: 8px 5px;
@@ -81,23 +84,77 @@
     text-align: center;
 }
 
-.memotest-tick-chosen-size {
+#item-list .memotest-tick-chosen-size {
     float: left;
     margin: 3px 0 0 9px;
     width: 14px;
     height: 14px;
     position: absolute;
+    top: 5px;
+    left: 2px;
 }
 
-#memotest-content #settings-menu li.memotest-size span {
+#memotest-content #item-list .memotest-size span {
     padding: 0;
     display: block;
 }
 
-#memotest-content #settings-menu li.memotest-size:hover {
-    background-color: #b8ebf0;
+#memotest-content #item-list .memotest-size:hover {
+    background-color: #dbf2ff;
 }
 
-#memotest-content #settings-menu li.memotest-size:hover a {
+#memotest-content #item-list .memotest-size:hover a {
     color: #159ead;
+}
+
+.switch-button {
+  position: absolute;
+  display: inline-block;
+  width: 52px;
+  height: 27px;
+  right: 110px;
+  bottom: 16px;
+}
+
+.switch-button-label {
+  position: absolute;
+  right: 74px;
+  bottom: 4px;
+  width: 104px;
+  color: #313131;
+}
+
+
+.button-text{
+    margin-right: 0;
+    position: absolute;
+    bottom: 16px;
+}
+
+.button-text.blue{
+    color: #ffffff;
+    background-color: #00a8ff;
+}
+
+.button-text.blue:hover{
+    background-color: #4cc2ff;
+}
+
+.button-text.white{
+    background-color: #ffffff;
+    color: #00a8ff;
+    border: 2px solid #00a8ff;
+}
+
+.button-text.white:hover{
+    background-color: #00a8ff;
+    color: #ffffff;
+}
+
+#button-next, #button-done, #button-done-trivia {
+    right: 0;
+}
+
+.hide {
+    display: none;
 }

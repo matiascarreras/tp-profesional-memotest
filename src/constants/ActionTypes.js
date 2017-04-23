@@ -1,1 +1,0 @@
-export const SELECT_GRID_SIZE = 'SELECT_GRID_SIZE'
