@@ -48,6 +48,7 @@
     background-image: none;
     line-height: 42px;
     margin-top: 44px;
+    outline: none;
 }
 
 #memotest-pieces-container.small .memotest-piece.text textarea,

@@ -96,7 +96,15 @@ class SearchPanelLocal extends Component {
 
     onDrop(files) {
         console.log('Received files: ', files);
-        this.props.memotestActions.saveUploadersFiles(files)
+        let filesArray = []
+        files.forEach(function(file){
+            filesArray.push({
+                size: file.size,
+                name: file.name,
+                link: file.preview
+            })
+        })
+        this.props.memotestActions.saveUploadersFiles(filesArray)
     }
 
     onOpenClick() {
@@ -107,7 +115,15 @@ class SearchPanelLocal extends Component {
     dropboxSuccessCallback(files){
         //@todo: psf: remove this error log from searchPanelLocal.jsx
         console.log("dropbox files:", files);
-        this.props.memotestActions.saveUploadersFiles(files)
+        let filesArray = []
+        files.forEach(function(file){
+            filesArray.push({
+                size: file.bytes,
+                name: file.name,
+                link: file.thumbnailLink
+            })
+        })
+        this.props.memotestActions.saveUploadersFiles(filesArray)
     }
 
     dropboxCancelCallback(){
@@ -117,15 +133,24 @@ class SearchPanelLocal extends Component {
     googleDrivePickerOnChange(data){
         console.log("gdrive files:", data);
         if(data.action === "picked"){
-            this.props.memotestActions.saveUploadersFiles(data.docs)
+            let filesArray = []
+            data.docs.forEach(function(file){
+                filesArray.push({
+                    size: file.sizeBytes,
+                    name: file.name,
+                    link: file.url
+                })
+            })
+            this.props.memotestActions.saveUploadersFiles(filesArray)
         }
     }
 
     localSearchContentElements(files){
+        console.log(files)
         for (var i = 0; i < files.length; i++) {
             return(
                 <div className="search-image ui-draggable" draggable="true">
-                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTX7gHwv1vmfrt__Yo3cx1vJmWoQsp0ev_hshA_h_4E4vnVrCNCqFHduQQp" alt=""/>
+                    <img src={files[i].link} alt=""/>
                 </div>
             )
         }
@@ -182,8 +207,10 @@ class SearchPanelLocal extends Component {
                     className={dropzoneClass}
                     activeClassName="active"
                     rejectClassName="reject"
+                    disableClick={true}
+                    accept={"image/png, image/jpeg"}
                     onDrop={this.onDrop.bind(this)}>
-                    <div>Try dropping some files here, or click to select files to upload.</div>
+                    <div>Drag and Drop any files here!</div>
                 </Dropzone>
             </div>
         );
