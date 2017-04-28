@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators} from 'redux'
 import './searchPanelGoogle.css';
+import * as actions from '../../actions'
 
 class SearchPanelGoogle extends Component {
 
@@ -8,7 +11,6 @@ class SearchPanelGoogle extends Component {
               
         this.state = {  
             googleSearchText : "",
-            googleImagesArray:[],
         };                
     }
 
@@ -43,20 +45,22 @@ class SearchPanelGoogle extends Component {
         .then( (json) => {
             console.log('parsed json', json.payload.images)
             for (var i = 0; i < json.payload.images.data.length; i++) {
-                let thumbnailLink = json.payload.images.data[i].image.thumbnailLink
-                this.state.googleImagesArray.push(
-                    <div class="search-image ui-draggable" draggable="true">
-                        <img src={thumbnailLink} alt=""/>
-                    </div>
-                )
-            }
-            //@todo: psf: remove this error log from searchPanelGoogle.jsx
-            console.log(this.state.googleImagesArray);
-            
+                this.props.memotestActions.saveGoogleImagesFiles(json.payload.images.data)
+            }          
         })
         .catch( (ex) => {
             console.log('parsing failed', ex)
         })
+    }
+
+    googleSearchContentElements(files){
+        for (var i = 0; i < files.length; i++) {
+            return(
+                <div className="search-image ui-draggable" draggable="true">
+                    <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTX7gHwv1vmfrt__Yo3cx1vJmWoQsp0ev_hshA_h_4E4vnVrCNCqFHduQQp" alt=""/>
+                </div>
+            )
+        }
     }
 
     render() {
@@ -71,15 +75,7 @@ class SearchPanelGoogle extends Component {
                     <img src="../../images/searchPanelGoogle/google_loading.gif" alt=""/>
                 </div>
                 <div id="google-search-content">
-                    <div className="search-image ui-draggable" draggable="true">
-                        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTX7gHwv1vmfrt__Yo3cx1vJmWoQsp0ev_hshA_h_4E4vnVrCNCqFHduQQp" alt=""/>
-                    </div>
-                    <div className="search-image ui-draggable" draggable="true">
-                        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTX7gHwv1vmfrt__Yo3cx1vJmWoQsp0ev_hshA_h_4E4vnVrCNCqFHduQQp" alt=""/>
-                    </div>
-                    <div className="search-image ui-draggable" draggable="true">
-                        <img src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcTX7gHwv1vmfrt__Yo3cx1vJmWoQsp0ev_hshA_h_4E4vnVrCNCqFHduQQp" alt=""/>
-                    </div>
+                    {this.googleSearchContentElements(this.props.memotest.googleFiles)}
                 </div>
                 <div className="googleImagesResults">
                     <h2>We're sorry!</h2>
@@ -96,4 +92,14 @@ class SearchPanelGoogle extends Component {
     }
 }
 
-export default SearchPanelGoogle;
+function mapStateToProps(state){
+  return state;
+}
+
+function mapDispatchToProps(dispatch){
+  return { 
+    memotestActions: bindActionCreators(actions, dispatch),
+  } 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPanelGoogle);

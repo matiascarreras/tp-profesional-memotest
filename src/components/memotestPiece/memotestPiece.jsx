@@ -8,7 +8,7 @@ class MemotestPiece extends Component {
 
   	let content = ""
   	if(this.props.type === "text"){
-  		content = <textarea defaultValue={this.props.text}></textarea>
+  		content = <textarea disabled={this.props.disabled} defaultValue={this.props.text}></textarea>
   	} else if(this.props.type === "image"){
   		content = <img src={this.props.src} alt=""/>
   	}
@@ -18,7 +18,7 @@ class MemotestPiece extends Component {
   	    'image': this.props.type === "image",
   	    'empty': this.props.type === "empty",
   	    'memotest-piece ui-droppable': true,
-        'selected': this.props.id === this.props.correctAnswer
+        'selected': this.props.id === this.props.correctAnswer,
   	});
 
     return (

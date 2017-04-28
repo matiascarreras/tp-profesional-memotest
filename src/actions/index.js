@@ -26,3 +26,17 @@ export function saveTriviaCorrectAnswer(correctAnswer) {
     correctAnswer: correctAnswer
   }
 }
+
+export function saveGoogleImagesFiles(files) {
+  return { 
+    type: types.SAVE_GOOGLE_IMAGES_FILES,
+    googleFiles: files
+  }
+}
+
+export function saveUploadersFiles(files) {
+  return { 
+    type: types.SAVE_UPLOADERS_FILES,
+    uploaderFiles: files
+  }
+}

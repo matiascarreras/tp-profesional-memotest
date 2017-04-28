@@ -51,3 +51,27 @@
     color: #ffffff;
 }
 
+.drag-drop-zone{
+    height: 160px;
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    border: 2px #bdbdbd dashed;
+    border-radius: 8px;
+}
+
+.drag-drop-zone.active{
+    border-color: #00a8ff;
+}
+
+.drag-drop-zone div{
+    text-align: center;
+    position: relative;
+    top: 55px;
+    padding: 10px;
+    color: #313131;
+}
+
+.drag-drop-zone.active div{
+    color: #00a8ff;
+}

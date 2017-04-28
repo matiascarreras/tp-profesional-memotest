@@ -44,7 +44,7 @@ class Trivia extends Component {
         }
 
         for (var i = 0; i < cantPieces; i++) {
-            triviaPieces.push(<MemotestPiece correctAnswer={this.props.memotest.triviaQuestionCorrectAnswer}id={this.props.memotest.pieces[i].id} type={this.props.memotest.pieces[i].type} text={this.props.memotest.pieces[i].text} src={this.props.memotest.pieces[i].src} textStyle={this.props.memotest.pieces[i].textStyle} onClick={this.handleOnClickPiece.bind(this, this.props.memotest.pieces[i].id)}/>);
+            triviaPieces.push(<MemotestPiece disabled="true" correctAnswer={this.props.memotest.triviaQuestionCorrectAnswer}id={this.props.memotest.pieces[i].id} type={this.props.memotest.pieces[i].type} text={this.props.memotest.pieces[i].text} src={this.props.memotest.pieces[i].src} textStyle={this.props.memotest.pieces[i].textStyle} onClick={this.handleOnClickPiece.bind(this, this.props.memotest.pieces[i].id)}/>);
         };
 
         return (

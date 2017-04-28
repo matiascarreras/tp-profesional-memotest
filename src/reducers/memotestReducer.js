@@ -5,13 +5,15 @@ const initialState = {
 	gridSize: constants.SMALL_GRID_SIZE,
 	isTriviaQuestionEnable: false,
 	triviaQuestionText: "",
-	triviaQuestionCorrectAnswer: 7,
-	pieces:[]
+	triviaQuestionCorrectAnswer: "",
+	pieces:[],
+  googleFiles:[],
+  uploaderFiles:[]
 }
 
 const arrayPieces = []
 for (var i = 0; i < 24; i++) {
-  arrayPieces[i] = {type:'text',text:'',src:'',id:i,textStyle:'font5'}
+  arrayPieces[i] = {type:'text',text:'adsasdsaa',src:'',id:i,textStyle:'font5'}
 }
 initialState.pieces = arrayPieces
 
@@ -29,6 +31,12 @@ const memotestReducer = (state = initialState, action) => {
       	return newState
     case types.SAVE_TRIVIA_CORRECT_ANSWER:
       newState.triviaQuestionCorrectAnswer = action.correctAnswer
+        return newState
+    case types.SAVE_GOOGLE_IMAGES_FILES:
+      newState.googleFiles = action.googleFiles
+        return newState
+    case types.SAVE_UPLOADERS_FILES:
+      newState.uploaderFiles = action.uploaderFiles
         return newState
     default:
       return state
