@@ -33,7 +33,7 @@ class Memotest extends Component {
         }
 
         for (var i = 0; i < cantPieces; i++) {
-            memotestPieces.push(<MemotestPiece id={this.props.pieces[i].id} type={this.props.pieces[i].type} text={this.props.pieces[i].text} src={this.props.pieces[i].src} textStyle={this.props.pieces[i].textStyle}/>);
+            memotestPieces.push(<MemotestPiece key={i} id={this.props.pieces[i].id} type={this.props.pieces[i].type} text={this.props.pieces[i].text} src={this.props.pieces[i].src} textStyle={this.props.pieces[i].textStyle}/>);
         };
 
         return (
