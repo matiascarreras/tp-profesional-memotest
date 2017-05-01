@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../fonts/fonts.css';
 import './fontPiece.css';
 
 class FontPiece extends Component {
