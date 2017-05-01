@@ -83,7 +83,10 @@ class SearchPanelGoogle extends Component {
                     })
                 })
                 this.props.memotestActions.saveGoogleImagesFiles(filesArray)
-                if(json.payload.images.showMore){
+                if(json.payload.images.data.length < 10){
+                    this.setState({googleSearchPage : this.state.googleSearchPage + 1});
+                    this.makeGoogleSearch(this.state.googleSearchText, this.state.googleSearchPage)
+                } else if(json.payload.images.showMore){
                     this.setState({googleSearchShowMore : true});
                     this.setState({googleSearchPage : this.state.googleSearchPage + 1});
                 } else {
@@ -103,13 +106,15 @@ class SearchPanelGoogle extends Component {
     }
 
     googleSearchContentElements(files){
-        for (var i = 0; i < files.length; i++) {
-            return(
-                <div className="search-image ui-draggable" draggable="true">
-                    <img src={files[i].link} alt=""/>
+        let elements = []
+        for (const key of Object.keys(files)) {
+            elements.push(
+                <div key={key} className="search-image ui-draggable" draggable="true">
+                    <img src={files[key].link} alt=""/>
                 </div>
             )
         }
+        return elements
     }
 
     render() {

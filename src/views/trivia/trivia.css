@@ -46,3 +46,38 @@
 #trivia-pieces-container .memotest-piece.selected{
     border: 4px #00a8ff solid;
 }
+
+#memotest-content #trivia .control-panel {
+    width: 915px;
+    height: 40px;
+}
+
+#memotest-content #trivia .control-panel .button-text{
+    margin-right: 0;
+    position: absolute;
+    bottom: 16px;
+}
+
+#memotest-content #trivia .control-panel .button-text.blue{
+    color: #ffffff;
+    background-color: #00a8ff;
+}
+
+#memotest-content #trivia .control-panel .button-text.blue:hover{
+    background-color: #4cc2ff;
+}
+
+#memotest-content #trivia .control-panel .button-text.white{
+    background-color: #ffffff;
+    color: #00a8ff;
+    border: 2px solid #00a8ff;
+}
+
+#memotest-content #trivia .control-panel .button-text.white:hover{
+    background-color: #00a8ff;
+    color: #ffffff;
+}
+
+#memotest-content #trivia .control-panel #button-done-trivia {
+    right: 0;
+}

@@ -5,7 +5,6 @@ import Header from './views/header/header'
 import Search from './views/search/search'
 import Memotest from './views/memotest/memotest'
 import Trivia from './views/trivia/trivia'
-import ItemList from './components/itemList/itemList'
 import './App.css';
 import icon from './assets/iconButton/btn-settings.png'
 import iconOn from './assets/iconButton/btn-settings-on.png'
@@ -59,12 +58,6 @@ class App extends Component {
         'button-icon': true,
         'on': this.state.showGridSizeMenu,
     });
-
-    let list = [
-      {onClick:'this.changeGridSize.bind(this, constants.SMALL_GRID_SIZE)',id:'size_1',text:'6 pairs'},
-      {onClick:'this.changeGridSize.bind(this, constants.MEDIUM_GRID_SIZE)',id:'size_2',text:'8 pairs'},
-      {onClick:'this.changeGridSize.bind(this, constants.LARGE_GRID_SIZE)',id:'size_3',text:'12 pairs'}
-    ]
 
     let srcIcon = icon
     if(this.state.showGridSizeMenu){

@@ -30,21 +30,6 @@
     margin-top: 20px;
 }
 
-#memotest-pieces-main {
-    height: 550px;
-    position: relative;
-}
-
-#memotest-content .control-panel {
-    width: 915px;
-    height: 40px;
-}
-
-#memotest-content #search-main-image, #memotest-content #search-main-text {
-    height: 600px;
-    margin-top: 20px;
-}
-
 #memotest-content #item-list {
     top: -28px;
     background-color: white;
@@ -105,54 +90,6 @@
 
 #memotest-content #item-list .memotest-size:hover a {
     color: #159ead;
-}
-
-.switch-button {
-  position: absolute;
-  display: inline-block;
-  width: 52px;
-  height: 27px;
-  right: 110px;
-  bottom: 16px;
-}
-
-.switch-button-label {
-  position: absolute;
-  right: 74px;
-  bottom: 4px;
-  width: 104px;
-  color: #313131;
-}
-
-
-.button-text{
-    margin-right: 0;
-    position: absolute;
-    bottom: 16px;
-}
-
-.button-text.blue{
-    color: #ffffff;
-    background-color: #00a8ff;
-}
-
-.button-text.blue:hover{
-    background-color: #4cc2ff;
-}
-
-.button-text.white{
-    background-color: #ffffff;
-    color: #00a8ff;
-    border: 2px solid #00a8ff;
-}
-
-.button-text.white:hover{
-    background-color: #00a8ff;
-    color: #ffffff;
-}
-
-#button-next, #button-done, #button-done-trivia {
-    right: 0;
 }
 
 .hide {

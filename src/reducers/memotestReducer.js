@@ -13,7 +13,7 @@ const initialState = {
 
 const arrayPieces = []
 for (var i = 0; i < 24; i++) {
-  arrayPieces[i] = {type:'text',text:'adsasdsaa',src:'',id:i,textStyle:'font5'}
+  arrayPieces[i] = {type:'empty',text:'',src:'',id:i,textStyle:''}
 }
 initialState.pieces = arrayPieces
 

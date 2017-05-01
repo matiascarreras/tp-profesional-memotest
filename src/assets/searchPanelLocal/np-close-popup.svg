@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="PaywallV1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="LearnMoreHover" sketch:type="MSArtboardGroup" transform="translate(-686.000000, -104.000000)" fill="#FFFFFF">
+            <g id="x-out" sketch:type="MSLayerGroup" transform="translate(686.000000, 104.000000)">
+                <path d="M12,8.90564256 L4.72319666,1.62883923 C3.74863699,0.654279557 2.16173643,0.650291441 1.1854257,1.62660217 C0.202308311,2.60971956 0.210116534,4.18682691 1.18766276,5.16437313 L8.46446609,12.4411765 L1.18766276,19.7179798 C0.213103086,20.6925395 0.20911497,22.27944 1.1854257,23.2557508 C2.16854309,24.2388682 3.74565044,24.2310599 4.72319666,23.2535137 L12,15.9767104 L19.2768033,23.2535137 C20.251363,24.2280734 21.8382636,24.2320615 22.8145743,23.2557508 C23.7976917,22.2726334 23.7898835,20.695526 22.8123372,19.7179798 L15.5355339,12.4411765 L22.8123372,5.16437313 C23.7868969,4.18981346 23.790885,2.6029129 22.8145743,1.62660217 C21.8314569,0.643484782 20.2543496,0.651293005 19.2768033,1.62883923 L12,8.90564256 Z" id="Rectangle-2" sketch:type="MSShapeGroup"></path>
+            </g>
+        </g>
+    </g>
+</svg>

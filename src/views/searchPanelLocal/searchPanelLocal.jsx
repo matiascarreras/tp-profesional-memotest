@@ -18,6 +18,7 @@ import oneDriveIconButton from '../../assets/uploaderButton/onedriveIcon.svg'
 import oneDriveIconButtonHover from '../../assets/uploaderButton/onedriveIcon-hover.png'
 import gdriveIconButton from '../../assets/uploaderButton/driveIcon.svg'
 import gdriveIconButtonHover from '../../assets/uploaderButton/driveIcon-hover.png'
+import closeImage from '../../assets/searchPanelLocal/np-close-popup.svg'
 import './searchPanelLocal.css';
 import * as actions from '../../actions'
 
@@ -30,71 +31,60 @@ class SearchPanelLocal extends Component {
         dropboxIcon: dropboxIconButton,
         boxIcon: boxIconButton,
         oneDriveIcon: oneDriveIconButton,
-        gdriveIcon: gdriveIconButton
+        gdriveIcon: gdriveIconButton,
+        showAlertMessage: false
       }
     }
 
     handleLocalUploadMouseOver() {
-        this.setState({
-          localIcon: localIconButtonHover
-        });
+        this.setState({ localIcon: localIconButtonHover });
     }
 
     handleLocalUploadMouseOut() {
-        this.setState({
-          localIcon: localIconButton
-        });
+        this.setState({ localIcon: localIconButton });
     }
 
     handleDropboxUploadMouseOver() {
-        this.setState({
-          dropboxIcon: dropboxIconButtonHover
-        });
+        this.setState({ dropboxIcon: dropboxIconButtonHover });
     }
 
     handleDropboxUploadMouseOut() {
-        this.setState({
-          dropboxIcon: dropboxIconButton
-        });
+        this.setState({ dropboxIcon: dropboxIconButton });
     }
 
     handleBoxUploadMouseOver() {
-        this.setState({
-          boxIcon: boxIconButtonHover
-        });
+        this.setState({ boxIcon: boxIconButtonHover });
     }
 
     handleBoxUploadMouseOut() {
-        this.setState({
-          boxIcon: boxIconButton
-        });
+        this.setState({ boxIcon: boxIconButton });
     }
 
     handleOneDriveUploadMouseOver() {
-        this.setState({
-          oneDriveIcon: oneDriveIconButtonHover
-        });
+        this.setState({ oneDriveIcon: oneDriveIconButtonHover });
     }
 
     handleOneDriveUploadMouseOut() {
-        this.setState({
-          oneDriveIcon: oneDriveIconButton
-        });
+        this.setState({ oneDriveIcon: oneDriveIconButton });
     }
 
     handleGdriveUploadMouseOver() {
-        this.setState({
-          gdriveIcon: gdriveIconButtonHover
-        });
+        this.setState({ gdriveIcon: gdriveIconButtonHover });
     }
 
     handleGdriveUploadMouseOut() {
-        this.setState({
-          gdriveIcon: gdriveIconButton
-        });
+        this.setState({ gdriveIcon: gdriveIconButton });
     }
 
-    onDrop(files) {
+    handleCloseBtnClick(){
+      this.setState({ showAlertMessage: false });
+    }
+
+    handleGotItBtnClick(){
+      this.setState({ showAlertMessage: false });
+    }
+
+    onDropAccepted(files) {
         console.log('Received files: ', files);
         let filesArray = []
         files.forEach(function(file){
@@ -107,7 +97,12 @@ class SearchPanelLocal extends Component {
         this.props.memotestActions.saveUploadersFiles(filesArray)
     }
 
-    onOpenClick() {
+    onDropRejected(files) {
+      console.log('drag rejected');
+      this.setState({ showAlertMessage: true });
+    }
+
+    openLocalUploadFiles() {
         this.dropzone.open();
         console.log("local upload open");
     }
@@ -146,21 +141,32 @@ class SearchPanelLocal extends Component {
     }
 
     localSearchContentElements(files){
-        console.log(files)
-        for (var i = 0; i < files.length; i++) {
-            return(
-                <div className="search-image ui-draggable" draggable="true">
-                    <img src={files[i].link} alt=""/>
+        let elements = []
+        for (const key of Object.keys(files)) {
+            elements.push(
+                <div key={key} className="search-image ui-draggable" draggable="true">
+                    <img src={files[key].link} alt=""/>
                 </div>
             )
         }
+        return elements
     }
 
     render() {
 
         var dropzoneClass = classnames({
-            'drag-drop-zone': true,
-            'hide': this.props.memotest.uploaderFiles.length > 0,
+          'drag-drop-zone': true,
+          'hide': this.props.memotest.uploaderFiles.length > 0,
+        });
+
+        var opacityModalClass = classnames({
+          'opacityModal': true,
+          'hide': !this.state.showAlertMessage,
+        });
+
+        var alertMessageClass = classnames({
+          'alert-message': true,
+          'hide': !this.state.showAlertMessage,
         });
 
         var localSearchContentClass = classnames({
@@ -177,7 +183,7 @@ class SearchPanelLocal extends Component {
 
         return (
             <div id="search-panel-local" className={(this.props.hide)?'hide':''}>
-                <UploaderButton onClick={this.onOpenClick.bind(this)} onMouseOver={this.handleLocalUploadMouseOver.bind(this)} onMouseOut={this.handleLocalUploadMouseOut.bind(this)} icon={this.state.localIcon} id="browse-local-file" text="Browse my files" name="localFile"/>
+                <UploaderButton onClick={this.openLocalUploadFiles.bind(this)} onMouseOver={this.handleLocalUploadMouseOver.bind(this)} onMouseOut={this.handleLocalUploadMouseOut.bind(this)} icon={this.state.localIcon} id="browse-local-file" text="Browse my files" name="localFile"/>
                 <DropboxChooser 
                     appKey={APP_KEY}
                     success={files => this.dropboxSuccessCallback(files)}
@@ -206,12 +212,25 @@ class SearchPanelLocal extends Component {
                     ref={(node) => { this.dropzone = node; }}
                     className={dropzoneClass}
                     activeClassName="active"
-                    rejectClassName="reject"
+                    rejectClassName="active"
                     disableClick={true}
                     accept={"image/png, image/jpeg"}
-                    onDrop={this.onDrop.bind(this)}>
-                    <div>Drag and Drop any files here!</div>
+                    onDropAccepted={this.onDropAccepted.bind(this)}
+                    onDropRejected={this.onDropRejected.bind(this)}>
+                    <div>Drop any files here!</div>
                 </Dropzone>
+                <div id="opacityModal" className={opacityModalClass}/>
+                <div className={alertMessageClass}>
+                  <span id="alert-message-closeBtn" onClick={this.handleCloseBtnClick.bind(this)}>
+                    <img alt="" src={closeImage} className="alert-message-closeBtn"/>
+                  </span>
+                  <div>
+                    <span>Please upload a .jpg or .png file.</span>
+                  </div>
+                  <div className="buttons">
+                    <button type="button" className="btn-gotIt" onClick={this.handleGotItBtnClick.bind(this)} value="Got it">Got it</button>
+                  </div>
+                </div>
             </div>
         );
     }
