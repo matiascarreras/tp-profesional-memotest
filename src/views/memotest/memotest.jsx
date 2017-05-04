@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators} from 'redux'
+
 import './memotest.css';
 import MemotestPiece from '../../components/memotestPiece/memotestPiece'
 import SwitchButton from '../../components/switchButton/switchButton'
 import TextButton from '../../components/textButton/textButton'
 import * as constants from '../../constants/constants'
+import * as actions from '../../actions'
 
 class Memotest extends Component {
+
+    handleOnDrop(id, type, textStyle, src){
+        this.props.memotestActions.saveMemotestPiece(id, type, textStyle, src)
+    }
 
     render() {
 
@@ -33,7 +41,7 @@ class Memotest extends Component {
         }
 
         for (var i = 0; i < cantPieces; i++) {
-            memotestPieces.push(<MemotestPiece key={i} id={this.props.pieces[i].id} type={this.props.pieces[i].type} text={this.props.pieces[i].text} src={this.props.pieces[i].src} textStyle={this.props.pieces[i].textStyle}/>);
+            memotestPieces.push(<MemotestPiece handleOnDrop={this.handleOnDrop.bind(this)} key={i} id={this.props.pieces[i].id} type={this.props.pieces[i].type} text={this.props.pieces[i].text} src={this.props.pieces[i].src} textStyle={this.props.pieces[i].textStyle}/>);
         };
 
         return (
@@ -53,4 +61,14 @@ class Memotest extends Component {
     }
 }
 
-export default Memotest;
+function mapStateToProps(state){
+  return state;
+}
+
+function mapDispatchToProps(dispatch){
+  return { 
+    memotestActions: bindActionCreators(actions, dispatch),
+  } 
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Memotest);

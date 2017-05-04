@@ -24,8 +24,8 @@ import * as actions from '../../actions'
 
 class SearchPanelLocal extends Component {
   
-    constructor(){
-      super()
+    constructor(props){
+      super(props)
       this.state = {
         localIcon: localIconButton,
         dropboxIcon: dropboxIconButton,
@@ -82,6 +82,18 @@ class SearchPanelLocal extends Component {
 
     handleGotItBtnClick(){
       this.setState({ showAlertMessage: false });
+    }
+
+    onDragStart(src, event) {
+      if(event){
+        var data = {
+          type: 'image',
+          src: src,
+          textStyle: ''
+        }
+
+        event.dataTransfer.setData('text', JSON.stringify(data)); 
+      }
     }
 
     onDropAccepted(files) {
@@ -142,9 +154,10 @@ class SearchPanelLocal extends Component {
 
     localSearchContentElements(files){
         let elements = []
+        var _this = this
         for (const key of Object.keys(files)) {
             elements.push(
-                <div key={key} className="search-image ui-draggable" draggable="true">
+                <div key={key} onDragStart={_this.onDragStart.bind(_this, files[key].link)} className="search-image ui-draggable" draggable="true">
                     <img src={files[key].link} alt=""/>
                 </div>
             )

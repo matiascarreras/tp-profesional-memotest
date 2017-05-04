@@ -58,6 +58,19 @@ class SearchPanelGoogle extends Component {
         }
 
     }
+
+    onDragStart(src, event) {
+      if(event){
+        var data = {
+          type: 'image',
+          src: src,
+          textStyle: ''
+        }
+
+        event.dataTransfer.setData('text', JSON.stringify(data)); 
+      }
+    }
+
     makeGoogleSearch(search, page){
         this.setState({showLoading : true});
         this.setState({googleSearchShowMore : false});
@@ -83,7 +96,7 @@ class SearchPanelGoogle extends Component {
                     })
                 })
                 this.props.memotestActions.saveGoogleImagesFiles(filesArray)
-                if(json.payload.images.data.length < 10){
+                if(this.props.memotest.googleFiles.length <= 10){
                     this.setState({googleSearchPage : this.state.googleSearchPage + 1});
                     this.makeGoogleSearch(this.state.googleSearchText, this.state.googleSearchPage)
                 } else if(json.payload.images.showMore){
@@ -107,9 +120,10 @@ class SearchPanelGoogle extends Component {
 
     googleSearchContentElements(files){
         let elements = []
+        var _this = this
         for (const key of Object.keys(files)) {
             elements.push(
-                <div key={key} className="search-image ui-draggable" draggable="true">
+                <div key={key} onDragStart={_this.onDragStart.bind(_this, files[key].link)} className="search-image ui-draggable" draggable="true">
                     <img src={files[key].link} alt=""/>
                 </div>
             )

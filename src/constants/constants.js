@@ -1,3 +1,6 @@
 export const SMALL_GRID_SIZE = 'small'
 export const MEDIUM_GRID_SIZE = 'medium'
 export const LARGE_GRID_SIZE = 'large'
+export const MEMOTEST_PIECE_TYPE_TEXT = 'text'
+export const MEMOTEST_PIECE_TYPE_IMAGE = 'image'
+export const MEMOTEST_PIECE_TYPE_EMPTY = 'empty'

@@ -40,3 +40,13 @@ export function saveUploadersFiles(files) {
     uploaderFiles: files
   }
 }
+
+export function saveMemotestPiece(id, type, textStyle, src) {
+  return { 
+    type: types.SAVE_MEMOTEST_PIECE,
+    id: id,
+    pieceType: type,
+    textStyle: textStyle,
+    src: src
+  }
+}

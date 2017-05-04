@@ -13,7 +13,7 @@ const initialState = {
 
 const arrayPieces = []
 for (var i = 0; i < 24; i++) {
-  arrayPieces[i] = {type:'empty',text:'',src:'',id:i,textStyle:''}
+  arrayPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_EMPTY,text:'',src:'',id:i,textStyle:''}
 }
 initialState.pieces = arrayPieces
 
@@ -22,22 +22,30 @@ const memotestReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SELECT_GRID_SIZE:
     	newState.gridSize = action.gridSize
-      	return newState
+      return newState
     case types.TOGGLE_TRIVIA_QUESTION:
     	newState.isTriviaQuestionEnable = !state.isTriviaQuestionEnable
-      	return newState
+      return newState
     case types.SAVE_TRIVIA_QUESTION:
     	newState.triviaQuestionText = action.questionText
-      	return newState
+      return newState
     case types.SAVE_TRIVIA_CORRECT_ANSWER:
       newState.triviaQuestionCorrectAnswer = action.correctAnswer
-        return newState
+      return newState
     case types.SAVE_GOOGLE_IMAGES_FILES:
       newState.googleFiles = action.googleFiles
-        return newState
+      return newState
     case types.SAVE_UPLOADERS_FILES:
       newState.uploaderFiles = action.uploaderFiles
-        return newState
+      return newState
+    case types.SAVE_MEMOTEST_PIECE:
+      newState.pieces[action.id].type = action.pieceType
+      if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_TEXT){
+        newState.pieces[action.id].textStyle = action.textStyle      
+      } else if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_IMAGE){
+        newState.pieces[action.id].src = action.src      
+      }
+      return newState
     default:
       return state
   }
