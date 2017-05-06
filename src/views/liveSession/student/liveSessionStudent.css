@@ -1,0 +1,178 @@
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'VerdanaRegular', Arial, Helvetica, sans-serif;
+    overflow: hidden;
+    transform-origin: 0px 0px;
+    -moz-transform-origin: 0px 0px;
+    -webkit-transform-origin: 0px 0px;
+    -ms-transform-origin: 0px 0px;
+}
+
+#overlay {
+    background-color: rgba(255, 255, 255, .94);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+    z-index: 98;
+}
+
+.overlayBox {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 635px;
+    max-width: 635px;
+    height: 300px;
+    text-align: center;
+    display: none;
+    margin: 0 auto;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    z-index: 99;
+    margin-top: -150px;
+}
+
+.overlayTitle {
+    padding: 17px 0;
+    font-size: 45px;
+    color: #00a8ff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.overlayInfo {
+    text-align: center;
+    font-size: 19px;
+    padding: 0 15px 36px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#triviaBox {
+    overflow: hidden;
+    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#triviaBox *, #triviaBox *:before, #triviaBox *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.triviaBoxContent {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+#triviaInfo {
+    display: none;
+    display: table;
+    margin: 0 auto;
+    padding: 0 0 36px 0;
+}
+
+#triviaMessages {
+    display: inline-block;
+    width: 100%;
+    min-height: 50px;
+}
+
+.errorMessage {
+    color: #F26C59;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 15px 0;
+}
+
+.pieces-row {
+    display: table-row;
+}
+
+.wrapperButton {
+    padding: 0 5px;
+}
+
+.overlayButton {
+    font-size: 16px;
+    color: white;
+    border: 0;
+    background-color: #00a8ff;
+    display: block;
+    padding: 10px 0;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: 6px;
+    margin: 6px auto 0 auto;
+    -webkit-appearance: none;
+    width: 100%;
+    max-width: 320px;
+}
+
+.timetxt {
+    background-color: #00a8ff;
+    padding: 5px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    color: white;
+    text-align: center;
+    font-size: 110%;
+    display: inline-block;
+    min-width: 25px;
+}
+
+#header {
+    border-bottom: 1px solid #E3E2E2;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    width: 100%;
+    height: 75px;
+}
+
+#content {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    display: none;
+}
+
+#imageContainer img {
+    display: none;
+    border-radius: 8px;
+}
+
+.board {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#backgroundCanvas, #revealedCanvas, #piece1, #piece2 {
+    position: absolute;
+    top: 55px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 100%;
+}

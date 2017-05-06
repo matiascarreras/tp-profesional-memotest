@@ -8,9 +8,11 @@ import './App.css';
 import icon from './assets/iconButton/btn-settings.png'
 import iconOn from './assets/iconButton/btn-settings-on.png'
 import iconList from './assets/memotest/icon-tick.png'
-import memotestActions from './actions/memotestActions'
+import appActions from './actions/appActions'
+import appSelector from './selectors/app_selector'
 import bindActionsToDispatch from './helpers/bindActionsToDispatch'
 import * as constants from './constants/constants'
+import { localize } from './helpers/translator'
 
 class App extends Component {
 
@@ -61,17 +63,17 @@ class App extends Component {
 
     var selectSmallGridSizeClass = classNames({
         'memotest-tick-chosen-size': true,
-        'hide': this.props.memotest.gridSize !== constants.SMALL_GRID_SIZE,
+        'hide': this.props.gridSize !== constants.SMALL_GRID_SIZE,
     });
 
     var selectMediumGridSizeClass = classNames({
         'memotest-tick-chosen-size': true,
-        'hide': this.props.memotest.gridSize !== constants.MEDIUM_GRID_SIZE,
+        'hide': this.props.gridSize !== constants.MEDIUM_GRID_SIZE,
     });
 
     var selectLargeGridSizeClass = classNames({
         'memotest-tick-chosen-size': true,
-        'hide': this.props.memotest.gridSize !== constants.LARGE_GRID_SIZE,
+        'hide': this.props.gridSize !== constants.LARGE_GRID_SIZE,
     });
 
     let srcIcon = icon
@@ -81,35 +83,35 @@ class App extends Component {
 
     return (
       <div id="memotest-content">
-        <Header title="Memory Test"/>
+        <Header title={localize('header_title')}/>
         <div id="menu" className={this.state.showTrivia ? "hide" : ""}>
           <button className={settingsBtnClass} onBlur={this.handleOnBlurGridMenu.bind(this)} onClick={this.openGridSizeMenu.bind(this)}>
-            Grid Size
+            {localize('btn_grid_size')}
             <img src={srcIcon} alt=""/>
             <ul id="item-list" className={this.state.showGridSizeMenu ? "" : "hide"}>
               <li className="memotest-size size_1" onClick={this.changeGridSize.bind(this, constants.SMALL_GRID_SIZE)}>
                 <a>
                   <img src={iconList} className={selectSmallGridSizeClass} alt=""/>
-                  <span>6 pairs</span> 
+                  <span>{localize('small_grid_size')}</span> 
                 </a>
               </li>
               <li className="memotest-size size_2" onClick={this.changeGridSize.bind(this, constants.MEDIUM_GRID_SIZE)}>
                 <a>
                   <img src={iconList} className={selectMediumGridSizeClass} alt=""/>
-                  <span>8 pairs</span>
+                  <span>{localize('medium_grid_size')}</span>
                 </a>
               </li>
               <li className="memotest-size size_3" onClick={this.changeGridSize.bind(this, constants.LARGE_GRID_SIZE)}>
                 <a>
                   <img src={iconList} className={selectLargeGridSizeClass} alt=""/>
-                  <span>12 pairs</span>
+                  <span>{localize('large_grid_size')}</span>
                 </a>
               </li>
             </ul>
           </button>
         </div>
         <Search hide={this.state.showTrivia}/>
-        <Memotest gridSize={this.props.memotest.gridSize} pieces={this.props.memotest.pieces} hide={this.state.showTrivia} isTriviaQuestionEnable={this.props.memotest.isTriviaQuestionEnable} switchButtonClick={this.handleTriviaQuestionClick.bind(this)} nextBtnClick={this.handleNextBtnClick.bind(this)} doneBtnClick={this.handleDoneBtnClick.bind(this)}/>
+        <Memotest gridSize={this.props.gridSize} pieces={this.props.pieces} hide={this.state.showTrivia} isTriviaQuestionEnable={this.props.isTriviaQuestionEnable} switchButtonClick={this.handleTriviaQuestionClick.bind(this)} nextBtnClick={this.handleNextBtnClick.bind(this)} doneBtnClick={this.handleDoneBtnClick.bind(this)}/>
         <Trivia hide={!this.state.showTrivia} backBtnClick={this.handleBackBtnClick.bind(this)} doneBtnClick={this.handleDoneBtnClick.bind(this)}/>
       </div>
     );
@@ -117,13 +119,13 @@ class App extends Component {
 }
 
 function mapStateToProps(state){
-  return state;
+  return appSelector(state);
 }
 
 function mapDispatchToProps(dispatch){
   return bindActionsToDispatch({
-      selectGridSize: memotestActions.selectGridSize,
-      toggleTriviaQuestion: memotestActions.toggleTriviaQuestion,
+      selectGridSize: appActions.selectGridSize,
+      toggleTriviaQuestion: appActions.toggleTriviaQuestion,
   }, dispatch)
 }
 

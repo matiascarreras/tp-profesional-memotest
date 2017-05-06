@@ -11,7 +11,6 @@ let defaultData = {
 const searchPanelGoogleSelector = createSelector(
   [ getMemotestData ],
   (memotestData) => {
-    console.log(memotestData)
 
     let googleSearchData = {}
     if (!(Object.keys(memotestData.googleFiles).length === 0 && memotestData.googleFiles.constructor === Object)){
@@ -35,9 +34,6 @@ const searchPanelGoogleSelector = createSelector(
     } else {
       googleSearchData = defaultData
     }
-    
-    console.log(googleSearchData)
-
 
     return {
       googleSearchData: googleSearchData,

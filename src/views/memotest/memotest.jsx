@@ -7,7 +7,9 @@ import SwitchButton from '../../components/switchButton/switchButton'
 import TextButton from '../../components/textButton/textButton'
 import * as constants from '../../constants/constants'
 import memotestActions from '../../actions/memotestActions'
+import memotestSelector from '../../selectors/memotest_selector'
 import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
+import { localize } from '../../helpers/translator'
 
 class Memotest extends Component {
 
@@ -52,9 +54,9 @@ class Memotest extends Component {
                     </div>
                 </div>
                 <div className="control-panel">
-                  <SwitchButton text="Final Question" onClick={this.props.switchButtonClick}/>
-                  <TextButton text="Next" id="button-next" class={nextBtnClass} onClick={this.props.nextBtnClick}/>
-                  <TextButton text="Done" id="button-done" class={doneBtnClass} onClick={this.props.doneBtnClick}/>
+                  <SwitchButton text={localize('final_question_switch')} onClick={this.props.switchButtonClick}/>
+                  <TextButton text={localize('btn_next')} id="button-next" class={nextBtnClass} onClick={this.props.nextBtnClick}/>
+                  <TextButton text={localize('btn_done')} id="button-done" class={doneBtnClass} onClick={this.props.doneBtnClick}/>
                 </div>
         	</div>
         );
@@ -62,7 +64,7 @@ class Memotest extends Component {
 }
 
 function mapStateToProps(state){
-  return state;
+  return memotestSelector(state);
 }
 
 function mapDispatchToProps(dispatch){

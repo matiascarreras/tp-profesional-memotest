@@ -7,6 +7,7 @@ import textStyleIconButton from '../../assets/iconButton/btn-text.png'
 import textStyleIconButtonOn from '../../assets/iconButton/btn-text-on.png'
 import imageIconButton from '../../assets/iconButton/btn-imagen.png'
 import imageIconButtonOn from '../../assets/iconButton/btn-imagen-on.png'
+import { localize } from '../../helpers/translator'
 
 class Search extends Component {
 	constructor(){
@@ -52,8 +53,8 @@ class Search extends Component {
 
 	    return (
 	    	<div id="search" className={(this.props.hide)?'hide':''}>
-	    		<IconButton text="Text Style" icon={this.state.textStyleIcon} class={textBtnClass} onClick={this.showText.bind(this)}/>
-	    		<IconButton text="Images" icon={this.state.imageIcon} class={imageBtnClass} onClick={this.showImage.bind(this)}/>
+	    		<IconButton text={localize('search_icon_btn_text_style')} icon={this.state.textStyleIcon} class={textBtnClass} onClick={this.showText.bind(this)}/>
+	    		<IconButton text={localize('search_icon_btn_images')} icon={this.state.imageIcon} class={imageBtnClass} onClick={this.showImage.bind(this)}/>
 	    	  	<SearchMainImage hide={!this.state.showMainImage}/>
 	    	  	<SearchMainText hide={!this.state.showMainText}/>
 	    	</div>

@@ -19,8 +19,10 @@ import gdriveIconButton from '../../assets/uploaderButton/driveIcon.svg'
 import gdriveIconButtonHover from '../../assets/uploaderButton/driveIcon-hover.png'
 import closeImage from '../../assets/searchPanelLocal/np-close-popup.svg'
 import './searchPanelLocal.css';
-import memotestActions from '../../actions/memotestActions'
+import searchPanelLocalActions from '../../actions/searchPanelLocalActions'
+import searchPanelLocalSelector from '../../selectors/search_panel_local_selector'
 import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
+import { localize } from '../../helpers/translator'
 
 class SearchPanelLocal extends Component {
   
@@ -169,7 +171,7 @@ class SearchPanelLocal extends Component {
 
         var dropzoneClass = classnames({
           'drag-drop-zone': true,
-          'hide': this.props.memotest.uploaderFiles.length > 0,
+          'hide': this.props.uploaderFiles.length > 0,
         });
 
         var opacityModalClass = classnames({
@@ -183,7 +185,7 @@ class SearchPanelLocal extends Component {
         });
 
         var localSearchContentClass = classnames({
-            'hide': this.props.memotest.uploaderFiles.length === 0,
+            'hide': this.props.uploaderFiles.length === 0,
         });
 
         const CLIENT_ID = '843876855982-gr36gak7lm9pbitlcj4t5r7k6mosrrtc.apps.googleusercontent.com';
@@ -196,17 +198,17 @@ class SearchPanelLocal extends Component {
 
         return (
             <div id="search-panel-local" className={(this.props.hide)?'hide':''}>
-                <UploaderButton onClick={this.openLocalUploadFiles.bind(this)} onMouseOver={this.handleLocalUploadMouseOver.bind(this)} onMouseOut={this.handleLocalUploadMouseOut.bind(this)} icon={this.state.localIcon} id="browse-local-file" text="Browse my files" name="localFile"/>
+                <UploaderButton onClick={this.openLocalUploadFiles.bind(this)} onMouseOver={this.handleLocalUploadMouseOver.bind(this)} onMouseOut={this.handleLocalUploadMouseOut.bind(this)} icon={this.state.localIcon} id="browse-local-file" text={localize('upload_local')} name="localFile"/>
                 <DropboxChooser 
                     appKey={APP_KEY}
                     success={files => this.dropboxSuccessCallback(files)}
                     cancel={() => this.dropboxCancelCallback()}
                     multiselect={true}
                     extensions={['.png', '.jpg', '.jpeg']} >
-                    <UploaderButton onMouseOver={this.handleDropboxUploadMouseOver.bind(this)} onMouseOut={this.handleDropboxUploadMouseOut.bind(this)} icon={this.state.dropboxIcon} id="browse-dropbox-file" text="Dropbox" name="dropBoxFile"/>       
+                    <UploaderButton onMouseOver={this.handleDropboxUploadMouseOver.bind(this)} onMouseOut={this.handleDropboxUploadMouseOut.bind(this)} icon={this.state.dropboxIcon} id="browse-dropbox-file" text={localize('upload_dropbox')} name="dropBoxFile"/>       
                 </DropboxChooser>
-                <UploaderButton onMouseOver={this.handleBoxUploadMouseOver.bind(this)} onMouseOut={this.handleBoxUploadMouseOut.bind(this)} icon={this.state.boxIcon} id="browse-box-file" text="Box" name="boxFile"/>
-                <UploaderButton onMouseOver={this.handleOneDriveUploadMouseOver.bind(this)} onMouseOut={this.handleOneDriveUploadMouseOut.bind(this)} icon={this.state.oneDriveIcon} id="browse-onedrive-file" text="One Drive" name="oneDriveFile"/>
+                <UploaderButton onMouseOver={this.handleBoxUploadMouseOver.bind(this)} onMouseOut={this.handleBoxUploadMouseOut.bind(this)} icon={this.state.boxIcon} id="browse-box-file" text={localize('upload_box')} name="boxFile"/>
+                <UploaderButton onMouseOver={this.handleOneDriveUploadMouseOver.bind(this)} onMouseOut={this.handleOneDriveUploadMouseOut.bind(this)} icon={this.state.oneDriveIcon} id="browse-onedrive-file" text={localize('upload_onedrive')} name="oneDriveFile"/>
                 <GooglePicker clientId={CLIENT_ID}
                               developerKey={DEVELOPER_KEY}
                               scope={SCOPE}
@@ -216,10 +218,10 @@ class SearchPanelLocal extends Component {
                               authImmediate={false}
                               mimeTypes={['image/png', 'image/jpeg', 'image/jpg']}
                               viewId={'DOCS'}>
-                   <UploaderButton onMouseOver={this.handleGdriveUploadMouseOver.bind(this)} onMouseOut={this.handleGdriveUploadMouseOut.bind(this)} icon={this.state.gdriveIcon} id="browse-gdrive-file" text="Google Drive" name="googleDriveFile"/>
+                   <UploaderButton onMouseOver={this.handleGdriveUploadMouseOver.bind(this)} onMouseOut={this.handleGdriveUploadMouseOut.bind(this)} icon={this.state.gdriveIcon} id="browse-gdrive-file" text={localize('upload_gdrive')} name="googleDriveFile"/>
                 </GooglePicker>
                 <div id="local-search-content" className={localSearchContentClass}>
-                    {this.localSearchContentElements(this.props.memotest.uploaderFiles)}
+                    {this.localSearchContentElements(this.props.uploaderFiles)}
                 </div>
                 <Dropzone 
                     ref={(node) => { this.dropzone = node; }}
@@ -230,7 +232,7 @@ class SearchPanelLocal extends Component {
                     accept={"image/png, image/jpeg"}
                     onDropAccepted={this.onDropAccepted.bind(this)}
                     onDropRejected={this.onDropRejected.bind(this)}>
-                    <div>Drop any files here!</div>
+                    <div>{localize('drag_and_drop')}</div>
                 </Dropzone>
                 <div id="opacityModal" className={opacityModalClass}/>
                 <div className={alertMessageClass}>
@@ -238,10 +240,10 @@ class SearchPanelLocal extends Component {
                     <img alt="" src={closeImage} className="alert-message-closeBtn"/>
                   </span>
                   <div>
-                    <span>Please upload a .jpg or .png file.</span>
+                    <span>{localize('invalid_file_type')}</span>
                   </div>
                   <div className="buttons">
-                    <button type="button" className="btn-gotIt" onClick={this.handleGotItBtnClick.bind(this)} value="Got it">Got it</button>
+                    <button type="button" className="btn-gotIt" onClick={this.handleGotItBtnClick.bind(this)} value={localize('btn_got_it')}>{localize('btn_got_it')}</button>
                   </div>
                 </div>
             </div>
@@ -250,12 +252,12 @@ class SearchPanelLocal extends Component {
 }
 
 function mapStateToProps(state){
-  return state;
+  return searchPanelLocalSelector(state);
 }
 
 function mapDispatchToProps(dispatch){
     return bindActionsToDispatch({
-        saveUploadersFiles: memotestActions.saveUploadersFiles,
+        saveUploadersFiles: searchPanelLocalActions.saveUploadersFiles,
     }, dispatch)
 }
 

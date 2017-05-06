@@ -5,8 +5,9 @@ import './searchPanelGoogle.css';
 import classnames from 'classnames'
 import loading from '../../assets/searchPanelGoogle/google_loading.gif'
 import searchPanelGoogleSelector from '../../selectors/search_panel_google_selector'
-import memotestActions from '../../actions/memotestActions'
+import searchPanelGoogleActions from '../../actions/searchPanelGoogleActions'
 import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
+import { localize } from '../../helpers/translator'
 
 class SearchPanelGoogle extends Component {
 
@@ -22,7 +23,7 @@ class SearchPanelGoogle extends Component {
     handleOnChange(event){
         this.setState({googleSearchText : event.target.value});
         if(event.target.value === ""){
-            event.target.placeholder = "Search with Google SafeSearch"
+            event.target.placeholder = localize("google_search_input_placeholder")
         }
     }
 
@@ -32,7 +33,7 @@ class SearchPanelGoogle extends Component {
 
     handleOnBlur(event){
         if(event.target.value === ""){
-            event.target.placeholder = "Search with Google SafeSearch"
+            event.target.placeholder = localize("google_search_input_placeholder")
         }
     }
 
@@ -109,7 +110,7 @@ class SearchPanelGoogle extends Component {
         return (
             <div id="search-panel-google" className={(this.props.hide)?'hide':''}>
                 <span id="google-search-input_parent">
-                    <input type="text" placeholder="Search with Google SafeSearch" onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} value={this.state.googleSearchText} onChange={this.handleOnChange.bind(this)} onKeyPress={this.handleKeyPress.bind(this)} id="google-search-input"/>
+                    <input type="text" placeholder={localize("google_search_input_placeholder")} onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} value={this.state.googleSearchText} onChange={this.handleOnChange.bind(this)} onKeyPress={this.handleKeyPress.bind(this)} id="google-search-input"/>
                     <div className="validateTextbox"></div>
                 </span>
                 <input type="button" id="google-search-btn" onClick={this.handleOnClick.bind(this)}/>
@@ -120,14 +121,14 @@ class SearchPanelGoogle extends Component {
                     {this.googleSearchContentElements(this.props.googleSearchData.googleImages)}
                 </div>
                 <div className={googleImagesResultsClass}>
-                    <h2>We're sorry!</h2>
-                    <p>Too many awesome teachers are using this feature right now. Please try again later.</p>
+                    <h2>{localize('google_images_results_title')}</h2>
+                    <p>{localize('google_images_results_description')}</p>
                 </div>
-                <div className={googleNoResultClass}>No results match your criteria</div>
+                <div className={googleNoResultClass}>{localize('google_no_results')}</div>
                 <span id="google-search-show-more" className={googleSearchShowMoreClass}>
-                    <div className="poweredBy">Powered by Google</div>
+                    <div className="poweredBy">{localize('google_powered_by')}</div>
                     <div className="spanLink hide"> - </div>
-                    <a onClick={this.handleGoogleSearchShowMoreClick.bind(this, this.state.googleSearchText, this.state.googleSearchPage)} className="spanLink hide">Show more</a>
+                    <a onClick={this.handleGoogleSearchShowMoreClick.bind(this, this.state.googleSearchText, this.state.googleSearchPage)} className="spanLink hide">{localize('google_show_more')}</a>
                 </span>
             </div>
         );
@@ -140,7 +141,7 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
     return bindActionsToDispatch({
-        makeGoogleSearch: memotestActions.makeGoogleSearch,
+        makeGoogleSearch: searchPanelGoogleActions.makeGoogleSearch,
     }, dispatch)
 }
 
