@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 import memotestReducer from './memotestReducer'
 
 const rootReducer = combineReducers({
-  memotest: memotestReducer
+	memotest: memotestReducer
 })
 
 export default rootReducer

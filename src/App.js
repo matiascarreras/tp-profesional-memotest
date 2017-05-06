@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators} from 'redux'
 import Header from './views/header/header'
 import Search from './views/search/search'
 import Memotest from './views/memotest/memotest'
@@ -9,7 +8,8 @@ import './App.css';
 import icon from './assets/iconButton/btn-settings.png'
 import iconOn from './assets/iconButton/btn-settings-on.png'
 import iconList from './assets/memotest/icon-tick.png'
-import * as actions from './actions'
+import memotestActions from './actions/memotestActions'
+import bindActionsToDispatch from './helpers/bindActionsToDispatch'
 import * as constants from './constants/constants'
 
 class App extends Component {
@@ -31,11 +31,11 @@ class App extends Component {
   }
 
   changeGridSize(gridSize){
-    this.props.memotestActions.selectGridSize(gridSize)
+    this.props.actions.selectGridSize(gridSize)
   }
 
   handleTriviaQuestionClick(){
-    this.props.memotestActions.toggleTriviaQuestion()
+    this.props.actions.toggleTriviaQuestion()
   }
 
   handleNextBtnClick(){
@@ -59,6 +59,21 @@ class App extends Component {
         'on': this.state.showGridSizeMenu,
     });
 
+    var selectSmallGridSizeClass = classNames({
+        'memotest-tick-chosen-size': true,
+        'hide': this.props.memotest.gridSize !== constants.SMALL_GRID_SIZE,
+    });
+
+    var selectMediumGridSizeClass = classNames({
+        'memotest-tick-chosen-size': true,
+        'hide': this.props.memotest.gridSize !== constants.MEDIUM_GRID_SIZE,
+    });
+
+    var selectLargeGridSizeClass = classNames({
+        'memotest-tick-chosen-size': true,
+        'hide': this.props.memotest.gridSize !== constants.LARGE_GRID_SIZE,
+    });
+
     let srcIcon = icon
     if(this.state.showGridSizeMenu){
       srcIcon = iconOn
@@ -74,19 +89,19 @@ class App extends Component {
             <ul id="item-list" className={this.state.showGridSizeMenu ? "" : "hide"}>
               <li className="memotest-size size_1" onClick={this.changeGridSize.bind(this, constants.SMALL_GRID_SIZE)}>
                 <a>
-                  <img src={iconList} className={this.props.memotest.gridSize === constants.SMALL_GRID_SIZE ? "memotest-tick-chosen-size" : "memotest-tick-chosen-size hide"} alt=""/>
+                  <img src={iconList} className={selectSmallGridSizeClass} alt=""/>
                   <span>6 pairs</span> 
                 </a>
               </li>
               <li className="memotest-size size_2" onClick={this.changeGridSize.bind(this, constants.MEDIUM_GRID_SIZE)}>
                 <a>
-                  <img src={iconList} className={this.props.memotest.gridSize === constants.MEDIUM_GRID_SIZE ? "memotest-tick-chosen-size" : "memotest-tick-chosen-size hide"} alt=""/>
+                  <img src={iconList} className={selectMediumGridSizeClass} alt=""/>
                   <span>8 pairs</span>
                 </a>
               </li>
               <li className="memotest-size size_3" onClick={this.changeGridSize.bind(this, constants.LARGE_GRID_SIZE)}>
                 <a>
-                  <img src={iconList} className={this.props.memotest.gridSize === constants.LARGE_GRID_SIZE ? "memotest-tick-chosen-size" : "memotest-tick-chosen-size hide"} alt=""/>
+                  <img src={iconList} className={selectLargeGridSizeClass} alt=""/>
                   <span>12 pairs</span>
                 </a>
               </li>
@@ -106,9 +121,10 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return { 
-    memotestActions: bindActionCreators(actions, dispatch),
-  } 
+  return bindActionsToDispatch({
+      selectGridSize: memotestActions.selectGridSize,
+      toggleTriviaQuestion: memotestActions.toggleTriviaQuestion,
+  }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators} from 'redux'
+
 import './searchPanelGoogle.css';
-import * as actions from '../../actions'
 import classnames from 'classnames'
 import loading from '../../assets/searchPanelGoogle/google_loading.gif'
+import searchPanelGoogleSelector from '../../selectors/search_panel_google_selector'
+import memotestActions from '../../actions/memotestActions'
+import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
 
 class SearchPanelGoogle extends Component {
 
@@ -13,10 +15,6 @@ class SearchPanelGoogle extends Component {
               
         this.state = {  
             googleSearchText : "",
-            googleNoResult: false,
-            googleImagesResults: false,
-            googleSearchShowMore: false,
-            showLoading: false,
             googleSearchPage: 1
         };                
     }
@@ -42,9 +40,7 @@ class SearchPanelGoogle extends Component {
         if(target.charCode === 13){
             if(this.state.googleSearchText !== ""){
                 this.setState({googleSearchPage : 1});
-                this.setState({googleNoResult : false});
-                this.setState({googleImagesResults : false});
-                this.makeGoogleSearch(this.state.googleSearchText, this.state.googleSearchPage)
+                this.props.actions.makeGoogleSearch(this.state.googleSearchText, this.state.googleSearchPage)
             }
         }
     }
@@ -52,9 +48,7 @@ class SearchPanelGoogle extends Component {
     handleOnClick(){
         if(this.state.googleSearchText !== ""){
             this.setState({googleSearchPage : 1});
-            this.setState({googleNoResult : false});
-            this.setState({googleImagesResults : false});  
-            this.makeGoogleSearch(this.state.googleSearchText, this.state.googleSearchPage)
+            this.props.actions.makeGoogleSearch(this.state.googleSearchText, this.state.googleSearchPage)
         }
 
     }
@@ -71,51 +65,9 @@ class SearchPanelGoogle extends Component {
       }
     }
 
-    makeGoogleSearch(search, page){
-        this.setState({showLoading : true});
-        this.setState({googleSearchShowMore : false});
-        fetch('http://ct.api.com/v1/ct/google_images?q='+search+'&page='+page, {
-            method: 'get',
-            headers: {
-                'x-api-key':'7dabac64681a7c12c1cb97183c44de93',
-                'JWT': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDVCIsImV4cCI6MzYzOTk0NTE2OCwiYXVkIjoiN2RhYmFjNjQ2ODFhN2MxMmMxY2I5NzE4M2M0NGRlOTMiLCJyZWZyZXNoIjoyMTQ3NDgzNjQ3LCJ1aWQiOiIiLCJpYXQiOjE0OTI0NjE1MjEsImlkIjoxNTQ5NSwiZW52IjoiaHR0cDpcL1wvMTg0LmN0LnBzZi1pdC5jb20uYXJcLyJ9.iWFf3TzR7uy3iG9bsZVHAjQ5mcQr8XVIsJrZqE0-Ja0',
-            }
-        })
-        .then( (response) => {               
-            return response.json()    
-        })
-        .then( (json) => {
-            console.log('parsed json', json.payload.images)
-            if(json.payload.images.data.length > 0){
-                let filesArray = []
-                json.payload.images.data.forEach(function(file){
-                    filesArray.push({
-                        size: file.image.byteSize,
-                        name: file.title,
-                        link: file.image.thumbnailLink
-                    })
-                })
-                this.props.memotestActions.saveGoogleImagesFiles(filesArray)
-                if(this.props.memotest.googleFiles.length <= 10){
-                    this.setState({googleSearchPage : this.state.googleSearchPage + 1});
-                    this.makeGoogleSearch(this.state.googleSearchText, this.state.googleSearchPage)
-                } else if(json.payload.images.showMore){
-                    this.setState({googleSearchShowMore : true});
-                    this.setState({googleSearchPage : this.state.googleSearchPage + 1});
-                } else {
-                    this.setState({googleSearchShowMore : false});
-                }
-                this.setState({showLoading : false});  
-            } else {
-                this.setState({googleNoResult : true});
-                this.setState({showLoading : false});
-            }
-        })
-        .catch( (ex) => {
-            console.log('parsing failed', ex)
-            this.setState({googleImagesResults : true});  
-            this.setState({showLoading : false}); 
-        })
+    handleGoogleSearchShowMoreClick(search, page){
+        this.setState({googleSearchPage : page + 1});
+        this.props.actions.makeGoogleSearch(search, page+1)
     }
 
     googleSearchContentElements(files){
@@ -135,22 +87,22 @@ class SearchPanelGoogle extends Component {
 
         var googleImagesResultsClass = classnames({
             'googleImagesResults': true,
-            'hide': !this.state.googleImagesResults,
+            'hide': !this.props.googleImagesResults,
         });
 
         var googleNoResultClass = classnames({
             'googleNoResult': true,
-            'hide': !this.state.googleNoResult,
+            'hide': !this.props.googleSearchData.googleNoResult,
         });
 
         var googleSearchShowMoreClass = classnames({
             'google-search-show-more': true,
-            'hide': !this.state.googleSearchShowMore,
+            'hide': !this.props.googleSearchData.googleSearchShowMore,
         });
 
         var googleImagesLoadingClass = classnames({
             'google-images-loading': true,
-            'hide': !this.state.showLoading,
+            'hide': !this.props.googleImagesLoading,
         });
 
 
@@ -165,7 +117,7 @@ class SearchPanelGoogle extends Component {
                     <img src={loading} alt=""/>
                 </div>
                 <div id="google-search-content">
-                    {this.googleSearchContentElements(this.props.memotest.googleFiles)}
+                    {this.googleSearchContentElements(this.props.googleSearchData.googleImages)}
                 </div>
                 <div className={googleImagesResultsClass}>
                     <h2>We're sorry!</h2>
@@ -175,7 +127,7 @@ class SearchPanelGoogle extends Component {
                 <span id="google-search-show-more" className={googleSearchShowMoreClass}>
                     <div className="poweredBy">Powered by Google</div>
                     <div className="spanLink hide"> - </div>
-                    <a onClick={this.makeGoogleSearch.bind(this, this.state.googleSearchText, this.state.googleSearchPage)} className="spanLink hide">Show more</a>
+                    <a onClick={this.handleGoogleSearchShowMoreClick.bind(this, this.state.googleSearchText, this.state.googleSearchPage)} className="spanLink hide">Show more</a>
                 </span>
             </div>
         );
@@ -183,13 +135,13 @@ class SearchPanelGoogle extends Component {
 }
 
 function mapStateToProps(state){
-  return state;
+  return searchPanelGoogleSelector(state);
 }
 
 function mapDispatchToProps(dispatch){
-  return { 
-    memotestActions: bindActionCreators(actions, dispatch),
-  } 
+    return bindActionsToDispatch({
+        makeGoogleSearch: memotestActions.makeGoogleSearch,
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanelGoogle);

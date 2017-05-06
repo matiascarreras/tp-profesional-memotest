@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators} from 'redux'
 import './trivia.css';
 import MemotestPiece from '../../components/memotestPiece/memotestPiece'
 import TextButton from '../../components/textButton/textButton'
-import * as actions from '../../actions'
+import memotestActions from '../../actions/memotestActions'
+import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
 import * as constants from '../../constants/constants'
 
 class Trivia extends Component {
 
     handleOnChange(event){
-        this.props.memotestActions.saveTriviaQuestion(event.target.value)
+        this.props.actions.saveTriviaQuestion(event.target.value)
         if(event.target.value === ""){
             event.target.placeholder = "Write a question and select the right answer"
         }
@@ -27,7 +27,7 @@ class Trivia extends Component {
     }
 
     handleOnClickPiece(pieceId){
-        this.props.memotestActions.saveTriviaCorrectAnswer(pieceId)
+        this.props.actions.saveTriviaCorrectAnswer(pieceId)
     }
 
     render() {
@@ -69,9 +69,10 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return { 
-    memotestActions: bindActionCreators(actions, dispatch),
-  } 
+    return bindActionsToDispatch({
+        saveTriviaQuestion: memotestActions.saveTriviaQuestion,
+        saveTriviaCorrectAnswer: memotestActions.saveTriviaCorrectAnswer,
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Trivia);

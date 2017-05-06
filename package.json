@@ -3,17 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "check-types": "^7.0.1",
     "classnames": "^2.2.5",
     "immutable": "^3.8.1",
     "prop-types": "^15.5.8",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
+    "react": "^15.4.1",
+    "react-dom": "^15.4.1",
     "react-dropbox-chooser": "0.0.3",
     "react-dropzone": "^3.13.0",
     "react-google-picker": "0.0.4",
     "react-redux": "^5.0.3",
+    "react-router": "^2.1.1",
     "redux": "^3.6.0",
-    "redux-saga": "^0.14.8"
+    "redux-saga": "^0.14.8",
+    "reselect": "^3.0.0",
+    "superagent": "^3.5.2",
+    "superagent-defaults": "^0.1.14",
+    "superagent-promise-plugin": "^3.2.0"
   },
   "devDependencies": {
     "react-scripts": "0.9.5"

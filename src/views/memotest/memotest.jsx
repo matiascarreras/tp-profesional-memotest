@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators} from 'redux'
 
 import './memotest.css';
 import MemotestPiece from '../../components/memotestPiece/memotestPiece'
 import SwitchButton from '../../components/switchButton/switchButton'
 import TextButton from '../../components/textButton/textButton'
 import * as constants from '../../constants/constants'
-import * as actions from '../../actions'
+import memotestActions from '../../actions/memotestActions'
+import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
 
 class Memotest extends Component {
 
     handleOnDrop(id, type, textStyle, src){
-        this.props.memotestActions.saveMemotestPiece(id, type, textStyle, src)
+        this.props.actions.saveMemotestPiece(id, type, textStyle, src)
     }
 
     render() {
@@ -66,9 +66,9 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return { 
-    memotestActions: bindActionCreators(actions, dispatch),
-  } 
+    return bindActionsToDispatch({
+        saveMemotestPiece: memotestActions.saveMemotestPiece,
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Memotest);

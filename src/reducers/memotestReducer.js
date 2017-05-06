@@ -7,8 +7,10 @@ const initialState = {
 	triviaQuestionText: "",
 	triviaQuestionCorrectAnswer: "",
 	pieces:[],
-  googleFiles:[],
-  uploaderFiles:[]
+  googleFiles:{},
+  uploaderFiles:[],
+  googleImagesResults: false,
+  googleImagesLoading: false,
 }
 
 const arrayPieces = []
@@ -17,35 +19,80 @@ for (var i = 0; i < 24; i++) {
 }
 initialState.pieces = arrayPieces
 
-const memotestReducer = (state = initialState, action) => {
+function selectGridSize(state, action){
   let newState = {...state}
+  newState.gridSize = action.gridSize
+  return newState
+}
+
+function toggleTriviaQuestion(state){
+  let newState = {...state}
+  newState.isTriviaQuestionEnable = !state.isTriviaQuestionEnable
+  return newState
+}
+
+function saveTriviaQuestion(state, action){
+  let newState = {...state}
+  newState.triviaQuestionText = action.questionText
+  return newState
+}
+
+function saveTriviaCorrectAnswer(state, action){
+  let newState = {...state}
+  newState.triviaQuestionCorrectAnswer = action.correctAnswer
+  return newState
+}
+
+function saveUploadersFiles(state, action){
+  let newState = {...state}
+  newState.uploaderFiles = action.uploaderFiles
+  return newState
+}
+
+function saveMemotestPiece(state, action){
+  let newState = {...state}
+  newState.pieces[action.id].type = action.pieceType
+  if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_TEXT){
+    newState.pieces[action.id].textStyle = action.textStyle      
+  } else if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_IMAGE){
+    newState.pieces[action.id].src = action.src      
+  }
+  return newState
+}
+
+function makeGoogleSearchSuccess(state, action){
+  let newState = {...state}
+  newState.googleFiles = action.images
+  newState.googleImagesLoading = false
+  newState.googleImagesResults = false
+  return newState
+}
+
+function makeGoogleSearchFailed(state, action){
+  let newState = {...state}
+  newState.googleImagesLoading = false
+  newState.googleImagesResults = true
+  return newState
+}
+
+const memotestReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SELECT_GRID_SIZE:
-    	newState.gridSize = action.gridSize
-      return newState
+      return selectGridSize(state, action)
     case types.TOGGLE_TRIVIA_QUESTION:
-    	newState.isTriviaQuestionEnable = !state.isTriviaQuestionEnable
-      return newState
+      return toggleTriviaQuestion(state)
     case types.SAVE_TRIVIA_QUESTION:
-    	newState.triviaQuestionText = action.questionText
-      return newState
+      return saveTriviaQuestion(state, action)
     case types.SAVE_TRIVIA_CORRECT_ANSWER:
-      newState.triviaQuestionCorrectAnswer = action.correctAnswer
-      return newState
-    case types.SAVE_GOOGLE_IMAGES_FILES:
-      newState.googleFiles = action.googleFiles
-      return newState
+      return saveTriviaCorrectAnswer(state, action)
     case types.SAVE_UPLOADERS_FILES:
-      newState.uploaderFiles = action.uploaderFiles
-      return newState
+      return saveUploadersFiles(state, action)
     case types.SAVE_MEMOTEST_PIECE:
-      newState.pieces[action.id].type = action.pieceType
-      if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_TEXT){
-        newState.pieces[action.id].textStyle = action.textStyle      
-      } else if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_IMAGE){
-        newState.pieces[action.id].src = action.src      
-      }
-      return newState
+      return saveMemotestPiece(state, action)
+    case types.MAKE_GOOGLE_SEARCH_SUCCESS:
+      return makeGoogleSearchSuccess(state, action)
+    case types.MAKE_GOOGLE_SEARCH_FAILED:
+      return makeGoogleSearchFailed(state, action)
     default:
       return state
   }

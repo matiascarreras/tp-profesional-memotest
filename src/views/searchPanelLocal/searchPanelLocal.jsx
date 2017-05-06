@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { bindActionCreators} from 'redux'
 
 import Dropzone from 'react-dropzone'
 import GooglePicker from 'react-google-picker'
@@ -20,7 +19,8 @@ import gdriveIconButton from '../../assets/uploaderButton/driveIcon.svg'
 import gdriveIconButtonHover from '../../assets/uploaderButton/driveIcon-hover.png'
 import closeImage from '../../assets/searchPanelLocal/np-close-popup.svg'
 import './searchPanelLocal.css';
-import * as actions from '../../actions'
+import memotestActions from '../../actions/memotestActions'
+import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
 
 class SearchPanelLocal extends Component {
   
@@ -106,7 +106,7 @@ class SearchPanelLocal extends Component {
                 link: file.preview
             })
         })
-        this.props.memotestActions.saveUploadersFiles(filesArray)
+        this.props.actions.saveUploadersFiles(filesArray)
     }
 
     onDropRejected(files) {
@@ -130,7 +130,7 @@ class SearchPanelLocal extends Component {
                 link: file.thumbnailLink
             })
         })
-        this.props.memotestActions.saveUploadersFiles(filesArray)
+        this.props.actions.saveUploadersFiles(filesArray)
     }
 
     dropboxCancelCallback(){
@@ -148,7 +148,7 @@ class SearchPanelLocal extends Component {
                     link: file.url
                 })
             })
-            this.props.memotestActions.saveUploadersFiles(filesArray)
+            this.props.actions.saveUploadersFiles(filesArray)
         }
     }
 
@@ -254,9 +254,9 @@ function mapStateToProps(state){
 }
 
 function mapDispatchToProps(dispatch){
-  return { 
-    memotestActions: bindActionCreators(actions, dispatch),
-  } 
+    return bindActionsToDispatch({
+        saveUploadersFiles: memotestActions.saveUploadersFiles,
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPanelLocal);
