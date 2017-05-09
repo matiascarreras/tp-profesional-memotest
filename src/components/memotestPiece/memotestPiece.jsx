@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './memotestPiece.css';
 import classnames from 'classnames';
+import Textarea from 'react-textarea-autosize';
+
 import * as constants from '../../constants/constants'
 
 class MemotestPiece extends Component {
@@ -29,7 +31,6 @@ class MemotestPiece extends Component {
       event.preventDefault();
 
       var data;
-
       try {
         data = JSON.parse(event.dataTransfer.getData('text'));
         this.props.handleOnDrop(this.props.id, data.type, data.textStyle, data.src)
@@ -43,7 +44,7 @@ class MemotestPiece extends Component {
 
   	let content = ""
   	if(this.props.type === constants.MEMOTEST_PIECE_TYPE_TEXT){
-  		content = <textarea disabled={this.props.disabled} defaultValue={this.props.text}></textarea>
+      content = <Textarea style={{maxHeight: 130, width: 100}} disabled={this.props.disabled} defaultValue={this.props.text}/>
   	} else if(this.props.type === constants.MEMOTEST_PIECE_TYPE_IMAGE){
   		content = <img src={this.props.src} alt=""/>
   	}

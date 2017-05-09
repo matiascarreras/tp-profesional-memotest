@@ -2,17 +2,17 @@ import { createSelector } from 'reselect'
 
 const getMemotestData = (state) => state.memotest
 
-const appSelector = createSelector(
+const liveSessionTeacherSelector = createSelector(
   [ getMemotestData ],
   (memotestData) => {
-   
+   	
     return {
       gridSize: memotestData.gridSize,
       pieces: memotestData.pieces,
-      isTriviaQuestionEnable: memotestData.isTriviaQuestionEnable,
-      showTrivia: memotestData.showTrivia
+      triviaQuestionText: memotestData.triviaQuestionText,
+      triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
     }
   }
 )
 
-export default appSelector
+export default liveSessionTeacherSelector

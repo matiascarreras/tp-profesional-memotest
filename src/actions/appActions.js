@@ -8,9 +8,22 @@ let appActions = {
     }
   },
 
-  toggleTriviaQuestion: function() {
+  intializeMemotest: function() {
     return { 
-    	type: types.TOGGLE_TRIVIA_QUESTION,
+      type: types.INITIALIZE_MEMOTEST,
+    }
+  },
+
+  saveMemotestData: function() {
+    return { 
+      type: types.SAVE_MEMOTEST_DATA,
+    }
+  },
+
+  showTrivia: function(show) {
+    return { 
+      type: types.SHOW_TRIVIA,
+      show: show
     }
   },
 

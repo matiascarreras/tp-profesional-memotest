@@ -13,6 +13,8 @@ function _genericCatch(err) {
 
 function getMemotestData(id) {
 	return http_agent.get('http://ct.api.com/v1/ct/custom_slides')
+	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
+	.set('JWT', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDVCIsImV4cCI6MzYzOTk0NTE2OCwiYXVkIjoiN2RhYmFjNjQ2ODFhN2MxMmMxY2I5NzE4M2M0NGRlOTMiLCJyZWZyZXNoIjoyMTQ3NDgzNjQ3LCJ1aWQiOiIiLCJpYXQiOjE0OTI0NjE1MjEsImlkIjoxNTQ5NSwiZW52IjoiaHR0cDpcL1wvMTg0LmN0LnBzZi1pdC5jb20uYXJcLyJ9.iWFf3TzR7uy3iG9bsZVHAjQ5mcQr8XVIsJrZqE0-Ja0')
 	.send({
 		id: id,
 	})
@@ -27,6 +29,8 @@ function getMemotestData(id) {
 
 function saveMemotestData(presentationId, completed, title, data_all, data_teacher) {
 	return http_agent.post('http://ct.api.com/v1/ct/custom_slides')
+	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
+	.set('JWT', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDVCIsImV4cCI6MzYzOTk0NTE2OCwiYXVkIjoiN2RhYmFjNjQ2ODFhN2MxMmMxY2I5NzE4M2M0NGRlOTMiLCJyZWZyZXNoIjoyMTQ3NDgzNjQ3LCJ1aWQiOiIiLCJpYXQiOjE0OTI0NjE1MjEsImlkIjoxNTQ5NSwiZW52IjoiaHR0cDpcL1wvMTg0LmN0LnBzZi1pdC5jb20uYXJcLyJ9.iWFf3TzR7uy3iG9bsZVHAjQ5mcQr8XVIsJrZqE0-Ja0')
 	.send({
 		presentationId: presentationId,
 		completed: completed,
@@ -69,9 +73,15 @@ function getJwtToken(appUid, deviceUid, id, slide, isTeacher, token) {
 	.catch(err => _genericCatch(err))
 }
 
+function getGoogleDriveDownloadLink(fileId, token){
+	return http_agent.get('https://www.googleapis.com/drive/v3/files/' + fileId + '?alt=media')
+
+}
+
 export default {
 	getMemotestData,
 	saveMemotestData,
 	makeGoogleSearch,
-	getJwtToken
+	getJwtToken,
+	getGoogleDriveDownloadLink
 }

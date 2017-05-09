@@ -10,7 +10,8 @@ const triviaSelector = createSelector(
       gridSize: memotestData.gridSize,
       pieces: memotestData.pieces,
       triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
-      triviaQuestionText: memotestData.triviaQuestionText
+      triviaQuestionText: memotestData.triviaQuestionText,
+      showTrivia: memotestData.showTrivia
     }
   }
 )

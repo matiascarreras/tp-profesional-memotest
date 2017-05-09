@@ -9,6 +9,14 @@ let searchPanelLocalActions = {
     }
   },
 
+  getGoogleDriveDownloadLink: function(fileId, token) {
+    return { 
+      type: types.GET_GOOGLE_DRIVE_DOWNLOAD_LINK,
+      fileId: fileId,
+      token: token
+    }
+  },
+
 }
 
 export default searchPanelLocalActions

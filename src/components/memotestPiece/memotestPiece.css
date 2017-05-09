@@ -1,4 +1,4 @@
-#memotest-content .memotest-piece{
+.memotest-piece{
     border: 1px solid #5E5E5E;
     display: inline-block;
     border-radius: 9px;
@@ -9,16 +9,16 @@
     background-repeat: no-repeat;
 }
 
-#memotest-content .memotest-piece.empty{
+.memotest-piece.empty{
     background-image: url(../../assets/memotestPiece/dorso-big.png);
 }
 
-#memotest-content .memotest-piece.drag-over{
+.memotest-piece.drag-over{
     border: 1px dashed #5E5E5E;
     opacity: 0.7;
 }
 
-#memotest-content .memotest-piece.image img{
+.memotest-piece.image img{
     width: 100%;
     height: 100%
 }
@@ -41,7 +41,7 @@
     background-size: 85px 85px;
 }
 
-#memotest-content .memotest-piece.text textarea{
+.memotest-piece.text textarea{
     border: 0px;
     resize: none;
     height: 42px;
@@ -70,54 +70,54 @@
     margin-top: 21.5px;
 }
 
-#memotest-content .memotest-piece.text.font1{
+.memotest-piece.text.font1{
     background-color: rgb(255, 255, 255);
 }
 
-#memotest-content .memotest-piece.text.font2{
+.memotest-piece.text.font2{
     background-color: rgb(115, 115, 115);
 }
 
-#memotest-content .memotest-piece.text.font3{
+.memotest-piece.text.font3{
     background-color: rgb(255, 181, 131);
 }
 
-#memotest-content .memotest-piece.text.font4{
+.memotest-piece.text.font4{
     background-color: rgb(244, 86, 86);
 }
 
-#memotest-content .memotest-piece.text.font5{
+.memotest-piece.text.font5{
     background-color: rgb(158, 250, 203);
 }
 
-#memotest-content .memotest-piece.text.font6{
+.memotest-piece.text.font6{
     background-color: rgb(79, 205, 141);
 }
 
-#memotest-content .memotest-piece.text.font7{
+.memotest-piece.text.font7{
     background-color: rgb(170, 218, 255);
 }
 
-#memotest-content .memotest-piece.text.font8{
+.memotest-piece.text.font8{
     background-color: rgb(87, 155, 224);
 }
 
-#memotest-content .memotest-piece.text.font9{
+.memotest-piece.text.font9{
     background-color: rgb(255, 249, 183);
 }
 
-#memotest-content .memotest-piece.text.font10 {
+.memotest-piece.text.font10 {
     background-color: rgb(197, 168, 240);
 }
 
-#memotest-content .memotest-piece.text.font1 > textarea{
+.memotest-piece.text.font1 > textarea{
     background-color: rgb(255, 255, 255);
     color: rgb(0, 0, 0);
     font-family: Dosis;
     font-size: 26px;
 }
 
-#memotest-content .memotest-piece.text.font2 > textarea{
+.memotest-piece.text.font2 > textarea{
     background-color: rgb(115, 115, 115);
     color: rgb(255, 255, 255);
     font-family: Dosis;
@@ -125,14 +125,14 @@
     opacity: 1;
 }
 
-#memotest-content .memotest-piece.text.font3 > textarea{
+.memotest-piece.text.font3 > textarea{
     background-color: rgb(255, 181, 131);
     color: rgb(0, 0, 0);
     font-family: "Grand Hotel";
     font-size: 33px;
 }
 
-#memotest-content .memotest-piece.text.font4 > textarea{
+.memotest-piece.text.font4 > textarea{
     background-color: rgb(244, 86, 86);
     color: rgb(255, 255, 255);
     font-family: "Grand Hotel";
@@ -140,14 +140,14 @@
     opacity: 1;
 }
 
-#memotest-content .memotest-piece.text.font5 > textarea{
+.memotest-piece.text.font5 > textarea{
     background-color: rgb(158, 250, 203);
     color: rgb(0, 0, 0);
     font-family: Arial;
     font-size: 22px;
 }
 
-#memotest-content .memotest-piece.text.font6 > textarea{
+.memotest-piece.text.font6 > textarea{
     background-color: rgb(79, 205, 141);
     color: rgb(255, 255, 255);
     font-family: Arial;
@@ -155,7 +155,7 @@
     opacity: 1;
 }
 
-#memotest-content .memotest-piece.text.font7 > textarea{
+.memotest-piece.text.font7 > textarea{
     background-color: rgb(170, 218, 255);
     color: rgb(0, 0, 0);
     font-family: Times;
@@ -163,7 +163,7 @@
     opacity: 1;
 }
 
-#memotest-content .memotest-piece.text.font8 > textarea{
+.memotest-piece.text.font8 > textarea{
     background-color: rgb(87, 155, 224);
     color: rgb(255, 255, 255);
     font-family: Times;
@@ -171,14 +171,14 @@
     opacity: 1;
 }
 
-#memotest-content .memotest-piece.text.font9 > textarea{
+.memotest-piece.text.font9 > textarea{
     background-color: rgb(255, 249, 183);
     color: rgb(0, 0, 0);
     font-family: "Great Vibes";
     font-size: 33px;
 }
 
-#memotest-content .memotest-piece.text.font10 > textarea{
+.memotest-piece.text.font10 > textarea{
     background-color: rgb(197, 168, 240);
     color: rgb(255, 255, 255);
     font-family: "Great Vibes";

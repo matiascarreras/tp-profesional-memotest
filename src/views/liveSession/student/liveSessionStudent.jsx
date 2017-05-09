@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import classnames from 'classnames'
+import { localize } from '../../../helpers/translator'
+
 import './liveSessionStudent.css';
 import logo from '../../../assets/header/logo.svg'
+import liveSessionStudentSelector from '../../../selectors/live_session_student_selector'
+import bindActionsToDispatch from '../../../helpers/bindActionsToDispatch'
+import appActions from '../../../actions/appActions'
 
 class LiveSessionStudent extends Component {
 
   render() {
     return (
-    	<div id="body">
+    	<div id="live-session-student">
     		<div id="overlay"></div>
    			<div id="triviaBox" className="overlayBox">
         		<div className="triviaBoxContent">
-		            <div id="triviaTitle" className="overlayTitle">asdadasdasasd</div>
+		            <div id="triviaTitle" className="overlayTitle">{this.props.triviaQuestionText}</div>
 		            <div id="triviaInfo" className="overlayInfo">
-		                <div className="pieces-row">
-		                	<div className="triviaPiece" data-trivia-piece="0"><img src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837529/icon1.jpg" alt=""/></div>
-			                <div className="triviaPiece" data-trivia-piece="1"><img src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837529/icon1.jpg" alt=""/></div>
-			                <div className="triviaPiece" data-trivia-piece="2"><img src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837529/icon1.jpg" alt=""/></div>
-		                </div>
-		                <div className="pieces-row">
-		                	<div className="triviaPiece" data-trivia-piece="3"><img src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837529/icon1.jpg" alt=""/></div>
-		                	<div className="triviaPiece" data-trivia-piece="4"><img src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837529/icon1.jpg" alt=""/></div>
-		                	<div className="triviaPiece" data-trivia-piece="5"><img src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837529/icon1.jpg" alt=""/></div>
-		                </div>
+		            	trivia pieces
 		            </div>
 		            <div className="wrapperButton">
 		            	<input id="triviaButton" className="overlayButton" type="button" value="Check my answer!"/>
@@ -43,7 +41,7 @@ class LiveSessionStudent extends Component {
 		    <div id="header">
 		        <div className="container">
 		            <img id="logo" src={logo} alt=""/>
-		            <h2 id="title">Memory Test</h2>
+		            <h2 id="title">{localize('header_title')}</h2>
 		        </div>
 		    </div>
 		    <div id="content">
@@ -68,4 +66,15 @@ class LiveSessionStudent extends Component {
   }
 }
 
-export default LiveSessionStudent;
+function mapStateToProps(state){
+  return liveSessionStudentSelector(state);
+}
+
+function mapDispatchToProps(dispatch){
+    return bindActionsToDispatch({
+        saveMemotestData: appActions.saveMemotestData,
+        showTrivia: appActions.showTrivia,
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LiveSessionStudent);

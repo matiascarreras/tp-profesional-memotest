@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-
 import Dropzone from 'react-dropzone'
 import GooglePicker from 'react-google-picker'
 import DropboxChooser from 'react-dropbox-chooser'
 import classnames from 'classnames'
+import superagentPromisePlugin from 'superagent-promise-plugin'
+import http_agent from '../../sync/http_agent'
 
 import UploaderButton from '../../components/uploaderButton/uploaderButton'
 import localIconButton from '../../assets/uploaderButton/localBtn.svg'
@@ -140,17 +141,33 @@ class SearchPanelLocal extends Component {
     }
 
     googleDrivePickerOnChange(data){
-        console.log("gdrive files:", data);
+        //var token = window.gapi.auth.getToken().access_token;
+        var token = 'ya29.GlxCBAgHG6G6At-kPxPTUnOXJK5_ypxysV3Hq7utdY3JCpS5Je5JOD0eEoKN8TJyaty_jBh7cDEzBGg58pQ9pG6iTRFPCuy5G2ZRj0H5qZSS6rgKx4e1J1v-h45KKg'
         if(data.action === "picked"){
             let filesArray = []
             data.docs.forEach(function(file){
-                filesArray.push({
-                    size: file.sizeBytes,
-                    name: file.name,
-                    link: file.url
+                http_agent.get('https://www.googleapis.com/drive/v2/files/' + file.id + '?alt=media')
+                .set('Authorization', 'Bearer ' + token)
+                .send({})
+                .withCredentials()
+                .use(superagentPromisePlugin)
+                .then(function(response) {
+                    console.log('response', response)
+                    console.log('response text', response.text)
+                    let payload = JSON.parse(response.text)
+                    console.log('response payload', payload)
+
+                    /*filesArray.push({
+                        size: file.sizeBytes,
+                        name: file.name,
+                        link: file.url
+                    })*/
+                })
+                .catch( (ex) => {
+                    console.log('parsing failed', ex)
                 })
             })
-            this.props.actions.saveUploadersFiles(filesArray)
+            //this.props.actions.saveUploadersFiles(filesArray)
         }
     }
 
@@ -215,7 +232,7 @@ class SearchPanelLocal extends Component {
                               onChange={data => this.googleDrivePickerOnChange(data)}
                               multiselect={true}
                               navHidden={true}
-                              authImmediate={false}
+                              authImmediate={true}
                               mimeTypes={['image/png', 'image/jpeg', 'image/jpg']}
                               viewId={'DOCS'}>
                    <UploaderButton onMouseOver={this.handleGdriveUploadMouseOver.bind(this)} onMouseOut={this.handleGdriveUploadMouseOut.bind(this)} icon={this.state.gdriveIcon} id="browse-gdrive-file" text={localize('upload_gdrive')} name="googleDriveFile"/>
@@ -258,6 +275,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return bindActionsToDispatch({
         saveUploadersFiles: searchPanelLocalActions.saveUploadersFiles,
+        getGoogleDriveDownloadLink: searchPanelLocalActions.getGoogleDriveDownloadLink
     }, dispatch)
 }
 

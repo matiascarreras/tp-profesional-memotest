@@ -7,10 +7,12 @@ const initialState = {
 	triviaQuestionText: "",
 	triviaQuestionCorrectAnswer: "",
 	pieces:[],
-  googleFiles:{},
+  googleFiles:[],
   uploaderFiles:[],
   googleImagesResults: false,
   googleImagesLoading: false,
+  googleSearchShowMore: false,
+  showTrivia: false,
 }
 
 const arrayPieces = []
@@ -51,20 +53,29 @@ function saveUploadersFiles(state, action){
 
 function saveMemotestPiece(state, action){
   let newState = {...state}
-  newState.pieces[action.id].type = action.pieceType
+  let newPieces = {...state.pieces}
+  let newPiece = {...state.pieces[action.id]}
+  newPiece.type = action.pieceType
   if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_TEXT){
-    newState.pieces[action.id].textStyle = action.textStyle      
+    newPiece.textStyle = action.textStyle      
   } else if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_IMAGE){
-    newState.pieces[action.id].src = action.src      
+    newPiece.src = action.src      
   }
+  newPieces[action.id] = newPiece
+  newState.pieces = newPieces
   return newState
 }
 
 function makeGoogleSearchSuccess(state, action){
   let newState = {...state}
-  newState.googleFiles = action.images
+  let images = action.images
+  if(state.googleFiles.lenght > 0){
+    images = state.googleFiles.concat(action.images)  
+  }
+  newState.googleFiles = images
   newState.googleImagesLoading = false
   newState.googleImagesResults = false
+  newState.googleSearchShowMore = action.showMore
   return newState
 }
 
@@ -72,6 +83,42 @@ function makeGoogleSearchFailed(state, action){
   let newState = {...state}
   newState.googleImagesLoading = false
   newState.googleImagesResults = true
+  return newState
+}
+
+function getMemotestDataSuccess(state, action){
+  let newState = {...state}
+  return newState
+}
+
+function getMemotestDataFailed(state, action){
+  let newState = {...state}
+  return newState
+}
+
+function saveMemotestDataSuccess(state, action){
+  let newState = {...state}
+  return newState
+}
+
+function saveMemotestDataFailed(state, action){
+  let newState = {...state}
+  return newState
+}
+
+function getTokenSuccess(state, action){
+  let newState = {...state}
+  return newState
+}
+
+function getTokenFailed(state, action){
+  let newState = {...state}
+  return newState
+}
+
+function showTrivia(state, action){
+  let newState = {...state}
+  newState.showTrivia = action.show
   return newState
 }
 
@@ -93,6 +140,20 @@ const memotestReducer = (state = initialState, action) => {
       return makeGoogleSearchSuccess(state, action)
     case types.MAKE_GOOGLE_SEARCH_FAILED:
       return makeGoogleSearchFailed(state, action)
+    case types.GET_MEMOTEST_DATA_SUCCESS:
+      return getMemotestDataSuccess(state, action)
+    case types.GET_MEMOTEST_DATA_FAILED:
+      return getMemotestDataFailed(state, action)
+    case types.SAVE_MEMOTEST_DATA_SUCCESS:
+      return saveMemotestDataSuccess(state, action)
+    case types.SAVE_MEMOTEST_DATA_FAILED:
+      return saveMemotestDataFailed(state, action)
+    case types.GET_TOKEN_SUCCESS:
+      return getTokenSuccess(state, action)
+    case types.GET_TOKEN_FAILED:
+      return getTokenFailed(state, action)
+    case types.SHOW_TRIVIA:
+      return showTrivia(state, action)
     default:
       return state
   }

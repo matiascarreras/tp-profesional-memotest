@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import classnames from 'classnames'
+
 import Header from './views/header/header'
 import Search from './views/search/search'
 import Memotest from './views/memotest/memotest'
@@ -20,8 +22,11 @@ class App extends Component {
     super()
     this.state = {
       showGridSizeMenu: false,
-      showTrivia: false
     }
+  }
+
+  componentDidMount(){
+    //this.props.actions.intializeMemotest()
   }
 
   openGridSizeMenu(){
@@ -36,42 +41,24 @@ class App extends Component {
     this.props.actions.selectGridSize(gridSize)
   }
 
-  handleTriviaQuestionClick(){
-    this.props.actions.toggleTriviaQuestion()
-  }
-
-  handleNextBtnClick(){
-    this.setState({showTrivia:true})
-  }
-
-  handleDoneBtnClick(){
-    //save
-  }
-
-  handleBackBtnClick(){
-    this.setState({showTrivia:false})
-  }
-
   render() {
 
-    var classNames = require('classnames');
-
-    var settingsBtnClass = classNames({
+    var settingsBtnClass = classnames({
         'button-icon': true,
         'on': this.state.showGridSizeMenu,
     });
 
-    var selectSmallGridSizeClass = classNames({
+    var selectSmallGridSizeClass = classnames({
         'memotest-tick-chosen-size': true,
         'hide': this.props.gridSize !== constants.SMALL_GRID_SIZE,
     });
 
-    var selectMediumGridSizeClass = classNames({
+    var selectMediumGridSizeClass = classnames({
         'memotest-tick-chosen-size': true,
         'hide': this.props.gridSize !== constants.MEDIUM_GRID_SIZE,
     });
 
-    var selectLargeGridSizeClass = classNames({
+    var selectLargeGridSizeClass = classnames({
         'memotest-tick-chosen-size': true,
         'hide': this.props.gridSize !== constants.LARGE_GRID_SIZE,
     });
@@ -84,7 +71,7 @@ class App extends Component {
     return (
       <div id="memotest-content">
         <Header title={localize('header_title')}/>
-        <div id="menu" className={this.state.showTrivia ? "hide" : ""}>
+        <div id="menu" className={this.props.showTrivia ? "hide" : ""}>
           <button className={settingsBtnClass} onBlur={this.handleOnBlurGridMenu.bind(this)} onClick={this.openGridSizeMenu.bind(this)}>
             {localize('btn_grid_size')}
             <img src={srcIcon} alt=""/>
@@ -110,9 +97,9 @@ class App extends Component {
             </ul>
           </button>
         </div>
-        <Search hide={this.state.showTrivia}/>
-        <Memotest gridSize={this.props.gridSize} pieces={this.props.pieces} hide={this.state.showTrivia} isTriviaQuestionEnable={this.props.isTriviaQuestionEnable} switchButtonClick={this.handleTriviaQuestionClick.bind(this)} nextBtnClick={this.handleNextBtnClick.bind(this)} doneBtnClick={this.handleDoneBtnClick.bind(this)}/>
-        <Trivia hide={!this.state.showTrivia} backBtnClick={this.handleBackBtnClick.bind(this)} doneBtnClick={this.handleDoneBtnClick.bind(this)}/>
+        <Search hide={this.props.showTrivia}/>
+        <Memotest/>
+        <Trivia/>
       </div>
     );
   }
@@ -125,7 +112,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return bindActionsToDispatch({
       selectGridSize: appActions.selectGridSize,
-      toggleTriviaQuestion: appActions.toggleTriviaQuestion,
+      intializeMemotest: appActions.intializeMemotest,
   }, dispatch)
 }
 

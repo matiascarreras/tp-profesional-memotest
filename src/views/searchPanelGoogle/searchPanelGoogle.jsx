@@ -98,7 +98,7 @@ class SearchPanelGoogle extends Component {
 
         var googleSearchShowMoreClass = classnames({
             'google-search-show-more': true,
-            'hide': !this.props.googleSearchData.googleSearchShowMore,
+            'hide': !this.props.googleSearchShowMore,
         });
 
         var googleImagesLoadingClass = classnames({
