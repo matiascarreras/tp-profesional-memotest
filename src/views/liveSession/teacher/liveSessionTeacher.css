@@ -37,16 +37,6 @@
     text-align: center;
 }
 
-#content {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    height: auto;
-    overflow: hidden;
-    position: relative;
-    display: none;
-}
-
 #logo {
     width: 50px;
     vertical-align: middle;
@@ -87,11 +77,19 @@ h2#title {
 }
 
 #live-session-teacher #memotest-pieces-main{
-    max-width: 656px;
     margin: 0 auto;
     text-align: center;
     margin-top: 10px;
     height: 510px;
+}
+
+#live-session-teacher #memotest-pieces-main.small{
+    max-width: 651px;
+}
+
+#live-session-teacher #memotest-pieces-main.medium,
+#live-session-teacher #memotest-pieces-main.large{
+    max-width: 648px;
 }
 
 #live-session-teacher #memotest-final-question{
@@ -102,4 +100,5 @@ h2#title {
 
 #live-session-teacher #memotest-pieces-main .memotest-piece.selected{
     border: 4px #00a8ff solid;
+    box-sizing: border-box;
 }

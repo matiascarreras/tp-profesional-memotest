@@ -161,16 +161,6 @@
     text-align: center;
 }
 
-#content {
-    width: 100%;
-    max-width: 1280px;
-    margin: 0 auto;
-    height: auto;
-    overflow: hidden;
-    position: relative;
-    display: none;
-}
-
 #logo {
     width: 50px;
     vertical-align: middle;
@@ -210,30 +200,18 @@ h2#title {
     vertical-align: middle;
 }
 
-#imageContainer img {
-    display: none;
-    border-radius: 8px;
-}
-
-@media screen and (max-height: 480px) and (orientation: landscape)
-.board {
-    margin-top: -35px;
-}
-
-.board {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    top: 0;
-    left: 0;
-}
-
-#backgroundCanvas, #revealedCanvas, #piece1, #piece2 {
-    position: absolute;
-    top: 55px;
-    left: 0;
-    right: 0;
+#live-session-student #memotest-pieces-main{
     margin: 0 auto;
-    max-width: 100%;
-    max-height: 100%;
+    text-align: center;
+    margin-top: 10px;
+    height: 510px;
+}
+
+#live-session-student #memotest-pieces-main.small{
+    max-width: 651px;
+}
+
+#live-session-student #memotest-pieces-main.medium,
+#live-session-student #memotest-pieces-main.large{
+    max-width: 648px;
 }

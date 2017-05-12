@@ -6,8 +6,6 @@ import { localize } from '../../../helpers/translator'
 import './liveSessionTeacher.css';
 import logo from '../../../assets/header/logo.svg'
 import liveSessionTeacherSelector from '../../../selectors/live_session_teacher_selector'
-import bindActionsToDispatch from '../../../helpers/bindActionsToDispatch'
-import appActions from '../../../actions/appActions'
 import * as constants from '../../../constants/constants'
 import MemotestPiece from '../../../components/memotestPiece/memotestPiece'
 
@@ -43,7 +41,7 @@ class LiveSessionTeacher extends Component {
 	    		        <h2 id="title">{localize('header_title')}</h2>
 	    		    </div>
 	    		</div>
-	    		<div id="memotest-pieces-main">
+	    		<div id="memotest-pieces-main" className={this.props.gridSize}>
 	    		    <div id="memotest-pieces-container" className={this.props.gridSize}>
 	    		        {this.listMemotestPieces(this.props.pieces, cantPieces)}
 	    		    </div>
@@ -60,11 +58,4 @@ function mapStateToProps(state){
   return liveSessionTeacherSelector(state);
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionsToDispatch({
-        saveMemotestData: appActions.saveMemotestData,
-        showTrivia: appActions.showTrivia,
-    }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LiveSessionTeacher);
+export default connect(mapStateToProps)(LiveSessionTeacher);

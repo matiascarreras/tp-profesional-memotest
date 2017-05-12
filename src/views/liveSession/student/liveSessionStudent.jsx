@@ -6,75 +6,92 @@ import { localize } from '../../../helpers/translator'
 import './liveSessionStudent.css';
 import logo from '../../../assets/header/logo.svg'
 import liveSessionStudentSelector from '../../../selectors/live_session_student_selector'
-import bindActionsToDispatch from '../../../helpers/bindActionsToDispatch'
-import appActions from '../../../actions/appActions'
+import * as constants from '../../../constants/constants'
+import MemotestPiece from '../../../components/memotestPiece/memotestPiece'
 
 class LiveSessionStudent extends Component {
 
-  render() {
-    return (
-    	<div id="live-session-student">
-    		<div id="overlay"></div>
-   			<div id="triviaBox" className="overlayBox">
-        		<div className="triviaBoxContent">
-		            <div id="triviaTitle" className="overlayTitle">{this.props.triviaQuestionText}</div>
-		            <div id="triviaInfo" className="overlayInfo">
-		            	trivia pieces
-		            </div>
-		            <div className="wrapperButton">
-		            	<input id="triviaButton" className="overlayButton" type="button" value="Check my answer!"/>
-		            </div>
-		            <span id="triviaMessages"></span>
-        		</div>
-    		</div>
-		    <div id="overlayBox" className="overlayBox">
-		        <div id="overlayTitle" className="overlayTitle">Well done!</div>
-		        <div id="overlayInfo" className="overlayInfo">
-		        	You made it in
-		        	<span className="timetxt">14</span>
-		        	 moves!
-		        </div>
-		        <div className="wrapperButton">
-		        	<input id="overlayButton" className="overlayButton" type="button" value="Show Question"/>
-		        </div>
-		    </div>
-		    <div id="header">
-		        <div className="container">
-		            <img id="logo" src={logo} alt=""/>
-		            <h2 id="title">{localize('header_title')}</h2>
-		        </div>
-		    </div>
-		    <div id="content">
-		        <div id="imageContainer">
-		            <img id="memotest-dorso" src="images/dorso-big.png" alt=""/>
-		        	<img className="memotest-image-0" src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837529/icon1.jpg" id="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837529/icon1.jpg" alt=""/>
-		        	<img className="memotest-image-1" src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837530/icon1.jpg" id="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837530/icon1.jpg" alt=""/>
-		        	<img className="memotest-image-2" src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837531/icon1.jpg" id="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837531/icon1.jpg" alt=""/>
-		        	<img className="memotest-image-3" src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837532/icon1.jpg" id="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837532/icon1.jpg" alt=""/>
-		        	<img className="memotest-image-4" src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837534/icon1.jpg" id="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837534/icon1.jpg" alt=""/>
-		        	<img className="memotest-image-5" src="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837535/icon1.jpg" id="https://cf.nearpod.com/neareducation/new/MemotestPiece/329837535/icon1.jpg" alt=""/>
-		        </div>
-		        <div className="board">
-		            <canvas id="backgroundCanvas" width="1024" height="500"></canvas>
-		            <canvas id="revealedCanvas" width="1024" height="500"></canvas>
-		            <canvas id="piece1" className="memotest-piece" width="1024" height="500"></canvas>
-		            <canvas id="piece2" className="memotest-piece" width="1024" height="500"></canvas>
-		        </div>
-		    </div>
-		</div>
-    );
-  }
+	listMemotestPieces(pieces, cantPieces){
+	    let elements = []
+	    var _this = this
+	    for (var i = 0; i < cantPieces; i++) {
+	        elements.push(
+	        	<div key={i} className="full-piece-container">
+		        	<div className="front">
+		        		<div className="empty memotest-piece ui-droppable"></div>
+		        	</div>
+		        	<div className="back">
+			        	<MemotestPiece disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>        		
+		        	</div>
+	        	</div>
+	        )
+	    }
+	    return elements
+	}
+
+	render() {
+
+		let cantPieces = 0;
+		if (this.props.gridSize === constants.SMALL_GRID_SIZE) {
+		    cantPieces = 12;
+		} else if (this.props.gridSize === constants.MEDIUM_GRID_SIZE){
+		    cantPieces = 16;
+		} else if (this.props.gridSize === constants.LARGE_GRID_SIZE){
+		    cantPieces = 24;
+		}
+
+		var memotestPiecesMainClass = classnames(this.props.gridSize, {
+			'flip-container': true,
+		});
+
+		var memotestPiecesContainerClass = classnames(this.props.gridSize, {
+			'flipper': true,
+		});
+
+	    return (
+	    	<div id="live-session-student">
+	    		<div id="overlay"></div>
+	   			<div id="triviaBox" className="overlayBox">
+	        		<div className="triviaBoxContent">
+			            <div id="triviaTitle" className="overlayTitle">{this.props.triviaQuestionText}</div>
+			            <div id="triviaInfo" className="overlayInfo">
+			            	trivia pieces
+			            </div>
+			            <div className="wrapperButton">
+			            	<input id="triviaButton" className="overlayButton" type="button" value="Check my answer!"/>
+			            </div>
+			            <span id="triviaMessages"></span>
+	        		</div>
+	    		</div>
+			    <div id="overlayBox" className="overlayBox">
+			        <div id="overlayTitle" className="overlayTitle">Well done!</div>
+			        <div id="overlayInfo" className="overlayInfo">
+			        	You made it in
+			        	<span className="timetxt">14</span>
+			        	 moves!
+			        </div>
+			        <div className="wrapperButton">
+			        	<input id="overlayButton" className="overlayButton" type="button" value="Show Question"/>
+			        </div>
+			    </div>
+			    <div id="header">
+			        <div className="container">
+			            <img id="logo" src={logo} alt=""/>
+			            <h2 id="title">{localize('header_title')}</h2>
+			        </div>
+			    </div>
+			    <div id="memotest-pieces-main" className={memotestPiecesMainClass}>
+			    	<div id="memotest-pieces-container" className={memotestPiecesContainerClass}>
+			    		{this.listMemotestPieces(this.props.pieces, cantPieces)}
+			    	</div>
+			    </div>
+			</div>
+	    );
+	}
 }
 
 function mapStateToProps(state){
-  return liveSessionStudentSelector(state);
+	return liveSessionStudentSelector(state);
 }
 
-function mapDispatchToProps(dispatch){
-    return bindActionsToDispatch({
-        saveMemotestData: appActions.saveMemotestData,
-        showTrivia: appActions.showTrivia,
-    }, dispatch)
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(LiveSessionStudent);
+export default connect(mapStateToProps)(LiveSessionStudent);
