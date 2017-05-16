@@ -12,12 +12,13 @@ const initialState = {
   googleImagesResults: false,
   googleImagesLoading: false,
   googleSearchShowMore: false,
+  isSearch: false,
   showTrivia: false,
 }
 
 const arrayPieces = []
 for (var i = 0; i < 24; i++) {
-  arrayPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_EMPTY,text:'',src:'',id:i,textStyle:''}
+  arrayPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_TEXT,text:'sd',src:'',id:i,textStyle:'font5'}
 }
 initialState.pieces = arrayPieces
 
@@ -47,7 +48,11 @@ function saveTriviaCorrectAnswer(state, action){
 
 function saveUploadersFiles(state, action){
   let newState = {...state}
-  newState.uploaderFiles = action.uploaderFiles
+  let files = action.uploaderFiles
+  if(state.uploaderFiles.length  > 0){
+    files = state.uploaderFiles.concat(action.uploaderFiles)
+  }
+  newState.uploaderFiles = files
   return newState
 }
 
@@ -69,13 +74,14 @@ function saveMemotestPiece(state, action){
 function makeGoogleSearchSuccess(state, action){
   let newState = {...state}
   let images = action.images
-  if(state.googleFiles.lenght > 0){
+  if(state.googleFiles.length > 0){
     images = state.googleFiles.concat(action.images)  
   }
   newState.googleFiles = images
   newState.googleImagesLoading = false
   newState.googleImagesResults = false
   newState.googleSearchShowMore = action.showMore
+  newState.isSearch = true
   return newState
 }
 
@@ -83,6 +89,7 @@ function makeGoogleSearchFailed(state, action){
   let newState = {...state}
   newState.googleImagesLoading = false
   newState.googleImagesResults = true
+  newState.isSearch = true
   return newState
 }
 
@@ -98,20 +105,11 @@ function getMemotestDataFailed(state, action){
 
 function saveMemotestDataSuccess(state, action){
   let newState = {...state}
+  debugger
   return newState
 }
 
 function saveMemotestDataFailed(state, action){
-  let newState = {...state}
-  return newState
-}
-
-function getTokenSuccess(state, action){
-  let newState = {...state}
-  return newState
-}
-
-function getTokenFailed(state, action){
   let newState = {...state}
   return newState
 }
@@ -148,10 +146,6 @@ const memotestReducer = (state = initialState, action) => {
       return saveMemotestDataSuccess(state, action)
     case types.SAVE_MEMOTEST_DATA_FAILED:
       return saveMemotestDataFailed(state, action)
-    case types.GET_TOKEN_SUCCESS:
-      return getTokenSuccess(state, action)
-    case types.GET_TOKEN_FAILED:
-      return getTokenFailed(state, action)
     case types.SHOW_TRIVIA:
       return showTrivia(state, action)
     default:

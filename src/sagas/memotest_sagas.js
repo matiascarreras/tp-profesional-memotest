@@ -1,11 +1,10 @@
-import { takeLatest, call, put, select } from 'redux-saga/effects'
+import { takeLatest, call, put } from 'redux-saga/effects'
 import * as types from '../constants/actionTypes'
 import { memotestSync } from '../sync'
-import searchPanelGoogleSelector from '../selectors/search_panel_google_selector'
 
-function *getMemotestData(){
+function *getMemotestData(action){
 	try {
-		const response = yield call(memotestSync.getMemotestData)
+		const response = yield call(memotestSync.getMemotestData, action.id)
 	
 		if(response.error_code === 0) {
 			yield put({ 
@@ -24,9 +23,10 @@ function *getMemotestData(){
 	}
 }
 
-function *saveMemotestData(){
+function *saveMemotestData(action){
 	try {
-		const response = yield call(memotestSync.saveMemotestData)
+		debugger
+		const response = yield call(memotestSync.saveMemotestData, action.presentationId, action.completed, action.title, action.data_all, action.data_teacher)
 	
 		if(response.error_code === 0) {
 			yield put({ 
@@ -47,49 +47,17 @@ function *saveMemotestData(){
 
 function *makeGoogleSearch(action){
 	try {
-		const searchPanelGoogleData = yield select(searchPanelGoogleSelector)
-		let imagesArray = []
-		const response = ""
-		
-		response = yield call(memotestSync.makeGoogleSearch, action.search, action.page)
+		const response = yield call(memotestSync.makeGoogleSearch, action.search, action.page)
 
-		imagesArray.push(response.payload.images.data)
-
-		if(imagesArray.length <= 10){
-			response = yield call(memotestSync.makeGoogleSearch, action.search, action.page)
-			imagesArray.push(response.payload.images.data)
-			if(response.error_code === 0) {
-				yield put({ 
-					type: types.MAKE_GOOGLE_SEARCH_SUCCESS,
-					images: imagesArray,
-					showMore: response.payload.images.showMore
-				})
-			} else if(response.error_code === 1){
-				yield put({ 
-					type: types.MAKE_GOOGLE_SEARCH_FAILED,
-					payload: response.payload
-				})
-			}
-		}
-
-	}
-	catch(error) {
-		console.log(error)
-	}
-}
-
-function *getJwtToken(){
-	try {
-		const response = yield call(memotestSync.getJwtToken)
-	
 		if(response.error_code === 0) {
 			yield put({ 
-				type: types.GET_TOKEN_SUCCESS,
-				payload: response.payload
+				type: types.MAKE_GOOGLE_SEARCH_SUCCESS,
+				images: response.payload.images.data,
+				showMore: response.payload.images.showMore
 			})
 		} else if(response.error_code === 1){
 			yield put({ 
-				type: types.GET_TOKEN_FAILED,
+				type: types.MAKE_GOOGLE_SEARCH_FAILED,
 				payload: response.payload
 			})
 		}
@@ -102,13 +70,18 @@ function *getJwtToken(){
 function *getGoogleDriveDownloadLink(action){
 	try {
 		const response = yield call(memotestSync.getGoogleDriveDownloadLink, action.fileId, action.token)
-	
-		if(response.error_code === 0) {
+		if(response.statusCode === 200) {
+			let fileArray = []
+		    fileArray.push({
+		        size: response.body.fileSize,
+		        name: response.body.title,
+		        link: response.body.downloadUrl
+		    })
 			yield put({ 
-				type: types.GET_GOOGLE_DRIVE_DOWNLOAD_LINK_SUCCESS,
-				fileData: response.payload
+				type: types.SAVE_UPLOADERS_FILES,
+				uploaderFiles: fileArray
 			})
-		} else if(response.error_code === 1){
+		} else {
 			yield put({ 
 				type: types.GET_GOOGLE_DRIVE_DOWNLOAD_LINK_FAILED,
 				payload: response.payload
@@ -124,6 +97,5 @@ export default [
 	takeLatest(types.INITIALIZE_MEMOTEST, getMemotestData),
 	takeLatest(types.SAVE_MEMOTEST_DATA, saveMemotestData),
 	takeLatest(types.MAKE_GOOGLE_SEARCH, makeGoogleSearch),
-	takeLatest(types.GET_TOKEN, getJwtToken),
 	takeLatest(types.GET_GOOGLE_DRIVE_DOWNLOAD_LINK, getGoogleDriveDownloadLink),
 ]

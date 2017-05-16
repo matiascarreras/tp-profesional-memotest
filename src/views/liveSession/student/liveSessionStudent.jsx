@@ -11,22 +11,79 @@ import MemotestPiece from '../../../components/memotestPiece/memotestPiece'
 
 class LiveSessionStudent extends Component {
 
+	constructor(){
+	    super()
+	    this.state = {
+	    	showOverlay: true,
+	        showOverlayBox: true,
+	        showTriviaBox: false,
+	        showTriviaIncorrectAnswerMessage: false,
+	        showTriviaCorrectAnswerMessage: false,
+	        showTriviaMissingAnswerMessage: false,
+	        overlayTitle: localize('live_session_student_overlay_title'),
+	        overlayInfoBeforeTxt: localize('live_session_student_overlay_info'),
+	        overlayInfoAfterTxt: localize('live_session_student_overlay_info_moves'),
+	        overlayButton: localize('live_session_student_overlay_button'),
+	        triviaAnswer: '',
+	    }
+	}
+
 	listMemotestPieces(pieces, cantPieces){
 	    let elements = []
 	    var _this = this
 	    for (var i = 0; i < cantPieces; i++) {
 	        elements.push(
-	        	<div key={i} className="full-piece-container">
-		        	<div className="front">
-		        		<div className="empty memotest-piece ui-droppable"></div>
-		        	</div>
-		        	<div className="back">
-			        	<MemotestPiece disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>        		
-		        	</div>
-	        	</div>
+	        	<MemotestPiece key={i} disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>        		
 	        )
 	    }
 	    return elements
+	}
+
+	listTriviaPieces(pieces, cantPieces){
+	    let elements = []
+	    var _this = this
+	    for (var i = 0; i < cantPieces; i++) {
+	        elements.push(
+	        	<MemotestPiece key={i} disabled="true" correctAnswer={this.state.triviaAnswer} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle} onClick={this.handleOnClickPiece.bind(this, pieces[i].id)}/>        		
+	        )
+	    }
+	    return elements
+	}
+
+	overlayButtonClick(){
+		this.setState({ showOverlayBox: false });
+		if(this.props.triviaQuestionText){
+			this.setState({ showTriviaBox: true });
+		} else {
+			this.setState({ showOverlay: false });	
+		}
+	}
+
+	handleOnClickPiece(pieceId){
+	    this.setState({ triviaAnswer: pieceId });
+	}
+
+	triviaButtonClick(){
+		this.setState({ showTriviaMissingAnswerMessage: false });
+		if(this.state.triviaAnswer){
+			this.setState({ showTriviaBox: false })
+			this.setState({ showOverlayBox: true })
+			if(this.props.triviaQuestionCorrectAnswer === this.state.triviaAnswer){
+				this.setState({ overlayTitle: localize('live_session_student_trivia_correct_answer_title') })
+				this.setState({ overlayInfoBeforeTxt: localize('live_session_student_trivia_correct_answer_message') })
+				this.setState({ overlayInfoAfterTxt: '' })
+				this.setState({ triviaAnswer: '' })
+				this.setState({ overlayButton: localize('live_session_student_trivia_correct_answer_btn')})
+			} else {
+				this.setState({ overlayTitle: localize('live_session_student_trivia_incorrect_answer_title') })
+				this.setState({ overlayInfoBeforeTxt: localize('live_session_student_trivia_incorrect_answer_message') })
+				this.setState({ overlayInfoAfterTxt: ''})
+				this.setState({ triviaAnswer: '' })
+				this.setState({ overlayButton: localize('live_session_student_trivia_incorrect_answer_btn') })
+			}
+		} else {
+			this.setState({ showTriviaMissingAnswerMessage: true });
+		}
 	}
 
 	render() {
@@ -48,30 +105,57 @@ class LiveSessionStudent extends Component {
 			'flipper': true,
 		});
 
+		var overlayBoxClass = classnames({
+			'overlayBox': true,
+			'hide': !this.state.showOverlayBox,
+		});
+
+		let triviaBoxStyle = 'none'
+		if(this.state.showTriviaBox){
+			triviaBoxStyle = 'table'
+		}
+
+		var overlayClass = classnames({
+			'hide': !this.state.showOverlay,
+		})
+
+		if(this.props.triviaQuestionText){
+			this.state.overlayButton =  localize('live_session_student_overlay_button_show_question')
+		}
+
+		var triviaMessagesClass = classnames({
+			'errorMessage': true,
+			'hide': !this.state.showTriviaMissingAnswerMessage,
+		});
+
 	    return (
 	    	<div id="live-session-student">
-	    		<div id="overlay"></div>
-	   			<div id="triviaBox" className="overlayBox">
+	    		<div id="overlay" className={overlayClass}></div>
+	   			<div id="triviaBox" className="overlayBox" style={{display: triviaBoxStyle}}>
 	        		<div className="triviaBoxContent">
 			            <div id="triviaTitle" className="overlayTitle">{this.props.triviaQuestionText}</div>
 			            <div id="triviaInfo" className="overlayInfo">
-			            	trivia pieces
+			            	{this.listTriviaPieces(this.props.pieces, cantPieces)}
 			            </div>
 			            <div className="wrapperButton">
-			            	<input id="triviaButton" className="overlayButton" type="button" value="Check my answer!"/>
+			            	<input id="triviaButton" onClick={this.triviaButtonClick.bind(this)} className="overlayButton" type="button" value={localize('live_session_student_trivia_button')}/>
 			            </div>
-			            <span id="triviaMessages"></span>
+			            <span id="triviaMessages">
+			            	<p className={triviaMessagesClass}>{localize('live_session_student_trivia_missing_answer')}</p>
+			            </span>
 	        		</div>
 	    		</div>
-			    <div id="overlayBox" className="overlayBox">
-			        <div id="overlayTitle" className="overlayTitle">Well done!</div>
+			    <div id="overlayBox" className={overlayBoxClass}>
+			        <div id="overlayTitle" className="overlayTitle">{this.state.overlayTitle}</div>
 			        <div id="overlayInfo" className="overlayInfo">
-			        	You made it in
-			        	<span className="timetxt">14</span>
-			        	 moves!
+			        	{this.state.overlayInfoBeforeTxt}
+			        	{this.state.overlayInfoAfterTxt
+			        	&& <span className="timetxt">14</span>
+			        	}
+			        	{this.state.overlayInfoAfterTxt}
 			        </div>
 			        <div className="wrapperButton">
-			        	<input id="overlayButton" className="overlayButton" type="button" value="Show Question"/>
+			        	<input id="overlayButton" onClick={this.overlayButtonClick.bind(this)} className="overlayButton" type="button" value={this.state.overlayButton}/>
 			        </div>
 			    </div>
 			    <div id="header">

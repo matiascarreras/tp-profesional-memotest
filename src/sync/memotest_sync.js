@@ -61,27 +61,21 @@ function makeGoogleSearch(search, page) {
 	.catch(err => _genericCatch(err))
 }
 
-function getJwtToken(appUid, deviceUid, id, slide, isTeacher, token) {
-	return http_agent.get('http://ct.api.com/v1/ct/token?app_uid='+appUid+'&device_uid='+deviceUid+'&custom_slide_id='+id+'&slide='+slide+'&is_teacher='+isTeacher+'&token='+token)
+function getGoogleDriveDownloadLink(fileId, token){
+	return http_agent.get('https://www.googleapis.com/drive/v2/files/' + fileId)
+	.set('Authorization', 'Bearer ' + token)
 	.send({})
 	.withCredentials()
 	.use(superagentPromisePlugin)
 	.then(function(response) {
-		let payload = JSON.parse(response.text)
-		return payload
+	    return response
 	})
 	.catch(err => _genericCatch(err))
-}
-
-function getGoogleDriveDownloadLink(fileId, token){
-	return http_agent.get('https://www.googleapis.com/drive/v3/files/' + fileId + '?alt=media')
-
 }
 
 export default {
 	getMemotestData,
 	saveMemotestData,
 	makeGoogleSearch,
-	getJwtToken,
 	getGoogleDriveDownloadLink
 }

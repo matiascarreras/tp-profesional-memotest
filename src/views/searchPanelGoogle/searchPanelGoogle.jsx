@@ -68,7 +68,7 @@ class SearchPanelGoogle extends Component {
 
     handleGoogleSearchShowMoreClick(search, page){
         this.setState({googleSearchPage : page + 1});
-        this.props.actions.makeGoogleSearch(search, page+1)
+        this.props.actions.makeGoogleSearch(search, this.state.googleSearchPage)
     }
 
     googleSearchContentElements(files){

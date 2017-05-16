@@ -18,7 +18,6 @@
     height: 100%;
     top: 0;
     left: 0;
-    display: none;
     z-index: 98;
 }
 
@@ -28,7 +27,6 @@
     max-width: 635px;
     height: 300px;
     text-align: center;
-    display: none;
     margin: 0 auto;
     top: 50%;
     bottom: 0;
@@ -75,16 +73,15 @@
 }
 
 #triviaInfo {
-    display: none;
     display: table;
     margin: 0 auto;
     padding: 0 0 36px 0;
 }
 
 #triviaMessages {
-    display: inline-block;
     width: 100%;
     min-height: 50px;
+    display: inline-block;
 }
 
 .errorMessage {
@@ -214,4 +211,14 @@ h2#title {
 #live-session-student #memotest-pieces-main.medium,
 #live-session-student #memotest-pieces-main.large{
     max-width: 648px;
+}
+
+@media screen and (min-width: 636px)
+.overlayBox {
+    left: 50%;
+    margin-left: -317.5px;
+}
+
+.triviaBoxContent .memotest-piece.selected{
+    border: 4px #00a8ff solid;
 }

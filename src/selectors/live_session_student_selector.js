@@ -9,8 +9,8 @@ const liveSessionStudentSelector = createSelector(
     return {
       gridSize: memotestData.gridSize,
       pieces: memotestData.pieces,
-      triviaQuestionText: memotestData.triviaQuestionText,
-      triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
+      triviaQuestionText: "messi",
+      triviaQuestionCorrectAnswer: 2,
     }
   }
 )

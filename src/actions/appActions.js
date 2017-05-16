@@ -8,15 +8,21 @@ let appActions = {
     }
   },
 
-  intializeMemotest: function() {
+  intializeMemotest: function(id) {
     return { 
       type: types.INITIALIZE_MEMOTEST,
+      id: id,
     }
   },
 
-  saveMemotestData: function() {
+  saveMemotestData: function(presentationId, completed, title, data_all, data_teacher) {
     return { 
       type: types.SAVE_MEMOTEST_DATA,
+      presentationId: presentationId,
+      completed: completed,
+      title: title,
+      data_all: data_all,
+      data_teacher: data_teacher
     }
   },
 

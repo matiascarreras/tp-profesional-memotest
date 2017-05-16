@@ -141,33 +141,13 @@ class SearchPanelLocal extends Component {
     }
 
     googleDrivePickerOnChange(data){
-        //var token = window.gapi.auth.getToken().access_token;
-        var token = 'ya29.GlxCBAgHG6G6At-kPxPTUnOXJK5_ypxysV3Hq7utdY3JCpS5Je5JOD0eEoKN8TJyaty_jBh7cDEzBGg58pQ9pG6iTRFPCuy5G2ZRj0H5qZSS6rgKx4e1J1v-h45KKg'
+        var token = window.gapi.auth.getToken().access_token;
+        var _this = this
         if(data.action === "picked"){
             let filesArray = []
             data.docs.forEach(function(file){
-                http_agent.get('https://www.googleapis.com/drive/v2/files/' + file.id + '?alt=media')
-                .set('Authorization', 'Bearer ' + token)
-                .send({})
-                .withCredentials()
-                .use(superagentPromisePlugin)
-                .then(function(response) {
-                    console.log('response', response)
-                    console.log('response text', response.text)
-                    let payload = JSON.parse(response.text)
-                    console.log('response payload', payload)
-
-                    /*filesArray.push({
-                        size: file.sizeBytes,
-                        name: file.name,
-                        link: file.url
-                    })*/
-                })
-                .catch( (ex) => {
-                    console.log('parsing failed', ex)
-                })
+                _this.props.actions.getGoogleDriveDownloadLink(file.id, token)
             })
-            //this.props.actions.saveUploadersFiles(filesArray)
         }
     }
 
@@ -232,7 +212,7 @@ class SearchPanelLocal extends Component {
                               onChange={data => this.googleDrivePickerOnChange(data)}
                               multiselect={true}
                               navHidden={true}
-                              authImmediate={true}
+                              authImmediate={false}
                               mimeTypes={['image/png', 'image/jpeg', 'image/jpg']}
                               viewId={'DOCS'}>
                    <UploaderButton onMouseOver={this.handleGdriveUploadMouseOver.bind(this)} onMouseOut={this.handleGdriveUploadMouseOut.bind(this)} icon={this.state.gdriveIcon} id="browse-gdrive-file" text={localize('upload_gdrive')} name="googleDriveFile"/>

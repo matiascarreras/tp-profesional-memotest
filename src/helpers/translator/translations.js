@@ -32,6 +32,20 @@ export default {
 		empty_pieces_error_msg: "Please complete all cards to continue",
 		empty_final_question: "Please add a question.",
 		empty_final_question_correct_answer: "Please select one image with the correct answer.",
+		live_session_final_question: "Final Question: ",
+		live_session_student_overlay_title: "Well done!",
+		live_session_student_overlay_info: "You made it in ",
+		live_session_student_overlay_info_moves: " moves!",
+		live_session_student_overlay_button_show_question: "Show Question",
+		live_session_student_overlay_button: "Close",
+		live_session_student_trivia_button: "Check my answer!",
+		live_session_student_trivia_missing_answer: "Please select your answer",
+		live_session_student_trivia_incorrect_answer_title: "Oops!",
+		live_session_student_trivia_incorrect_answer_message: "Nice try. You almost had it!",
+		live_session_student_trivia_incorrect_answer_btn: "Try Again",
+		live_session_student_trivia_correct_answer_title: "Exactly!",
+		live_session_student_trivia_correct_answer_message: "Well Done! You've answered the question correctly.",
+		live_session_student_trivia_correct_answer_btn: "Close"
 	},
 	es: {
 		header_beta_title:"beta",
@@ -66,5 +80,7 @@ export default {
 		empty_pieces_error_msg: "Por favor completa todas las piezas con imágenes o texto",
 		empty_final_question: "Por favor agrega una pregunta.",
 		empty_final_question_correct_answer: "Por favor selecciona una imagen con la respuesta correcta.",
+		live_session_final_question: "Pregunta Final: ",
+		live_session_student_overlay_title: "Well done!",
 	},
 }

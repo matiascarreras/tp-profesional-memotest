@@ -46,9 +46,12 @@ class LiveSessionTeacher extends Component {
 	    		        {this.listMemotestPieces(this.props.pieces, cantPieces)}
 	    		    </div>
 	    		</div>
-	    		<div id="memotest-final-question">
-	    			Final Question: {this.props.triviaQuestionText}
+	    		{this.props.triviaQuestionText
+	    		&& <div id="memotest-final-question">
+	    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
 	    		</div>
+	    		}
+	    		
 	    	</div>
 	    );
   	}

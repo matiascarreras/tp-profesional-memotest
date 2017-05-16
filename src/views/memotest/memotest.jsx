@@ -31,7 +31,7 @@ class Memotest extends Component {
         if(!this.isMemotestCompleted(this.props.pieces, this.props.gridSize)){
             this.setState({ showAlertMessage: true });
         } else {
-            this.props.actions.saveMemotestData()
+            this.props.actions.saveMemotestData(106135, 1, "Memory Test", this.props, this.props)
         }
     }
 
