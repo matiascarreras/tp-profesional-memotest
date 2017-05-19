@@ -45,44 +45,48 @@ class Reports extends Component {
 	    		        <h2 id="title">{localize('header_title')}</h2>
 	    		    </div>
 	    		</div>
-	    		<div id="memotest-pieces-main" className={memotestPiecesMainClass}>
-	    		    <div id="memotest-pieces-container" className={this.props.gridSize}>
-	    		        {this.listMemotestPieces(this.props.pieces, cantPieces)}
-	    		    </div>
+	    		<div id="reports-content">
+		    		<div id="memotest-pieces-main" className={memotestPiecesMainClass}>
+		    		    <div id="memotest-pieces-container" className={this.props.gridSize}>
+		    		        {this.listMemotestPieces(this.props.pieces, cantPieces)}
+		    		    </div>
+		    		</div>
+		    		{this.props.triviaQuestionText
+		    		&& <div id="memotest-final-question" className={this.props.gridSize}>
+		    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
+		    			<div id="memotest-pieces-container" className={this.props.gridSize}>
+		    				<MemotestPiece key={1000} disabled="true" id={this.props.pieces[this.props.triviaQuestionCorrectAnswer].id} type={this.props.pieces[this.props.triviaQuestionCorrectAnswer].type} text={this.props.pieces[this.props.triviaQuestionCorrectAnswer].text} src={this.props.pieces[this.props.triviaQuestionCorrectAnswer].src} textStyle={this.props.pieces[this.props.triviaQuestionCorrectAnswer].textStyle}/>
+		    			</div>
+		    		</div>
+		    		}
+		    		<table className="memotest-reports-table">
+		    			<thead>
+		    				<tr>
+		    					<th>Student Nickname</th>
+		    				   	<th>Moves</th> 
+		    				    {this.props.triviaQuestionText
+		    				    && <th>Final Question Trials </th>
+		    					}
+		    				</tr>
+		    			</thead>
+		    		  	<tbody>
+		    		  		<tr>
+		    		  			<td>Mati</td>
+		    		  		    <td>14</td> 
+		    		  		    {this.props.triviaQuestionText
+		    		  		    && <td>2</td>
+		    		  			}
+		    		  		</tr>
+		    		  		<tr>
+		    		  			<td>Alario</td>
+		    		  		    <td>10</td> 
+		    		  		    {this.props.triviaQuestionText
+		    		  		    && <td>3</td>
+		    		  			}
+		    		  		</tr>
+		    		  	</tbody>
+		    		</table>
 	    		</div>
-	    		{this.props.triviaQuestionText
-	    		&& <div id="memotest-final-question" className={this.props.gridSize}>
-	    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
-	    			<div id="memotest-pieces-container" className={this.props.gridSize}>
-	    				<MemotestPiece key={1000} disabled="true" id={this.props.pieces[this.props.triviaQuestionCorrectAnswer].id} type={this.props.pieces[this.props.triviaQuestionCorrectAnswer].type} text={this.props.pieces[this.props.triviaQuestionCorrectAnswer].text} src={this.props.pieces[this.props.triviaQuestionCorrectAnswer].src} textStyle={this.props.pieces[this.props.triviaQuestionCorrectAnswer].textStyle}/>
-	    			</div>
-	    		</div>
-	    		}
-	    		<table style={{width: 1100 + 'px'}}>
-	    		<tbody>
-	    		  <tr>
-	    		    <th>Student Nickname</th>
-	    		    <th>Moves</th> 
-	    		    {this.props.triviaQuestionText
-	    		    &&<th>Final Question Trials </th>
-	    			}
-	    		  </tr>
-	    		  <tr>
-	    		    <td>Mati</td>
-	    		    <td>14</td> 
-	    		    {this.props.triviaQuestionText
-	    		    &&<td>2</td>
-	    			}
-	    		  </tr>
-	    		  <tr>
-	    		    <td>Alario</td>
-	    		    <td>10</td> 
-	    		    {this.props.triviaQuestionText
-	    		    &&<td>3</td>
-	    			}
-	    		  </tr>
-	    		</tbody>
-	    		</table>
 	    	</div>
 	    );
   	}

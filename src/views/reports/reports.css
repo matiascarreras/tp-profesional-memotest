@@ -77,9 +77,7 @@ h2#title {
 }
 
 #reports #memotest-pieces-main{
-    height: 210px;
-    margin-top: 10px;
-    margin-left: 90px;
+    height: 190px;
 }
 
 #reports #memotest-pieces-main.no-final-question{
@@ -91,7 +89,7 @@ h2#title {
 }
 
 #reports #memotest-pieces-container{
-    height: 186px;
+    height: 190px;
 }
 
 #reports #memotest-pieces-main.small{
@@ -147,6 +145,60 @@ h2#title {
     left: 50px;
 }
 
-td {
+.memotest-reports-table{
+    display: block;
+    overflow: auto;
+    width: calc(100% - 120px);
+    margin: auto;
+    margin-bottom: 10px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-top: 20px;
+}
+
+.memotest-reports-table thead th {
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    font-weight: normal;
+    background-color: #aaaaaa;
+    color: white;
+    border-left: 1px solid #f3f3f3;
+    border-right: 1px solid #f3f3f3;
+    border-bottom: 1px solid #f3f3f3;
+    font-size: 78%;
+    vertical-align: middle;
+    font-family: "avenirmedium", Helvetica, Arial, sans-serif;
+    line-height: 12px;
+    width: 20%;
+    min-width: 150px;
+    padding: 5px 10px;
     text-align: center;
+    white-space: normal;
+}
+
+.memotest-reports-table thead th,
+.memotest-reports-table tbody td {
+    text-overflow: ellipsis;
+}
+
+.memotest-reports-table tbody {
+    border-bottom: 1px solid #f3f3f3;
+}
+
+.memotest-reports-table tbody td {
+    white-space: nowrap;
+    overflow: hidden;
+    font-family: "avenirlight", Helvetica, Arial, sans-serif;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #eaeef1;
+    box-sizing: border-box;
+    color: #5b6d79;
+    font-size: 14px;
+    padding: 10px 15px;
+    word-wrap: break-word;
+}
+
+#reports #reports-content{
+    padding: 20px 100px 0px 100px;
 }
