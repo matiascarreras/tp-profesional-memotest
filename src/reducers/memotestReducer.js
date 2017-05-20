@@ -71,11 +71,22 @@ function saveMemotestPiece(state, action){
   return newState
 }
 
+function makeGoogleSearch(state, action){
+  let newState = {...state}
+  newState.googleImagesLoading = true
+  if(action.page === 1){
+    newState.googleFiles = []  
+  }
+  newState.googleSearchShowMore = false
+  newState.isSearch = false
+  return newState
+}
+
 function makeGoogleSearchSuccess(state, action){
   let newState = {...state}
   let images = action.images
   if(state.googleFiles.length > 0){
-    images = state.googleFiles.concat(action.images)  
+    images = state.googleFiles.concat(action.images)
   }
   newState.googleFiles = images
   newState.googleImagesLoading = false
@@ -89,6 +100,7 @@ function makeGoogleSearchFailed(state, action){
   let newState = {...state}
   newState.googleImagesLoading = false
   newState.googleImagesResults = true
+  newState.googleSearchShowMore = false
   newState.isSearch = true
   return newState
 }
@@ -105,7 +117,6 @@ function getMemotestDataFailed(state, action){
 
 function saveMemotestDataSuccess(state, action){
   let newState = {...state}
-  debugger
   return newState
 }
 
@@ -134,6 +145,8 @@ const memotestReducer = (state = initialState, action) => {
       return saveUploadersFiles(state, action)
     case types.SAVE_MEMOTEST_PIECE:
       return saveMemotestPiece(state, action)
+    case types.MAKE_GOOGLE_SEARCH:
+      return makeGoogleSearch(state, action)
     case types.MAKE_GOOGLE_SEARCH_SUCCESS:
       return makeGoogleSearchSuccess(state, action)
     case types.MAKE_GOOGLE_SEARCH_FAILED:

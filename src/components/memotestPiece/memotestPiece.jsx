@@ -44,7 +44,7 @@ class MemotestPiece extends Component {
 
   	let content = ""
   	if(this.props.type === constants.MEMOTEST_PIECE_TYPE_TEXT){
-      content = <Textarea style={{maxHeight: 130, width: 100}} disabled={this.props.disabled} defaultValue={this.props.text}/>
+      content = <Textarea  disabled={this.props.disabled} defaultValue={this.props.text}/>
   	} else if(this.props.type === constants.MEMOTEST_PIECE_TYPE_IMAGE){
   		content = <img src={this.props.src} alt=""/>
   	}

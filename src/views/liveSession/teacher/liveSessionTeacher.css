@@ -90,15 +90,27 @@ h2#title {
 #live-session-teacher #memotest-pieces-main.medium,
 #live-session-teacher #memotest-pieces-main.large{
     max-width: 648px;
+    height: 470px;
 }
 
 #live-session-teacher #memotest-final-question{
-    max-width: 650px;
+    max-width: 618px;
     margin: 0 auto;
+    color: #333;
+    font-family: 'avenirroman', Arial, Helvetica, sans-serif;
+    font-weight: bold;
     text-align: left;
 }
 
-#live-session-teacher #memotest-pieces-main .memotest-piece.selected{
-    border: 4px #00a8ff solid;
+#live-session-teacher #memotest-final-question.medium{
+    max-width: 400px;
+}
+
+#live-session-teacher #memotest-pieces-main .memotest-piece{
+    border:5px transparent solid;
     box-sizing: border-box;
+}
+
+#live-session-teacher #memotest-pieces-main .memotest-piece.selected{
+    border-color: #00a8ff;
 }

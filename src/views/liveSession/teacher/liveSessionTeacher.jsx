@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import classnames from 'classnames'
 import { localize } from '../../../helpers/translator'
 
 import './liveSessionTeacher.css';
@@ -47,7 +46,7 @@ class LiveSessionTeacher extends Component {
 	    		    </div>
 	    		</div>
 	    		{this.props.triviaQuestionText
-	    		&& <div id="memotest-final-question">
+	    		&& <div id="memotest-final-question" className={this.props.gridSize}>
 	    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
 	    		</div>
 	    		}

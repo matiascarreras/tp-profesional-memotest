@@ -44,30 +44,29 @@
 .memotest-piece.text textarea{
     border: 0px;
     resize: none;
-    height: 42px;
-    padding: 0px;
+    padding: 5px;
     float: left;
-    width: 130px;
     overflow: hidden;
     text-align: center;
     background-image: none;
     line-height: 42px;
-    margin-top: 44px;
     outline: none;
 }
 
 #memotest-pieces-container.small .memotest-piece.text textarea,
 #trivia-pieces-container.small .memotest-piece.text textarea{
-    width: 130px;
-    margin-top: 44px;
+    width: 120px;
+    max-height: 120px;
+    margin-top: 40px;
 }
 
 #memotest-pieces-container.medium .memotest-piece.text textarea,
 #memotest-pieces-container.large .memotest-piece.text textarea,
 #trivia-pieces-container.medium .memotest-piece.text textarea,
 #trivia-pieces-container.large .memotest-piece.text textarea{
-    width: 85px;
-    margin-top: 21.5px;
+    width: 75px;
+    max-height: 75px;
+    margin-top: 18px;
 }
 
 .memotest-piece.text.font1{

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41 (35326) - http://www.bohemiancoding.com/sketch -->
+    <title>tick</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="tick">
+            <path d="M0.711598569,39.4043634 L1,3 C1,1.9 1.9,1 3,1 L40.0000109,0.951142195" id="Fill-1" fill-opacity="0.4" fill="#00A8FF"></path>
+            <path d="M12.4355059,16.5134433 C12.1048549,16.8249426 11.6590181,17 11.1942096,17 C10.7212703,16.9974256 10.2740784,16.821081 9.94478254,16.5057202 L6.51224599,13.2233936 C5.82655175,12.5682155 5.82926201,11.5101478 6.52037675,10.8588313 C7.20878124,10.2062275 8.32405071,10.2088019 9.00974495,10.8665544 L11.2009852,12.9620947 L16.9982183,7.48768875 C17.6866228,6.83508499 18.8018923,6.83765937 19.4875865,7.49412469 C20.1732807,8.14801564 20.1705705,9.20737046 19.4808109,9.85868704 L12.4355059,16.5134433 Z" id="Fill-5" fill="#FFFFFF"></path>
+        </g>
+    </g>
+</svg>

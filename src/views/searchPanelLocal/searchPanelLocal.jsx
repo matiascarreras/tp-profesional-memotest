@@ -4,8 +4,6 @@ import Dropzone from 'react-dropzone'
 import GooglePicker from 'react-google-picker'
 import DropboxChooser from 'react-dropbox-chooser'
 import classnames from 'classnames'
-import superagentPromisePlugin from 'superagent-promise-plugin'
-import http_agent from '../../sync/http_agent'
 
 import UploaderButton from '../../components/uploaderButton/uploaderButton'
 import localIconButton from '../../assets/uploaderButton/localBtn.svg'
@@ -100,7 +98,6 @@ class SearchPanelLocal extends Component {
     }
 
     onDropAccepted(files) {
-        console.log('Received files: ', files);
         let filesArray = []
         files.forEach(function(file){
             filesArray.push({
@@ -113,18 +110,14 @@ class SearchPanelLocal extends Component {
     }
 
     onDropRejected(files) {
-      console.log('drag rejected');
       this.setState({ showAlertMessage: true });
     }
 
     openLocalUploadFiles() {
         this.dropzone.open();
-        console.log("local upload open");
     }
 
     dropboxSuccessCallback(files){
-        //@todo: psf: remove this error log from searchPanelLocal.jsx
-        console.log("dropbox files:", files);
         let filesArray = []
         files.forEach(function(file){
             filesArray.push({
@@ -137,14 +130,12 @@ class SearchPanelLocal extends Component {
     }
 
     dropboxCancelCallback(){
-        console.log('closed');
     }
 
     googleDrivePickerOnChange(data){
         var token = window.gapi.auth.getToken().access_token;
         var _this = this
         if(data.action === "picked"){
-            let filesArray = []
             data.docs.forEach(function(file){
                 _this.props.actions.getGoogleDriveDownloadLink(file.id, token)
             })
@@ -187,7 +178,6 @@ class SearchPanelLocal extends Component {
 
         const CLIENT_ID = '843876855982-gr36gak7lm9pbitlcj4t5r7k6mosrrtc.apps.googleusercontent.com';
         const DEVELOPER_KEY = 'AIzaSyBxKfnBnJNs0WoCvUo6As5kYpIGhjS2r4E';
-        //const SCOPE = ['https://www.googleapis.com/auth/drive.readonly'];
         const SCOPE = ['https://www.googleapis.com/auth/drive',
                 'https://www.googleapis.com/auth/userinfo.email',
                 'https://www.googleapis.com/auth/userinfo.profile'];

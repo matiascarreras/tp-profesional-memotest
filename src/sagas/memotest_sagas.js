@@ -75,7 +75,7 @@ function *getGoogleDriveDownloadLink(action){
 		    fileArray.push({
 		        size: response.body.fileSize,
 		        name: response.body.title,
-		        link: response.body.downloadUrl
+		        link: response.body.webContentLink
 		    })
 			yield put({ 
 				type: types.SAVE_UPLOADERS_FILES,

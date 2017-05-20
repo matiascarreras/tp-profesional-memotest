@@ -14,8 +14,8 @@ class LiveSessionStudent extends Component {
 	constructor(){
 	    super()
 	    this.state = {
-	    	showOverlay: true,
-	        showOverlayBox: true,
+	    	showOverlay: false,
+	        showOverlayBox: false,
 	        showTriviaBox: false,
 	        showTriviaIncorrectAnswerMessage: false,
 	        showTriviaCorrectAnswerMessage: false,

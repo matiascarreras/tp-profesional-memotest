@@ -219,6 +219,16 @@ h2#title {
     margin-left: -317.5px;
 }
 
+#live-session-student #memotest-pieces-main .memotest-piece{
+    border:5px transparent solid;
+    box-sizing: border-box;
+}
+
+.triviaBoxContent .memotest-piece{
+    border:5px transparent solid;
+    box-sizing: border-box;
+}
+
 .triviaBoxContent .memotest-piece.selected{
-    border: 4px #00a8ff solid;
+    border-color: #00a8ff;
 }
