@@ -16,7 +16,7 @@ class Reports extends Component {
 	    var _this = this
 	    for (var i = 0; i < cantPieces; i++) {
 	        elements.push(
-	        	<MemotestPiece key={i} disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
+	        	<MemotestPiece key={i} disabled="true" correctAnswer={this.props.triviaQuestionCorrectAnswer} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
 	        )
 	    }
 	    return elements
@@ -52,11 +52,8 @@ class Reports extends Component {
 		    		    </div>
 		    		</div>
 		    		{this.props.triviaQuestionText
-		    		&& <div id="memotest-final-question" className={this.props.gridSize}>
+		    		&& <div id="memotest-final-question">
 		    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
-		    			<div id="memotest-pieces-container" className={this.props.gridSize}>
-		    				<MemotestPiece key={1000} disabled="true" id={this.props.pieces[this.props.triviaQuestionCorrectAnswer].id} type={this.props.pieces[this.props.triviaQuestionCorrectAnswer].type} text={this.props.pieces[this.props.triviaQuestionCorrectAnswer].text} src={this.props.pieces[this.props.triviaQuestionCorrectAnswer].src} textStyle={this.props.pieces[this.props.triviaQuestionCorrectAnswer].textStyle}/>
-		    			</div>
 		    		</div>
 		    		}
 		    		<table className="memotest-reports-table">
