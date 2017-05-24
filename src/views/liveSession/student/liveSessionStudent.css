@@ -233,6 +233,27 @@ h2#title {
     border-color: #00a8ff;
 }
 
+#live-session-student #memotest-pieces-container.medium {
+    height: 424px;
+    padding: 10px 62px 0px 62px;
+    text-align: center;
+}
+
+#live-session-student #memotest-pieces-container.small .memotest-piece.text textarea {
+    width: 120px;
+    max-height: 120px;
+    margin-top: 40px;
+    padding: 0px;
+}
+
+#live-session-student #memotest-pieces-container.medium .memotest-piece.text textarea,
+#live-session-student #memotest-pieces-container.large .memotest-piece.text textarea {
+    width: 75px;
+    max-height: 75px;
+    margin-top: 15px;
+    padding: 0px;
+}
+
 .react-card-flip {
     display: inline-block;
     position: relative;
@@ -241,4 +262,3 @@ h2#title {
 .react-card-flip .react-card-front{
     position: relative !important;
 }
-
