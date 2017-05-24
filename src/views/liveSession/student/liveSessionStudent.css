@@ -210,7 +210,7 @@ h2#title {
 
 #live-session-student #memotest-pieces-main.medium,
 #live-session-student #memotest-pieces-main.large{
-    max-width: 648px;
+    max-width: 642px;
 }
 
 @media screen and (min-width: 636px)
@@ -232,3 +232,13 @@ h2#title {
 .triviaBoxContent .memotest-piece.selected{
     border-color: #00a8ff;
 }
+
+.react-card-flip {
+    display: inline-block;
+    position: relative;
+}
+
+.react-card-flip .react-card-front{
+    position: relative !important;
+}
+

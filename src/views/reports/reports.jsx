@@ -62,10 +62,10 @@ class Reports extends Component {
 		    		<table className="memotest-reports-table">
 		    			<thead>
 		    				<tr>
-		    					<th>Student Nickname</th>
-		    				   	<th>Moves</th> 
+		    					<th>{localize('reports_student_nickname')}</th>
+		    				   	<th>{localize('reports_moves')}</th> 
 		    				    {this.props.triviaQuestionText
-		    				    && <th>Final Question Trials </th>
+		    				    && <th>{localize('reports_final_question_trials')}</th>
 		    					}
 		    				</tr>
 		    			</thead>

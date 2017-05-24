@@ -45,7 +45,10 @@ export default {
 		live_session_student_trivia_incorrect_answer_btn: "Try Again",
 		live_session_student_trivia_correct_answer_title: "Exactly!",
 		live_session_student_trivia_correct_answer_message: "Well Done! You've answered the question correctly.",
-		live_session_student_trivia_correct_answer_btn: "Close"
+		live_session_student_trivia_correct_answer_btn: "Close",
+		reports_student_nickname: "Student Nickname",
+		reports_moves: "Moves",
+		reports_final_question_trials: "Final Question Attemps"
 	},
 	es: {
 		header_beta_title:"beta",
@@ -93,6 +96,9 @@ export default {
 		live_session_student_trivia_incorrect_answer_btn: "Inténtalo de nuevo",
 		live_session_student_trivia_correct_answer_title: "Exactamente!",
 		live_session_student_trivia_correct_answer_message: "Bien Hecho! Has respondido correctamente a la pregunta.",
-		live_session_student_trivia_correct_answer_btn: "Cerrar"
+		live_session_student_trivia_correct_answer_btn: "Cerrar",
+		reports_student_nickname: "Apodo de los Estudiantes",
+		reports_moves: "Movimientos",
+		reports_final_question_trials: "Intentos de Pregunta Final"
 	},
 }

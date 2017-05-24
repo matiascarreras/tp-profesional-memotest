@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { localize } from '../../../helpers/translator'
+import ReactCardFlip from 'react-card-flip';
 
 import './liveSessionStudent.css';
 import logo from '../../../assets/header/logo.svg'
@@ -25,15 +26,19 @@ class LiveSessionStudent extends Component {
 	        overlayInfoAfterTxt: localize('live_session_student_overlay_info_moves'),
 	        overlayButton: localize('live_session_student_overlay_button'),
 	        triviaAnswer: '',
+	        isFlipped: false,
 	    }
 	}
 
-	listMemotestPieces(pieces, cantPieces){
+	listMemotestPieces(pieces, cantPieces, flippedCSS){
 	    let elements = []
 	    var _this = this
 	    for (var i = 0; i < cantPieces; i++) {
 	        elements.push(
-	        	<MemotestPiece key={i} disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>        		
+	        	<ReactCardFlip key={i} isFlipped={this.state.isFlipped}>
+	        		<div key="front" className="empty memotest-piece ui-droppable" onClick={this.handleClickMemotestPiece.bind(this)}></div>
+        	    	<MemotestPiece key="back" disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle} onClick={this.handleClickMemotestPiece.bind(this)}/>
+	        	</ReactCardFlip>
 	        )
 	    }
 	    return elements
@@ -44,7 +49,7 @@ class LiveSessionStudent extends Component {
 	    var _this = this
 	    for (var i = 0; i < cantPieces; i++) {
 	        elements.push(
-	        	<MemotestPiece key={i} disabled="true" correctAnswer={this.state.triviaAnswer} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle} onClick={this.handleOnClickPiece.bind(this, pieces[i].id)}/>        		
+	        	<MemotestPiece key={i} disabled="true" correctAnswer={this.state.triviaAnswer} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle} onClick={this.handleClickTriviaPiece.bind(this, pieces[i].id)}/>        		
 	        )
 	    }
 	    return elements
@@ -59,8 +64,13 @@ class LiveSessionStudent extends Component {
 		}
 	}
 
-	handleOnClickPiece(pieceId){
+	handleClickTriviaPiece(pieceId){
 	    this.setState({ triviaAnswer: pieceId });
+	}
+
+	handleClickMemotestPiece(e) {
+	    e.preventDefault();
+	    this.setState({ isFlipped: !this.state.isFlipped });
 	}
 
 	triviaButtonClick(){
@@ -97,14 +107,6 @@ class LiveSessionStudent extends Component {
 		    cantPieces = 24;
 		}
 
-		var memotestPiecesMainClass = classnames(this.props.gridSize, {
-			'flip-container': true,
-		});
-
-		var memotestPiecesContainerClass = classnames(this.props.gridSize, {
-			'flipper': true,
-		});
-
 		var overlayBoxClass = classnames({
 			'overlayBox': true,
 			'hide': !this.state.showOverlayBox,
@@ -127,6 +129,9 @@ class LiveSessionStudent extends Component {
 			'errorMessage': true,
 			'hide': !this.state.showTriviaMissingAnswerMessage,
 		});
+
+		var flippedCSS = this.state.flipped ? " Card-Back-Flip" : " Card-Front-Flip";
+		if (!this.state.clicked) flippedCSS =  "";
 
 	    return (
 	    	<div id="live-session-student">
@@ -164,9 +169,9 @@ class LiveSessionStudent extends Component {
 			            <h2 id="title">{localize('header_title')}</h2>
 			        </div>
 			    </div>
-			    <div id="memotest-pieces-main" className={memotestPiecesMainClass}>
-			    	<div id="memotest-pieces-container" className={memotestPiecesContainerClass}>
-			    		{this.listMemotestPieces(this.props.pieces, cantPieces)}
+			    <div id="memotest-pieces-main" className={this.props.gridSize}>
+			    	<div id="memotest-pieces-container" className={this.props.gridSize}>
+			    		{this.listMemotestPieces(this.props.pieces, cantPieces, flippedCSS)}
 			    	</div>
 			    </div>
 			</div>
