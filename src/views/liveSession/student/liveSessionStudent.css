@@ -78,6 +78,15 @@
     padding: 0 0 36px 0;
 }
 
+#triviaInfo.small {
+    width: 510px;
+}
+
+#triviaInfo.medium,
+#triviaInfo.large{
+    width: 680px;
+}
+
 #triviaMessages {
     width: 100%;
     min-height: 50px;
@@ -225,8 +234,26 @@ h2#title {
 }
 
 .triviaBoxContent .memotest-piece{
+    width: 75px;
+    height: 75px;
+    margin: 5px;
+    background-size: 75px 75px;
     border:5px transparent solid;
     box-sizing: border-box;
+}
+
+.triviaBoxContent .memotest-piece.text.selected textarea{
+    padding: 0px;
+    width: 65px;
+    max-height: 65px;
+    margin-top: 12px;
+}
+
+.triviaBoxContent .memotest-piece.text textarea {
+    width: 63px;
+    max-height: 63px;
+    margin-top: 11px;
+    padding: 0px;
 }
 
 .triviaBoxContent .memotest-piece.selected{
@@ -262,3 +289,4 @@ h2#title {
 .react-card-flip .react-card-front{
     position: relative !important;
 }
+

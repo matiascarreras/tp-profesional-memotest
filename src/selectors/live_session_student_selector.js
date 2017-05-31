@@ -11,6 +11,8 @@ const liveSessionStudentSelector = createSelector(
       pieces: memotestData.pieces,
       triviaQuestionText: "messi",
       triviaQuestionCorrectAnswer: 2,
+      selectedPieces: memotestData.selectedPieces,
+      matches: memotestData.matches,
     }
   }
 )

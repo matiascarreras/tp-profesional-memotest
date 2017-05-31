@@ -7,6 +7,8 @@ import ReactCardFlip from 'react-card-flip';
 import './liveSessionStudent.css';
 import logo from '../../../assets/header/logo.svg'
 import liveSessionStudentSelector from '../../../selectors/live_session_student_selector'
+import liveSessionStudentActions from '../../../actions/liveSessionStudentActions'
+import bindActionsToDispatch from '../../../helpers/bindActionsToDispatch'
 import * as constants from '../../../constants/constants'
 import MemotestPiece from '../../../components/memotestPiece/memotestPiece'
 
@@ -26,21 +28,28 @@ class LiveSessionStudent extends Component {
 	        overlayInfoAfterTxt: localize('live_session_student_overlay_info_moves'),
 	        overlayButton: localize('live_session_student_overlay_button'),
 	        triviaAnswer: '',
-	        isFlipped: false,
+	        moves: 0,
+	        finalQuestionAttemps: 0,
 	    }
 	}
 
-	listMemotestPieces(pieces, cantPieces, flippedCSS){
+	listMemotestPieces(pieces, cantPieces){
 	    let elements = []
 	    var _this = this
 	    for (var i = 0; i < cantPieces; i++) {
+	    	var isFlipped = false
+	    	if((this.props.selectedPieces.indexOf(pieces[i].id) !== -1) ||
+	    		this.props.matches.indexOf(pieces[i].id) !== -1){
+	    		isFlipped = true
+	    	}
 	        elements.push(
-	        	<ReactCardFlip key={i} isFlipped={this.state.isFlipped}>
-	        		<div key="front" className="empty memotest-piece ui-droppable" onClick={this.handleClickMemotestPiece.bind(this)}></div>
-        	    	<MemotestPiece key="back" disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle} onClick={this.handleClickMemotestPiece.bind(this)}/>
+	        	<ReactCardFlip key={i} isFlipped={isFlipped}>
+	        		<div key="front" id={pieces[i].id} className="empty memotest-piece ui-droppable" onClick={this.handleClickMemotestPiece.bind(this, pieces[i].id, cantPieces)}></div>
+        	    	<MemotestPiece key="back" disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
 	        	</ReactCardFlip>
 	        )
 	    }
+	    //this.shuffle(elements)
 	    return elements
 	}
 
@@ -55,9 +64,19 @@ class LiveSessionStudent extends Component {
 	    return elements
 	}
 
+	shuffle(a) {
+	    var j, x, i;
+	    for (i = a.length; i; i--) {
+	        j = Math.floor(Math.random() * i);
+	        x = a[i - 1];
+	        a[i - 1] = a[j];
+	        a[j] = x;
+	    }
+	}
+
 	overlayButtonClick(){
 		this.setState({ showOverlayBox: false });
-		if(this.props.triviaQuestionText){
+		if(this.props.triviaQuestionText && (this.state.overlayInfoAfterTxt || this.state.triviaAnswer)){
 			this.setState({ showTriviaBox: true });
 		} else {
 			this.setState({ showOverlay: false });	
@@ -68,9 +87,14 @@ class LiveSessionStudent extends Component {
 	    this.setState({ triviaAnswer: pieceId });
 	}
 
-	handleClickMemotestPiece(e) {
-	    e.preventDefault();
-	    this.setState({ isFlipped: !this.state.isFlipped });
+	handleClickMemotestPiece(pieceId, cantPieces) {
+		this.props.actions.saveMemotestPieceSelected(pieceId)
+		this.props.actions.validateMatch()
+		this.setState({ moves: this.state.moves + 1 })
+		if(cantPieces === this.props.matches.length){
+			this.setState({ showOverlay: true })
+			this.setState({ showOverlayBox: true })
+		}
 	}
 
 	triviaButtonClick(){
@@ -88,8 +112,8 @@ class LiveSessionStudent extends Component {
 				this.setState({ overlayTitle: localize('live_session_student_trivia_incorrect_answer_title') })
 				this.setState({ overlayInfoBeforeTxt: localize('live_session_student_trivia_incorrect_answer_message') })
 				this.setState({ overlayInfoAfterTxt: ''})
-				this.setState({ triviaAnswer: '' })
 				this.setState({ overlayButton: localize('live_session_student_trivia_incorrect_answer_btn') })
+				this.setState({ finalQuestionAttemps: this.state.finalQuestionAttemps + 1 });
 			}
 		} else {
 			this.setState({ showTriviaMissingAnswerMessage: true });
@@ -121,7 +145,7 @@ class LiveSessionStudent extends Component {
 			'hide': !this.state.showOverlay,
 		})
 
-		if(this.props.triviaQuestionText){
+		if(this.props.triviaQuestionText && this.state.overlayInfoAfterTxt){
 			this.state.overlayButton =  localize('live_session_student_overlay_button_show_question')
 		}
 
@@ -130,8 +154,9 @@ class LiveSessionStudent extends Component {
 			'hide': !this.state.showTriviaMissingAnswerMessage,
 		});
 
-		var flippedCSS = this.state.flipped ? " Card-Back-Flip" : " Card-Front-Flip";
-		if (!this.state.clicked) flippedCSS =  "";
+		var triviaInfoClass = classnames(this.props.gridSize, {
+			'overlayInfo': true,
+		})
 
 	    return (
 	    	<div id="live-session-student">
@@ -139,7 +164,7 @@ class LiveSessionStudent extends Component {
 	   			<div id="triviaBox" className="overlayBox" style={{display: triviaBoxStyle}}>
 	        		<div className="triviaBoxContent">
 			            <div id="triviaTitle" className="overlayTitle">{this.props.triviaQuestionText}</div>
-			            <div id="triviaInfo" className="overlayInfo">
+			            <div id="triviaInfo" className={triviaInfoClass}>
 			            	{this.listTriviaPieces(this.props.pieces, cantPieces)}
 			            </div>
 			            <div className="wrapperButton">
@@ -155,7 +180,7 @@ class LiveSessionStudent extends Component {
 			        <div id="overlayInfo" className="overlayInfo">
 			        	{this.state.overlayInfoBeforeTxt}
 			        	{this.state.overlayInfoAfterTxt
-			        	&& <span className="timetxt">14</span>
+			        	&& <span className="timetxt">{this.state.moves}</span>
 			        	}
 			        	{this.state.overlayInfoAfterTxt}
 			        </div>
@@ -171,7 +196,7 @@ class LiveSessionStudent extends Component {
 			    </div>
 			    <div id="memotest-pieces-main" className={this.props.gridSize}>
 			    	<div id="memotest-pieces-container" className={this.props.gridSize}>
-			    		{this.listMemotestPieces(this.props.pieces, cantPieces, flippedCSS)}
+			    		{this.listMemotestPieces(this.props.pieces, cantPieces)}
 			    	</div>
 			    </div>
 			</div>
@@ -183,4 +208,11 @@ function mapStateToProps(state){
 	return liveSessionStudentSelector(state);
 }
 
-export default connect(mapStateToProps)(LiveSessionStudent);
+function mapDispatchToProps(dispatch){
+    return bindActionsToDispatch({
+        saveMemotestPieceSelected: liveSessionStudentActions.saveMemotestPieceSelected,
+        validateMatch: liveSessionStudentActions.validateMatch,
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LiveSessionStudent);

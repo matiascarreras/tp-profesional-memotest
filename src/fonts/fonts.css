@@ -1,20 +1,100 @@
 @font-face {
     font-family: 'Dosis';
-    src: url('./Dosis-Regular.ttf') format('truetype');
-    font-weight: normal;
     font-style: normal;
+    font-weight: normal;
+    src: url('./Dosis-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Grand Hotel';
-    src: url('./GrandHotel-Regular.ttf') format('truetype');
-    font-weight: normal;
     font-style: normal;
+    font-weight: normal;
+    src: url('./GrandHotel-Regular.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'Great Vibes';
-    src: url('./GreatVibes-Regular.ttf') format('truetype');
-    font-weight: normal;
     font-style: normal;
+    font-weight: normal;
+    src: url('./GreatVibes-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'avenir-light';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-Light.eot');
+  src: local('☺'), url('./AvenirLTStd-Light.woff') format('woff'), url('./AvenirLTStd-Light.ttf') format('truetype'), url('./AvenirLTStd-Light.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-light-oblique';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-LightOblique.eot');
+  src: local('☺'), url('./AvenirLTStd-LightOblique.woff') format('woff'), url('./AvenirLTStd-LightOblique.ttf') format('truetype'), url('./AvenirLTStd-LightOblique.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-medium';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-Medium.eot');
+  src: local('☺'), url('./AvenirLTStd-Medium.woff') format('woff'), url('./AvenirLTStd-Medium.ttf') format('truetype'), url('./AvenirLTStd-Medium.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-medium-oblique';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-MediumOblique.eot');
+  src: local('☺'), url('./AvenirLTStd-MediumOblique.woff') format('woff'), url('./AvenirLTStd-MediumOblique.ttf') format('truetype'), url('./AvenirLTStd-MediumOblique.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-roman';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-Roman.eot');
+  src: local('☺'), url('./AvenirLTStd-Roman.woff') format('woff'), url('./AvenirLTStd-Roman.ttf') format('truetype'), url('./AvenirLTStd-Roman.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-oblique';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-Oblique.eot');
+  src: local('☺'), url('./AvenirLTStd-Oblique.woff') format('woff'), url('./AvenirLTStd-Oblique.ttf') format('truetype'), url('./AvenirLTStd-Oblique.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-book';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-Book.eot');
+  src: local('☺'), url('./AvenirLTStd-Book.woff') format('woff'), url('./AvenirLTStd-Book.ttf') format('truetype'), url('./AvenirLTStd-Book.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-book-oblique';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-BookOblique.eot');
+  src: local('☺'), url('./AvenirLTStd-BookOblique.woff') format('woff'), url('./AvenirLTStd-BookOblique.ttf') format('truetype'), url('./AvenirLTStd-BookOblique.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-heavy';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-Heavy.eot');
+  src: local('☺'), url('./AvenirLTStd-Heavy.woff') format('woff'), url('./AvenirLTStd-Heavy.ttf') format('truetype'), url('./AvenirLTStd-Heavy.svg') format('svg');
+}
+
+@font-face {
+  font-family: 'avenir-heavy-oblique';
+  font-style: normal;
+  font-weight: normal;
+  src: url('./AvenirLTStd-HeavyOblique.eot');
+  src: local('☺'), url('./AvenirLTStd-HeavyOblique.woff') format('woff'), url('./AvenirLTStd-HeavyOblique.ttf') format('truetype'), url('./AvenirLTStd-HeavyOblique.svg') format('svg');
 }

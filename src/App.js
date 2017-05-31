@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 
-import Header from './views/header/header'
-import Search from './views/search/search'
-import Memotest from './views/memotest/memotest'
-import Trivia from './views/trivia/trivia'
+import Header from 'views/header/header'
+import Search from 'views/search/search'
+import Memotest from 'views/memotest/memotest'
+import Trivia from 'views/trivia/trivia'
 import './App.css';
 import icon from './assets/iconButton/btn-settings.png'
 import iconOn from './assets/iconButton/btn-settings-on.png'

@@ -14,12 +14,17 @@ const initialState = {
   googleSearchShowMore: false,
   isSearch: false,
   showTrivia: false,
+  selectedPieces: [],
+  matches: [],
 }
 
 const arrayPieces = []
 for (var i = 0; i < 24; i++) {
   arrayPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_TEXT,text:'sd',src:'',id:i,textStyle:'font5'}
 }
+
+
+
 initialState.pieces = arrayPieces
 
 function selectGridSize(state, action){
@@ -131,6 +136,32 @@ function showTrivia(state, action){
   return newState
 }
 
+function saveMemotestPieceSelected(state, action){
+  let newState = {...state}
+  newState.selectedPieces = state.selectedPieces.concat(action.pieceId)
+  return newState
+}
+
+function validateMatch(state, action){
+  debugger
+  let newState = {...state}
+  let firstPieceId = state.selectedPieces[0]
+  let secondPieceId = state.selectedPieces[1]
+  let newMatches = state.matches
+  if(firstPieceId != undefined && secondPieceId != undefined){
+    if(Math.abs(firstPieceId - secondPieceId) === 1){
+      if(firstPieceId % 2 === 1 && firstPieceId > secondPieceId ||
+        secondPieceId % 2 === 1 && secondPieceId > firstPieceId){
+        newMatches = newMatches.concat(firstPieceId)
+        newMatches = newMatches.concat(secondPieceId)
+      }
+    }
+    newState.selectedPieces = [] 
+  }
+  newState.matches = newMatches
+  return newState
+}
+
 const memotestReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SELECT_GRID_SIZE:
@@ -161,6 +192,10 @@ const memotestReducer = (state = initialState, action) => {
       return saveMemotestDataFailed(state, action)
     case types.SHOW_TRIVIA:
       return showTrivia(state, action)
+    case types.SAVE_MEMOTEST_PIECE_SELECTED:
+      return saveMemotestPieceSelected(state, action)
+    case types.VALIDATE_MATCH:
+      return validateMatch(state, action)
     default:
       return state
   }

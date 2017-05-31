@@ -20,5 +20,5 @@ render(
       <Route path="/memotest/reports" component={Reports}/>
     </Router>
 	</Provider>,
-	document.getElementById('root')
+	document.getElementById('app')
 )

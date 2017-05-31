@@ -25,7 +25,6 @@ function *getMemotestData(action){
 
 function *saveMemotestData(action){
 	try {
-		debugger
 		const response = yield call(memotestSync.saveMemotestData, action.presentationId, action.completed, action.title, action.data_all, action.data_teacher)
 	
 		if(response.error_code === 0) {

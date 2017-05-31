@@ -270,6 +270,14 @@ class SearchPanelLocal extends Component {
         ODAuth.auth(this.onAuthenticated, wasClicked);
     }
 
+    launchOneDrivePicker(odOptions){
+        OneDrive.open(odOptions);
+      }
+
+    launchBoxPicker(boxSelect){
+      boxSelect.launchPopup();
+    }
+
     render() {
 
         var ODAuth = new OneDriveAuth({
@@ -277,6 +285,16 @@ class SearchPanelLocal extends Component {
           scopes: "user.read files.read files.read.all sites.read.all",
           redirectUri: "http://localhost:3000/memotest"
         });
+
+        var odOptions = {
+          clientId: "47aff83b-5eee-41e8-a9b3-ef8c03adac9c",
+          action: "download",
+          multiSelect: true,
+          advanced: {},
+          success: function(files) { /* success handler */ },
+          cancel: function() { /* cancel handler */ },
+          error: function(e) { /* error handler */ }
+        }
 
         var dropzoneClass = classnames({
           'drag-drop-zone': true,
@@ -304,6 +322,14 @@ class SearchPanelLocal extends Component {
                 'https://www.googleapis.com/auth/userinfo.profile'];
         const APP_KEY = '158dtt39zf0zj9k';
 
+
+        /*var options = {
+            clientId: 'bfedi0ts41mxl9fo6avttlenvpfj9ap1',
+            linkType: 'direct',
+            multiselect: 'true'
+        };
+        var boxSelect = new BoxSelect(options);*/
+
         return (
             <div id="search-panel-local" className={(this.props.hide)?'hide':''}>
                 <UploaderButton onClick={this.openLocalUploadFiles.bind(this)} onMouseOver={this.handleLocalUploadMouseOver.bind(this)} onMouseOut={this.handleLocalUploadMouseOut.bind(this)} icon={this.state.localIcon} id="browse-local-file" text={localize('upload_local')} name="localFile"/>
@@ -316,7 +342,7 @@ class SearchPanelLocal extends Component {
                     <UploaderButton onMouseOver={this.handleDropboxUploadMouseOver.bind(this)} onMouseOut={this.handleDropboxUploadMouseOut.bind(this)} icon={this.state.dropboxIcon} id="browse-dropbox-file" text={localize('upload_dropbox')} name="dropBoxFile"/>       
                 </DropboxChooser>
                 <UploaderButton onMouseOver={this.handleBoxUploadMouseOver.bind(this)} onMouseOut={this.handleBoxUploadMouseOut.bind(this)} icon={this.state.boxIcon} id="browse-box-file" text={localize('upload_box')} name="boxFile"/>
-                <UploaderButton onClick={this.odauth.bind(this, ODAuth, true)} onMouseOver={this.handleOneDriveUploadMouseOver.bind(this)} onMouseOut={this.handleOneDriveUploadMouseOut.bind(this)} icon={this.state.oneDriveIcon} id="browse-onedrive-file" text={localize('upload_onedrive')} name="oneDriveFile"/>
+                <UploaderButton onClick={this.launchOneDrivePicker.bind(this, odOptions)} onMouseOver={this.handleOneDriveUploadMouseOver.bind(this)} onMouseOut={this.handleOneDriveUploadMouseOut.bind(this)} icon={this.state.oneDriveIcon} id="browse-onedrive-file" text={localize('upload_onedrive')} name="oneDriveFile"/>
                 <GooglePicker clientId={CLIENT_ID}
                               developerKey={DEVELOPER_KEY}
                               scope={SCOPE}
