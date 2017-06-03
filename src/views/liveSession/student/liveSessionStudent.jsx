@@ -30,13 +30,14 @@ class LiveSessionStudent extends Component {
 	        triviaAnswer: '',
 	        moves: 0,
 	        finalQuestionAttemps: 0,
+	        gameFinish: false,
 	    }
 	}
 
-	listMemotestPieces(pieces, cantPieces){
+	listMemotestPieces(pieces){
 	    let elements = []
 	    var _this = this
-	    for (var i = 0; i < cantPieces; i++) {
+	    for (var i = 0; i < pieces.length; i++) {
 	    	var isFlipped = false
 	    	if((this.props.selectedPieces.indexOf(pieces[i].id) !== -1) ||
 	    		this.props.matches.indexOf(pieces[i].id) !== -1){
@@ -44,7 +45,7 @@ class LiveSessionStudent extends Component {
 	    	}
 	        elements.push(
 	        	<ReactCardFlip key={i} isFlipped={isFlipped}>
-	        		<div key="front" id={pieces[i].id} className="empty memotest-piece ui-droppable" onClick={this.handleClickMemotestPiece.bind(this, pieces[i].id, cantPieces)}></div>
+	        		<div key="front" id={pieces[i].id} className="empty memotest-piece ui-droppable" onClick={this.handleClickMemotestPiece.bind(this, pieces[i].id)}></div>
         	    	<MemotestPiece key="back" disabled="true" id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
 	        	</ReactCardFlip>
 	        )
@@ -53,10 +54,10 @@ class LiveSessionStudent extends Component {
 	    return elements
 	}
 
-	listTriviaPieces(pieces, cantPieces){
+	listTriviaPieces(pieces){
 	    let elements = []
 	    var _this = this
-	    for (var i = 0; i < cantPieces; i++) {
+	    for (var i = 0; i < pieces.length; i++) {
 	        elements.push(
 	        	<MemotestPiece key={i} disabled="true" correctAnswer={this.state.triviaAnswer} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle} onClick={this.handleClickTriviaPiece.bind(this, pieces[i].id)}/>        		
 	        )
@@ -79,7 +80,8 @@ class LiveSessionStudent extends Component {
 		if(this.props.triviaQuestionText && (this.state.overlayInfoAfterTxt || this.state.triviaAnswer)){
 			this.setState({ showTriviaBox: true });
 		} else {
-			this.setState({ showOverlay: false });	
+			this.setState({ showOverlay: false });
+			this.setState({ gameFinish: true });	
 		}
 	}
 
@@ -87,14 +89,10 @@ class LiveSessionStudent extends Component {
 	    this.setState({ triviaAnswer: pieceId });
 	}
 
-	handleClickMemotestPiece(pieceId, cantPieces) {
+	handleClickMemotestPiece(pieceId) {
 		this.props.actions.saveMemotestPieceSelected(pieceId)
-		this.props.actions.validateMatch()
+		setTimeout(()=>this.props.actions.validateMatch(),2000)
 		this.setState({ moves: this.state.moves + 1 })
-		if(cantPieces === this.props.matches.length){
-			this.setState({ showOverlay: true })
-			this.setState({ showOverlayBox: true })
-		}
 	}
 
 	triviaButtonClick(){
@@ -122,13 +120,11 @@ class LiveSessionStudent extends Component {
 
 	render() {
 
-		let cantPieces = 0;
-		if (this.props.gridSize === constants.SMALL_GRID_SIZE) {
-		    cantPieces = 12;
-		} else if (this.props.gridSize === constants.MEDIUM_GRID_SIZE){
-		    cantPieces = 16;
-		} else if (this.props.gridSize === constants.LARGE_GRID_SIZE){
-		    cantPieces = 24;
+		if(this.props.cantPieces === this.props.matches.length
+		 && !this.state.gameFinish
+		 && !this.state.showTriviaBox){
+			this.state.showOverlay = true
+			this.state.showOverlayBox = true
 		}
 
 		var overlayBoxClass = classnames({
@@ -165,7 +161,7 @@ class LiveSessionStudent extends Component {
 	        		<div className="triviaBoxContent">
 			            <div id="triviaTitle" className="overlayTitle">{this.props.triviaQuestionText}</div>
 			            <div id="triviaInfo" className={triviaInfoClass}>
-			            	{this.listTriviaPieces(this.props.pieces, cantPieces)}
+			            	{this.listTriviaPieces(this.props.pieces)}
 			            </div>
 			            <div className="wrapperButton">
 			            	<input id="triviaButton" onClick={this.triviaButtonClick.bind(this)} className="overlayButton" type="button" value={localize('live_session_student_trivia_button')}/>
@@ -196,7 +192,7 @@ class LiveSessionStudent extends Component {
 			    </div>
 			    <div id="memotest-pieces-main" className={this.props.gridSize}>
 			    	<div id="memotest-pieces-container" className={this.props.gridSize}>
-			    		{this.listMemotestPieces(this.props.pieces, cantPieces)}
+			    		{this.listMemotestPieces(this.props.pieces)}
 			    	</div>
 			    </div>
 			</div>

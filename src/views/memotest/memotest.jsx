@@ -28,22 +28,14 @@ class Memotest extends Component {
     }
 
     handleDoneBtnClick(){
-        if(!this.isMemotestCompleted(this.props.pieces, this.props.gridSize)){
+        if(!this.isMemotestCompleted(this.props.pieces, this.props.cantPieces)){
             this.setState({ showAlertMessage: true });
         } else {
             this.props.actions.saveMemotestData(106135, 1, "Memory Test", this.props, this.props)
         }
     }
 
-    isMemotestCompleted(pieces, gridSize){
-        let cantPieces = 0;
-        if (gridSize === constants.SMALL_GRID_SIZE) {
-            cantPieces = 12;
-        } else if (gridSize === constants.MEDIUM_GRID_SIZE){
-            cantPieces = 16;
-        } else if (gridSize === constants.LARGE_GRID_SIZE){
-            cantPieces = 24;
-        }
+    isMemotestCompleted(pieces, cantPieces){
         for (var i = 0; i < cantPieces; i++) {
             if (pieces[i].type === constants.MEMOTEST_PIECE_TYPE_EMPTY){
                 return false
@@ -53,7 +45,7 @@ class Memotest extends Component {
     }
 
     handleNextBtnClick(){
-        if(!this.isMemotestCompleted(this.props.pieces, this.props.gridSize)){
+        if(!this.isMemotestCompleted(this.props.pieces, this.props.cantPieces)){
             this.setState({ showAlertMessage: true });
         } else {
             this.props.actions.showTrivia(true)
@@ -105,20 +97,11 @@ class Memotest extends Component {
           'hide': !this.state.showAlertMessage,
         });
 
-        let cantPieces = 0;
-        if (this.props.gridSize === constants.SMALL_GRID_SIZE) {
-            cantPieces = 12;
-        } else if (this.props.gridSize === constants.MEDIUM_GRID_SIZE){
-            cantPieces = 16;
-        } else if (this.props.gridSize === constants.LARGE_GRID_SIZE){
-            cantPieces = 24;
-        }
-
         return (
         	<div id="memotest" className={(this.props.showTrivia)?'hide':''}>
         	    <div id="memotest-pieces-main">
                     <div id="memotest-pieces-container" className={this.props.gridSize}>
-                        {this.listMemotestPieces(this.props.pieces, cantPieces)}
+                        {this.listMemotestPieces(this.props.pieces, this.props.cantPieces)}
                     </div>
                 </div>
                 <div className="control-panel">

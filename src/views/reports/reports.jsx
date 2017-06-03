@@ -11,10 +11,10 @@ import MemotestPiece from '../../components/memotestPiece/memotestPiece'
 
 class Reports extends Component {
 
-	listMemotestPieces(pieces, cantPieces){
+	listMemotestPieces(pieces){
 	    let elements = []
 	    var _this = this
-	    for (var i = 0; i < cantPieces; i++) {
+	    for (var i = 0; i < pieces.length; i++) {
 	        elements.push(
 	        	<MemotestPiece key={i} disabled="true" correctAnswer={this.props.triviaQuestionCorrectAnswer} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
 	        )
@@ -23,15 +23,6 @@ class Reports extends Component {
 	}
 
 	render() {
-
-		let cantPieces = 0;
-		if (this.props.gridSize === constants.SMALL_GRID_SIZE) {
-		    cantPieces = 12;
-		} else if (this.props.gridSize === constants.MEDIUM_GRID_SIZE){
-		    cantPieces = 16;
-		} else if (this.props.gridSize === constants.LARGE_GRID_SIZE){
-		    cantPieces = 24;
-		}
 
 		var memotestPiecesMainClass = classnames(this.props.gridSize, {
 		    'no-final-question': !this.props.triviaQuestionText,
@@ -48,7 +39,7 @@ class Reports extends Component {
 	    		<div id="reports-content">
 		    		<div id="memotest-pieces-main" className={memotestPiecesMainClass}>
 		    		    <div id="memotest-pieces-container" className={this.props.gridSize}>
-		    		        {this.listMemotestPieces(this.props.pieces, cantPieces)}
+		    		        {this.listMemotestPieces(this.props.pieces)}
 		    		    </div>
 		    		</div>
 		    		{this.props.triviaQuestionText

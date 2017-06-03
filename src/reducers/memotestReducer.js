@@ -23,8 +23,6 @@ for (var i = 0; i < 24; i++) {
   arrayPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_TEXT,text:'sd',src:'',id:i,textStyle:'font5'}
 }
 
-
-
 initialState.pieces = arrayPieces
 
 function selectGridSize(state, action){

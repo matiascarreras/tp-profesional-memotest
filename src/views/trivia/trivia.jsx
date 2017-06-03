@@ -26,19 +26,6 @@ class Trivia extends Component {
 
     handleOnChange(event){
         this.props.actions.saveTriviaQuestion(event.target.value)
-        if(event.target.value === ""){
-            event.target.placeholder = localize('trivia_question_placeholder')
-        }
-    }
-
-    handleOnFocus(event){
-        event.target.placeholder = ""
-    }
-
-    handleOnBlur(event){
-        if(event.target.value === ""){
-            event.target.placeholder = localize('trivia_question_placeholder')
-        }
     }
 
     handleOnClickPiece(pieceId){
@@ -92,23 +79,13 @@ class Trivia extends Component {
           'hide': !this.state.showAlertMessage,
         });
 
-
-        let cantPieces = 0;
-        if (this.props.gridSize === constants.SMALL_GRID_SIZE) {
-            cantPieces = 12;
-        } else if (this.props.gridSize === constants.MEDIUM_GRID_SIZE){
-            cantPieces = 16;
-        } else if (this.props.gridSize === constants.LARGE_GRID_SIZE){
-            cantPieces = 24;
-        }
-
         return (
         	<div id="trivia" className={(this.props.showTrivia)?'':'hide'}>
         	    <div id="trivia-question-container">
-        	    	<input type="text" className="triviaQuestion" placeholder={localize('trivia_question_placeholder')} onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} value={this.props.triviaQuestionText} onChange={this.handleOnChange.bind(this)} name="triviaQuestion" maxLength="150"/>
+        	    	<input type="text" className="triviaQuestion" placeholder={localize('trivia_question_placeholder')} value={this.props.triviaQuestionText} onChange={this.handleOnChange.bind(this)} name="triviaQuestion" maxLength="150"/>
         		</div>
         	    <div id="trivia-pieces-container" className={this.props.gridSize}>
-                    {this.listTriviaPieces(this.props.pieces, cantPieces)}
+                    {this.listTriviaPieces(this.props.pieces, this.props.cantPieces)}
                 </div>
                 <div className="control-panel">
                   <TextButton text={localize('btn_back')} id="button-back" class="button-text white" onClick={this.handleBackBtnClick.bind(this)}/>

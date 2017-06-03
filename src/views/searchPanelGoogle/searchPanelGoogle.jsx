@@ -22,19 +22,6 @@ class SearchPanelGoogle extends Component {
 
     handleOnChange(event){
         this.setState({googleSearchText : event.target.value});
-        if(event.target.value === ""){
-            event.target.placeholder = localize("google_search_input_placeholder")
-        }
-    }
-
-    handleOnFocus(event){
-        event.target.placeholder = ""
-    }
-
-    handleOnBlur(event){
-        if(event.target.value === ""){
-            event.target.placeholder = localize("google_search_input_placeholder")
-        }
     }
 
     handleKeyPress(target){
@@ -109,7 +96,7 @@ class SearchPanelGoogle extends Component {
         return (
             <div id="search-panel-google" className={(this.props.hide)?'hide':''}>
                 <span id="google-search-input_parent">
-                    <input type="text" placeholder={localize("google_search_input_placeholder")} onFocus={this.handleOnFocus.bind(this)} onBlur={this.handleOnBlur.bind(this)} value={this.state.googleSearchText} onChange={this.handleOnChange.bind(this)} onKeyPress={this.handleKeyPress.bind(this)} id="google-search-input"/>
+                    <input type="text" placeholder={localize("google_search_input_placeholder")} value={this.state.googleSearchText} onChange={this.handleOnChange.bind(this)} onKeyPress={this.handleKeyPress.bind(this)} id="google-search-input"/>
                     <div className="validateTextbox"></div>
                 </span>
                 <input type="button" id="google-search-btn" onClick={this.handleOnClick.bind(this)}/>
