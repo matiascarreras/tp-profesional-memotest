@@ -23,15 +23,24 @@ class Memotest extends Component {
         }
     }
 
+    getUrlParams() {
+      var params = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        params[key] = value;
+      });
+      return params;
+    }
+
     handleTriviaQuestionClick(){
         this.props.actions.toggleTriviaQuestion()
     }
 
     handleDoneBtnClick(){
         if(!this.isMemotestCompleted(this.props.pieces, this.props.cantPieces)){
-            this.setState({ showAlertMessage: true });
+            this.setState({ showAlertMessage: true })
         } else {
-            this.props.actions.saveMemotestData(106135, 1, "Memory Test", this.props, this.props)
+            let params = this.getUrlParams()
+            this.props.actions.saveMemotestData(params.id, 1, "Memory Test", this.props, this.props, params.jwt)
         }
     }
 

@@ -4,7 +4,7 @@ import { memotestSync } from '../sync'
 
 function *getMemotestData(action){
 	try {
-		const response = yield call(memotestSync.getMemotestData, action.id)
+		const response = yield call(memotestSync.getMemotestData, action.id, action.jwt)
 	
 		if(response.error_code === 0) {
 			yield put({ 
@@ -25,7 +25,7 @@ function *getMemotestData(action){
 
 function *saveMemotestData(action){
 	try {
-		const response = yield call(memotestSync.saveMemotestData, action.presentationId, action.completed, action.title, action.data_all, action.data_teacher)
+		const response = yield call(memotestSync.saveMemotestData, action.presentationId, action.completed, action.title, action.data_all, action.data_teacher, action.jwt)
 	
 		if(response.error_code === 0) {
 			yield put({ 
@@ -46,7 +46,7 @@ function *saveMemotestData(action){
 
 function *makeGoogleSearch(action){
 	try {
-		const response = yield call(memotestSync.makeGoogleSearch, action.search, action.page)
+		const response = yield call(memotestSync.makeGoogleSearch, action.search, action.page, action.jwt)
 
 		if(response.error_code === 0) {
 			yield put({ 

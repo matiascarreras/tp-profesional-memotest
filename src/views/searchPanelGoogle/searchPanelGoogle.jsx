@@ -20,6 +20,14 @@ class SearchPanelGoogle extends Component {
         };                
     }
 
+    getUrlParams() {
+      var params = {};
+      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        params[key] = value;
+      });
+      return params;
+    }
+
     handleOnChange(event){
         this.setState({googleSearchText : event.target.value});
     }
@@ -28,7 +36,8 @@ class SearchPanelGoogle extends Component {
         if(target.charCode === 13){
             if(this.state.googleSearchText !== ""){
                 this.setState({googleSearchPage : 1});
-                this.props.actions.makeGoogleSearch(this.state.googleSearchText, 1)
+                let params = this.getUrlParams()
+                this.props.actions.makeGoogleSearch(this.state.googleSearchText, 1, params.jwt)
             }
         }
     }
@@ -36,7 +45,8 @@ class SearchPanelGoogle extends Component {
     handleOnClick(){
         if(this.state.googleSearchText !== ""){
             this.setState({googleSearchPage : 1});
-            this.props.actions.makeGoogleSearch(this.state.googleSearchText, 1)
+            let params = this.getUrlParams()
+            this.props.actions.makeGoogleSearch(this.state.googleSearchText, 1,params.jwt)
         }
     }
 
@@ -54,7 +64,8 @@ class SearchPanelGoogle extends Component {
 
     handleGoogleSearchShowMoreClick(search, page){
         this.setState({googleSearchPage : page + 1});
-        this.props.actions.makeGoogleSearch(search, page + 1)
+        let params = this.getUrlParams()
+        this.props.actions.makeGoogleSearch(search, page + 1, params.jwt)
     }
 
     googleSearchContentElements(files){
