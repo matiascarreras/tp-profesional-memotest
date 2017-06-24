@@ -92,9 +92,73 @@ function *getGoogleDriveDownloadLink(action){
 	}
 }
 
+function *updateMemotestData(action){
+	try {
+		const response = yield call(memotestSync.updateMemotestData, action.presentationId, action.completed, action.title, action.data_all, action.data_teacher, action.jwt, action.slideId)
+	
+		if(response.error_code === 0) {
+			yield put({ 
+				type: types.UPDATE_MEMOTEST_DATA_SUCCESS,
+				payload: response.payload
+			})
+		} else if(response.error_code === 1){
+			yield put({ 
+				type: types.UPDATE_MEMOTEST_DATA_FAILED,
+				payload: response.payload
+			})
+		}
+	}
+	catch(error) {
+		console.log(error)
+	}
+}
+
+function *saveStudentResponse(action){
+	try {
+		const response = yield call(memotestSync.saveStudentResponse)
+		if(response.error_code === 0) {
+			yield put({ 
+				type: types.SAVE_STUDENT_RESPONSE_SUCCESS,
+				payload: response.payload
+			})
+		} else if(response.error_code === 1){
+			yield put({ 
+				type: types.SAVE_STUDENT_RESPONSE_FAILED,
+				payload: response.payload
+			})
+		}
+	}
+	catch(error) {
+		console.log(error)
+	}
+}
+
+function *getStudentResponses(action){
+	try {
+		const response = yield call(memotestSync.getStudentResponses)
+		if(response.error_code === 0) {
+			yield put({ 
+				type: types.GET_STUDENT_RESPONSES_SUCCESS,
+				payload: response.payload
+			})
+		} else if(response.error_code === 1){
+			yield put({ 
+				type: types.GET_STUDENT_RESPONSES_FAILED,
+				payload: response.payload
+			})
+		}
+	}
+	catch(error) {
+		console.log(error)
+	}
+}
+
 export default [
 	takeLatest(types.INITIALIZE_MEMOTEST, getMemotestData),
 	takeLatest(types.SAVE_MEMOTEST_DATA, saveMemotestData),
 	takeLatest(types.MAKE_GOOGLE_SEARCH, makeGoogleSearch),
 	takeLatest(types.GET_GOOGLE_DRIVE_DOWNLOAD_LINK, getGoogleDriveDownloadLink),
+	takeLatest(types.UPDATE_MEMOTEST_DATA, updateMemotestData),
+	takeLatest(types.SAVE_STUDENT_RESPONSE, saveStudentResponse),
+	takeLatest(types.GET_STUDENT_RESPONSES, getStudentResponses),
 ]

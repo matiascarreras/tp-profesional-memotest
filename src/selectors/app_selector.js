@@ -10,7 +10,10 @@ const appSelector = createSelector(
       gridSize: memotestData.gridSize,
       pieces: memotestData.pieces,
       isTriviaQuestionEnable: memotestData.isTriviaQuestionEnable,
-      showTrivia: memotestData.showTrivia
+      showTrivia: memotestData.showTrivia,
+      slideId: memotestData.slideId,
+      jwt: memotestData.jwt,
+      presentationId: memotestData.presentationId
     }
   }
 )

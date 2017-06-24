@@ -19,10 +19,14 @@ const triviaSelector = createSelector(
     return {
       gridSize: memotestData.gridSize,
       pieces: memotestData.pieces,
+      isTriviaQuestionEnable: memotestData.isTriviaQuestionEnable,
       triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
       triviaQuestionText: memotestData.triviaQuestionText,
       showTrivia: memotestData.showTrivia,
-      cantPieces:cantPieces
+      cantPieces:cantPieces,
+      presentationId: memotestData.presentationId,
+      jwt: memotestData.jwt,
+      slideId: memotestData.slideId
     }
   }
 )

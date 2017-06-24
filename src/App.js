@@ -26,7 +26,13 @@ class App extends Component {
   }
 
   componentDidMount(){
-    //this.props.actions.intializeMemotest()
+    let params = this.getUrlParams()
+    if((this.props.jwt == '' && !this.props.presentationId) || (this.props.jwt != params.jwt)){
+      this.props.actions.saveUrlParams(params.id, params.jwt)
+    }
+    if(this.props.slideId){
+      this.props.actions.intializeMemotest(this.props.slideId, params.jwt)    
+    }
   }
 
   getUrlParams() {
@@ -121,6 +127,7 @@ function mapDispatchToProps(dispatch){
   return bindActionsToDispatch({
       selectGridSize: appActions.selectGridSize,
       intializeMemotest: appActions.intializeMemotest,
+      saveUrlParams: appActions.saveUrlParams,
   }, dispatch)
 }
 

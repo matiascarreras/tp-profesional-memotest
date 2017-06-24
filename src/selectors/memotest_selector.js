@@ -23,7 +23,10 @@ const memotestSelector = createSelector(
       triviaQuestionText: memotestData.triviaQuestionText,
       triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
       showTrivia: memotestData.showTrivia,
-      cantPieces:cantPieces
+      cantPieces:cantPieces,
+      presentationId: memotestData.presentationId,
+      jwt: memotestData.jwt,
+      slideId: memotestData.slideId
     }
   }
 )

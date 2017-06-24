@@ -6,9 +6,9 @@ const initialState = {
 	isTriviaQuestionEnable: false,
 	triviaQuestionText: "",
 	triviaQuestionCorrectAnswer: "",
-	pieces:[],
-  googleFiles:[],
-  uploaderFiles:[],
+	pieces: [],
+  googleFiles: [],
+  uploaderFiles: [],
   googleImagesResults: false,
   googleImagesLoading: false,
   googleSearchShowMore: false,
@@ -16,11 +16,14 @@ const initialState = {
   showTrivia: false,
   selectedPieces: [],
   matches: [],
+  slideId: 1000026,
+  jwt: '',
+  presentationId: 0,
 }
 
 const arrayPieces = []
 for (var i = 0; i < 24; i++) {
-  arrayPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_TEXT,text:'sd',src:'',id:i,textStyle:'font5'}
+  arrayPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_EMPTY,text:'',src:'',id:i,textStyle:''}
 }
 
 initialState.pieces = arrayPieces
@@ -65,7 +68,7 @@ function saveMemotestPiece(state, action){
   let newPiece = {...state.pieces[action.id]}
   newPiece.type = action.pieceType
   if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_TEXT){
-    newPiece.textStyle = action.textStyle      
+    newPiece.textStyle = action.textStyle
   } else if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_IMAGE){
     newPiece.src = action.src      
   }
@@ -110,6 +113,11 @@ function makeGoogleSearchFailed(state, action){
 
 function getMemotestDataSuccess(state, action){
   let newState = {...state}
+  newState.gridSize = action.payload.custom_slide.data_all.gridSize
+  newState.isTriviaQuestionEnable = action.payload.custom_slide.data_all.isTriviaQuestionEnable
+  newState.triviaQuestionText = action.payload.custom_slide.data_all.triviaQuestionText
+  newState.triviaQuestionCorrectAnswer = action.payload.custom_slide.data_all.triviaQuestionCorrectAnswer
+  newState.pieces = action.payload.custom_slide.data_all.pieces
   return newState
 }
 
@@ -120,6 +128,7 @@ function getMemotestDataFailed(state, action){
 
 function saveMemotestDataSuccess(state, action){
   let newState = {...state}
+  newState.slideId = action.payload.custom_slide.id
   return newState
 }
 
@@ -141,7 +150,6 @@ function saveMemotestPieceSelected(state, action){
 }
 
 function validateMatch(state, action){
-  debugger
   let newState = {...state}
   let firstPieceId = state.selectedPieces[0]
   let secondPieceId = state.selectedPieces[1]
@@ -157,6 +165,13 @@ function validateMatch(state, action){
     newState.selectedPieces = [] 
   }
   newState.matches = newMatches
+  return newState
+}
+
+function saveUrlParams(state, action){
+  let newState = {...state}
+  newState.presentationId = parseInt(action.presentationId)
+  newState.jwt = action.jwt
   return newState
 }
 
@@ -194,6 +209,8 @@ const memotestReducer = (state = initialState, action) => {
       return saveMemotestPieceSelected(state, action)
     case types.VALIDATE_MATCH:
       return validateMatch(state, action)
+    case types.SAVE_URL_PARAMS:
+      return saveUrlParams(state, action)
     default:
       return state
   }

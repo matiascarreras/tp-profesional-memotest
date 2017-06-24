@@ -37,6 +37,7 @@ const searchPanelGoogleSelector = createSelector(
       googleImagesResults: memotestData.googleImagesResults,
       googleImagesLoading: memotestData.googleImagesLoading,
       googleSearchShowMore: memotestData.googleSearchShowMore,
+      jwt: memotestData.jwt
     }
   }
 )

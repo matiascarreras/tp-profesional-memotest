@@ -40,11 +40,25 @@ class MemotestPiece extends Component {
       }
   }
 
+  onKeyPress(event) {
+    
+      event.preventDefault();
+
+      var data;
+      try {
+        data = JSON.parse(event.dataTransfer.getData('text'));
+        this.props.handleKeyPress(this.props.id, data.type, data.textStyle, data.src, data.text)
+      } catch (e) {
+        // If the text data isn't parsable we'll just ignore it.
+        return;
+      }
+  }
+
   render() {
 
   	let content = ""
   	if(this.props.type === constants.MEMOTEST_PIECE_TYPE_TEXT){
-      content = <Textarea  disabled={this.props.disabled} defaultValue={this.props.text}/>
+      content = <Textarea  onKeyPress={this.onKeyPress.bind(this)} disabled={this.props.disabled} defaultValue={this.props.text}/>
   	} else if(this.props.type === constants.MEMOTEST_PIECE_TYPE_IMAGE){
   		content = <img src={this.props.src} alt=""/>
   	}

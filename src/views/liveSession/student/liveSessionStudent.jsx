@@ -93,6 +93,7 @@ class LiveSessionStudent extends Component {
 		this.props.actions.saveMemotestPieceSelected(pieceId)
 		setTimeout(()=>this.props.actions.validateMatch(),2000)
 		this.setState({ moves: this.state.moves + 1 })
+		//this.props.action.saveStudentResponse();
 	}
 
 	triviaButtonClick(){
@@ -112,6 +113,7 @@ class LiveSessionStudent extends Component {
 				this.setState({ overlayInfoAfterTxt: ''})
 				this.setState({ overlayButton: localize('live_session_student_trivia_incorrect_answer_btn') })
 				this.setState({ finalQuestionAttemps: this.state.finalQuestionAttemps + 1 });
+				//this.props.action.saveStudentResponse();
 			}
 		} else {
 			this.setState({ showTriviaMissingAnswerMessage: true });
@@ -208,6 +210,7 @@ function mapDispatchToProps(dispatch){
     return bindActionsToDispatch({
         saveMemotestPieceSelected: liveSessionStudentActions.saveMemotestPieceSelected,
         validateMatch: liveSessionStudentActions.validateMatch,
+        saveStudentResponse: liveSessionStudentActions.saveStudentResponse,
     }, dispatch)
 }
 

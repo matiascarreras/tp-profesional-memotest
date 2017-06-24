@@ -23,14 +23,6 @@ class Memotest extends Component {
         }
     }
 
-    getUrlParams() {
-      var params = {};
-      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        params[key] = value;
-      });
-      return params;
-    }
-
     handleTriviaQuestionClick(){
         this.props.actions.toggleTriviaQuestion()
     }
@@ -39,8 +31,11 @@ class Memotest extends Component {
         if(!this.isMemotestCompleted(this.props.pieces, this.props.cantPieces)){
             this.setState({ showAlertMessage: true })
         } else {
-            let params = this.getUrlParams()
-            this.props.actions.saveMemotestData(params.id, 1, "Memory Test", this.props, this.props, params.jwt)
+            if(this.props.slideId){
+                this.props.actions.updateMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId)
+            } else {
+                this.props.actions.saveMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt)            
+            }
         }
     }
 
@@ -65,12 +60,16 @@ class Memotest extends Component {
         this.props.actions.saveMemotestPiece(id, type, textStyle, src)
     }
 
+    handleKeyPress(id, type, textStyle, src, text){
+        this.props.actions.saveMemotestPiece(id, type, textStyle, src, text)
+    }
+
     listMemotestPieces(pieces, cantPieces){
         let elements = []
         var _this = this
         for (var i = 0; i < cantPieces; i++) {
             elements.push(
-                <MemotestPiece handleOnDrop={this.handleOnDrop.bind(this)} key={i} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
+                <MemotestPiece handleOnDrop={this.handleOnDrop.bind(this)} handleKeyPress={this.handleKeyPress.bind(this)} key={i} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
             )
         }
         return elements
@@ -145,6 +144,7 @@ function mapDispatchToProps(dispatch){
         saveMemotestPiece: memotestActions.saveMemotestPiece,
         saveMemotestData: appActions.saveMemotestData,
         showTrivia: appActions.showTrivia,
+        updateMemotestData: appActions.updateMemotestData
     }, dispatch)
 }
 

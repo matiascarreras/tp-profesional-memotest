@@ -20,14 +20,6 @@ class SearchPanelGoogle extends Component {
         };                
     }
 
-    getUrlParams() {
-      var params = {};
-      var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        params[key] = value;
-      });
-      return params;
-    }
-
     handleOnChange(event){
         this.setState({googleSearchText : event.target.value});
     }
@@ -36,8 +28,7 @@ class SearchPanelGoogle extends Component {
         if(target.charCode === 13){
             if(this.state.googleSearchText !== ""){
                 this.setState({googleSearchPage : 1});
-                let params = this.getUrlParams()
-                this.props.actions.makeGoogleSearch(this.state.googleSearchText, 1, params.jwt)
+                this.props.actions.makeGoogleSearch(this.state.googleSearchText, 1, this.props.jwt)
             }
         }
     }
@@ -45,8 +36,7 @@ class SearchPanelGoogle extends Component {
     handleOnClick(){
         if(this.state.googleSearchText !== ""){
             this.setState({googleSearchPage : 1});
-            let params = this.getUrlParams()
-            this.props.actions.makeGoogleSearch(this.state.googleSearchText, 1,params.jwt)
+            this.props.actions.makeGoogleSearch(this.state.googleSearchText, 1, this.props.jwt)
         }
     }
 
@@ -64,8 +54,7 @@ class SearchPanelGoogle extends Component {
 
     handleGoogleSearchShowMoreClick(search, page){
         this.setState({googleSearchPage : page + 1});
-        let params = this.getUrlParams()
-        this.props.actions.makeGoogleSearch(search, page + 1, params.jwt)
+        this.props.actions.makeGoogleSearch(search, page + 1, this.props.jwt)
     }
 
     googleSearchContentElements(files){
@@ -82,6 +71,8 @@ class SearchPanelGoogle extends Component {
     }
 
     render() {
+
+        var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDVCIsImV4cCI6MjE0NzQ4MzY0NywiYXVkIjoiSW9zIiwidWlkIjoiIiwiaWF0IjoxNDk3MjE5MDg2LCJpZCI6MTU0OTUsImVudiI6Imh0dHA6XC9cL2N0LmNvbVwvIn0.KRoWsjJsKl23VnZFcSmhH2fl6hbwL9k0xkqmKenfhRY'
 
         var googleImagesResultsClass = classnames({
             'googleImagesResults': true,

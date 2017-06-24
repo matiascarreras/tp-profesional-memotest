@@ -15,6 +15,13 @@ let liveSessionStudentActions = {
    	}
   },
 
+  saveStudentResponse: function(response) {
+    return { 
+        type: types.SAVE_STUDENT_RESPONSE,
+        response: response
+    }
+  },
+
 }
 
 export default liveSessionStudentActions

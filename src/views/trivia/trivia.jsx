@@ -44,7 +44,11 @@ class Trivia extends Component {
             this.setState({ showAlertMessage: true });
             this.setState({ alertMessageText: localize('empty_final_question_correct_answer') });
         } else {
-            this.props.actions.saveMemotestData()        
+            if(this.props.slideId){
+                this.props.actions.updateMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId)
+            } else {
+                this.props.actions.saveMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt)            
+            }
         }
     }
 
@@ -118,6 +122,7 @@ function mapDispatchToProps(dispatch){
         saveTriviaCorrectAnswer: triviaActions.saveTriviaCorrectAnswer,
         saveMemotestData: appActions.saveMemotestData,
         showTrivia: appActions.showTrivia,
+        updateMemotestData: appActions.updateMemotestData,
     }, dispatch)
 }
 

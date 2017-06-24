@@ -6,6 +6,8 @@ import { localize } from '../../helpers/translator'
 import './reports.css';
 import logo from '../../assets/header/logo.svg'
 import reportsSelector from '../../selectors/reports_selector'
+import reportsActions from '../../actions/reportsActions'
+import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
 import * as constants from '../../constants/constants'
 import MemotestPiece from '../../components/memotestPiece/memotestPiece'
 
@@ -84,4 +86,10 @@ function mapStateToProps(state){
   return reportsSelector(state);
 }
 
-export default connect(mapStateToProps)(Reports);
+function mapDispatchToProps(dispatch){
+    return bindActionsToDispatch({
+        getStudentResponses: reportsActions.getStudentResponses,
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Reports);

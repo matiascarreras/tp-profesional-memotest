@@ -12,12 +12,9 @@ function _genericCatch(err) {
 }
 
 function getMemotestData(id, jwt) {
-	return http_agent.get('http://ct.api.com/v1/ct/custom_slides')
+	return http_agent.get('http://ct.api.com/v1/ct/custom_slides/' + id)
 	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
 	.set('JWT', jwt)
-	.send({
-		id: id,
-	})
 	.withCredentials()
 	.use(superagentPromisePlugin)
 	.then(function(response) {
@@ -32,7 +29,7 @@ function saveMemotestData(presentationId, completed, title, data_all, data_teach
 	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
 	.set('JWT', jwt)
 	.send({
-		presentationId: presentationId,
+		presentation_id: presentationId,
 		completed: completed,
 		title: title,
 		data_all: data_all,
@@ -48,9 +45,13 @@ function saveMemotestData(presentationId, completed, title, data_all, data_teach
 }
 
 function makeGoogleSearch(search, page, jwt) {
-	return http_agent.get('http://ct.api.com/v1/ct/google_images?q='+search+'&page='+page)
+	return http_agent.get('http://ct.api.com/v1/ct/google_images')
 	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
 	.set('JWT', jwt)
+	.query({ 
+		q: search,
+		page: page,
+	})
 	.send({})
 	.withCredentials()
 	.use(superagentPromisePlugin)
@@ -73,9 +74,65 @@ function getGoogleDriveDownloadLink(fileId, token){
 	.catch(err => _genericCatch(err))
 }
 
+function updateMemotestData(presentationId, completed, title, data_all, data_teacher, jwt, slideId) {
+	return http_agent.put('http://ct.api.com/v1/ct/custom_slides/' + slideId)
+	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
+	.set('JWT', jwt)
+	.send({
+		presentation_id: presentationId,
+		completed: completed,
+		title: title,
+		data_all: data_all,
+		data_teacher: data_teacher,
+	})
+	.withCredentials()
+	.use(superagentPromisePlugin)
+	.then(function(response) {
+		let payload = JSON.parse(response.text)
+		return payload
+	})
+	.catch(err => _genericCatch(err))
+}
+
+function saveStudentResponse(jwt) {
+	return http_agent.post('http://ct.api.com/v1/hub/student/responses')
+	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
+	.set('JWT', jwt)
+	.send({
+		presentation_id: presentationId,
+		completed: completed,
+		title: title,
+		data_all: data_all,
+		data_teacher: data_teacher,
+	})
+	.withCredentials()
+	.use(superagentPromisePlugin)
+	.then(function(response) {
+		let payload = JSON.parse(response.text)
+		return payload
+	})
+	.catch(err => _genericCatch(err))
+}
+
+function getStudentResponses(jwt) {
+	return http_agent.get('http://ct.api.com/v1/hub/teacher/responses' + id)
+	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
+	.set('JWT', jwt)
+	.withCredentials()
+	.use(superagentPromisePlugin)
+	.then(function(response) {
+		response = JSON.parse(response.text)
+		return response
+	})
+	.catch(err => {_genericCatch(err)})
+}
+
 export default {
 	getMemotestData,
 	saveMemotestData,
 	makeGoogleSearch,
-	getGoogleDriveDownloadLink
+	getGoogleDriveDownloadLink,
+	updateMemotestData,
+	saveStudentResponse,
+	getStudentResponses
 }
