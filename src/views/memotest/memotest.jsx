@@ -60,7 +60,7 @@ class Memotest extends Component {
         this.props.actions.saveMemotestPiece(id, type, textStyle, src)
     }
 
-    handleKeyPress(id, type, textStyle, src, text){
+    handleOnChange(id, type, textStyle, src, text){
         this.props.actions.saveMemotestPiece(id, type, textStyle, src, text)
     }
 
@@ -69,7 +69,7 @@ class Memotest extends Component {
         var _this = this
         for (var i = 0; i < cantPieces; i++) {
             elements.push(
-                <MemotestPiece handleOnDrop={this.handleOnDrop.bind(this)} handleKeyPress={this.handleKeyPress.bind(this)} key={i} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
+                <MemotestPiece handleOnDrop={this.handleOnDrop.bind(this)} handleOnChange={this.handleOnChange.bind(this)} key={i} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
             )
         }
         return elements

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import Dropzone from 'react-dropzone'
 import GooglePicker from 'react-google-picker'
 import DropboxChooser from 'react-dropbox-chooser'
-import OneDriveAuth from 'onedrive-auth'
 import classnames from 'classnames'
 
 import UploaderButton from '../../components/uploaderButton/uploaderButton'
@@ -156,135 +155,34 @@ class SearchPanelLocal extends Component {
         return elements
     }
 
-    // odauth calls our onAuthenticated method to give us the user's auth token.
-    // in this demo app we just use this as the method to drive the page logic
-    onAuthenticated(token, authWindow) {
-      if (token) {
-        /*ODAuth.removeLoginButton();
-        (function($){
-          // we extract the onedrive path from the url fragment and we
-          // flank it with colons to use the api's path-based addressing scheme
-          var path = "";
-          var beforePath = "";
-          var afterPath = "";
-          if (window.location.hash) {
-            path = window.location.hash.substr(1);
-            beforePath =":";
-            afterPath = ":";
-          }
-          var odurl = "https://api.onedrive.com/v1.0/drive/root" + beforePath + path + afterPath;
-          // the expand and select parameters mean:
-          //  "for the item i'm addressing, include its thumbnails and children,
-          //   and for each of the children, include its thumbnails. for those
-          //   thumbnails, return the 'large' and 'c200x150_Crop' sizes"
-          // we also attach the access token as a query parameter to every request.
-          // we could also pass it in through the 'Authorization: bearer' header,
-          // but that would result in an extra CORS preflight request for every
-          // unique path.
-          var odquery = "?expand=thumbnails,children(expand=thumbnails(select=large,c200x150_Crop))&access_token=" + token;
-          $.ajax({
-            url: odurl + odquery,
-            dataType: 'json',
-            success: function(data) {
-              if (data) {
-                // clear out the old content
-                $('#od-items').empty();
-                $('#od-json').empty();
-                // add the syntax-highlighted json response
-                $("<pre>").html(syntaxHighlight(data)).appendTo("#od-json");
-                // process the response data. if we get back children (data.children)
-                // then render the tile view. otherwise, render the "one-up" view
-                // for the item's individual data. we also look for children in
-                // 'data.value' because if this app is ever configured to reqeust
-                // '/children' directly instead of '/parent?expand=children', then
-                // they'll be in an array called 'data'
-                var children = data.children || data.value;
-                if (children && children.length > 0) {
-                  $.each(children, function(i,item) {
-                    var tile = $("<div>").
-                      attr("href", "#" + path + "/" + encodeURIComponent(item.name)).
-                      addClass("item").
-                      click(function() {
-                        // when the page changes in response to a user click,
-                        // we set loadedForHash to the new value and call
-                        // odauth ourselves in user-click mode. this causes
-                        // the catch-all hashchange event handler not to
-                        // process the page again. see comment at the top.
-                        loadedForHash = $(this).attr('href');
-                        window.location = loadedForHash;
-                        odauth(true);
-                      }).
-                      appendTo("#od-items");
-                    // look for various facets on the items and style them accordingly
-                    if (item.folder) {
-                      tile.addClass("folder");
-                    }
-                    if (item.thumbnails && item.thumbnails.length > 0) {
-                      $("<img>").
-                        attr("src", item.thumbnails[0].c200x150_Crop.url).
-                        appendTo(tile);
-                    }
-                    $("<div>").
-                      addClass("nameplate").
-                      text(item.name).
-                      appendTo(tile);
-                  });
-                }
-                else {
-                  // 1-up view
-                  var tile = $("<div>").
-                    addClass("item").
-                    addClass("oneup").
-                    appendTo("#od-items");
-                  var downloadUrl = data['@content.downloadUrl'];
-                  if (downloadUrl) {
-                    tile.click(function(){window.location = downloadUrl;});
-                  }
-                  if (data.folder) {
-                    tile.addClass("folder");
-                  }
-                  if (data.thumbnails && data.thumbnails.length > 0) {
-                    $("<img>").
-                      attr("src", data.thumbnails[0].large.url).
-                      appendTo(tile);
-                  }
-                }
-              } else {
-                $('#od-items').empty();
-                $('<p>error.</p>').appendTo('#od-items');
-                $('#od-json').empty();
-              }
-            }
-          });
-        })(jQuery);*/
-      }
-      else {
-        alert("Error signing in");
-      }
-    }
-    // start the whole thing off by calling odauth() in non-click mode.
-    // if the user isn't logged in already, a sign-in link will appear
-    // for them to click.
-    odauth(ODAuth, wasClicked) {
-
-        ODAuth.auth(this.onAuthenticated, wasClicked);
-    }
-
     launchOneDrivePicker(odOptions){
         OneDrive.open(odOptions);
       }
 
-    launchBoxPicker(boxSelect){
+    launchBoxPicker(boxOptions){
+      var boxSelect = new BoxSelect(boxOptions);
       boxSelect.launchPopup();
+      var _this = this
+
+      boxSelect.success(function(files) {
+          let filesArray = []
+          files.forEach(function(file){
+              filesArray.push({
+                  size: file.size,
+                  name: file.name,
+                  link: file.url
+              })
+          })
+          _this.props.actions.saveUploadersFiles(filesArray)
+          console.log(files);
+      });
+
+      boxSelect.cancel(function() {
+          console.log("The user clicked cancel or closed the popup");
+      });
     }
 
     render() {
-
-        var ODAuth = new OneDriveAuth({
-          clientId: "000000004C16C833",
-          scopes: "user.read files.read files.read.all sites.read.all",
-          redirectUri: "http://localhost:3000/memotest"
-        });
 
         var odOptions = {
           clientId: "47aff83b-5eee-41e8-a9b3-ef8c03adac9c",
@@ -323,12 +221,11 @@ class SearchPanelLocal extends Component {
         const APP_KEY = '158dtt39zf0zj9k';
 
 
-        /*var options = {
+        var boxOptions = {
             clientId: 'bfedi0ts41mxl9fo6avttlenvpfj9ap1',
             linkType: 'direct',
             multiselect: 'true'
         };
-        var boxSelect = new BoxSelect(options);*/
 
         return (
             <div id="search-panel-local" className={(this.props.hide)?'hide':''}>
@@ -341,7 +238,7 @@ class SearchPanelLocal extends Component {
                     extensions={['.png', '.jpg', '.jpeg']} >
                     <UploaderButton onMouseOver={this.handleDropboxUploadMouseOver.bind(this)} onMouseOut={this.handleDropboxUploadMouseOut.bind(this)} icon={this.state.dropboxIcon} id="browse-dropbox-file" text={localize('upload_dropbox')} name="dropBoxFile"/>       
                 </DropboxChooser>
-                <UploaderButton onMouseOver={this.handleBoxUploadMouseOver.bind(this)} onMouseOut={this.handleBoxUploadMouseOut.bind(this)} icon={this.state.boxIcon} id="browse-box-file" text={localize('upload_box')} name="boxFile"/>
+                <UploaderButton onClick={this.launchBoxPicker.bind(this, boxOptions)} onMouseOver={this.handleBoxUploadMouseOver.bind(this)} onMouseOut={this.handleBoxUploadMouseOut.bind(this)} icon={this.state.boxIcon} id="browse-box-file" text={localize('upload_box')} name="boxFile"/>
                 <UploaderButton onClick={this.launchOneDrivePicker.bind(this, odOptions)} onMouseOver={this.handleOneDriveUploadMouseOver.bind(this)} onMouseOut={this.handleOneDriveUploadMouseOut.bind(this)} icon={this.state.oneDriveIcon} id="browse-onedrive-file" text={localize('upload_onedrive')} name="oneDriveFile"/>
                 <GooglePicker clientId={CLIENT_ID}
                               developerKey={DEVELOPER_KEY}

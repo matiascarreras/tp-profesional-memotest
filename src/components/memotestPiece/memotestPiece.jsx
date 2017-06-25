@@ -15,50 +15,40 @@ class MemotestPiece extends Component {
   }
 
   onDragOver(event) {
-      this.setState({ dragOver: true });
-      event.preventDefault();
+    this.setState({ dragOver: true });
+    event.preventDefault();
   }
 
   onDragLeave(event) {
-      this.setState({ dragOver: false });
-      event.preventDefault();
+    this.setState({ dragOver: false });
+    event.preventDefault();
   }
 
   onDrop(event) {
     
-      this.setState({ dragOver: false });
+    this.setState({ dragOver: false });
 
-      event.preventDefault();
+    event.preventDefault();
 
-      var data;
-      try {
-        data = JSON.parse(event.dataTransfer.getData('text'));
-        this.props.handleOnDrop(this.props.id, data.type, data.textStyle, data.src)
-      } catch (e) {
-        // If the text data isn't parsable we'll just ignore it.
-        return;
-      }
+    var data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData('text'));
+      this.props.handleOnDrop(this.props.id, data.type, data.textStyle, data.src)
+    } catch (e) {
+      // If the text data isn't parsable we'll just ignore it.
+      return;
+    }
   }
 
-  onKeyPress(event) {
-    
-      event.preventDefault();
-
-      var data;
-      try {
-        data = JSON.parse(event.dataTransfer.getData('text'));
-        this.props.handleKeyPress(this.props.id, data.type, data.textStyle, data.src, data.text)
-      } catch (e) {
-        // If the text data isn't parsable we'll just ignore it.
-        return;
-      }
+  onChange(event) {
+    this.props.handleOnChange(this.props.id, this.props.type, this.props.textStyle, this.props.src, event.target.value)
   }
 
   render() {
 
   	let content = ""
   	if(this.props.type === constants.MEMOTEST_PIECE_TYPE_TEXT){
-      content = <Textarea  onKeyPress={this.onKeyPress.bind(this)} disabled={this.props.disabled} defaultValue={this.props.text}/>
+      content = <Textarea onChange={this.onChange.bind(this)} disabled={this.props.disabled} value={this.props.text}/>
   	} else if(this.props.type === constants.MEMOTEST_PIECE_TYPE_IMAGE){
   		content = <img src={this.props.src} alt=""/>
   	}

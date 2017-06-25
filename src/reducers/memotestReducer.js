@@ -69,6 +69,7 @@ function saveMemotestPiece(state, action){
   newPiece.type = action.pieceType
   if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_TEXT){
     newPiece.textStyle = action.textStyle
+    newPiece.text = action.text
   } else if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_IMAGE){
     newPiece.src = action.src      
   }
