@@ -5,11 +5,19 @@ import { localize } from '../../../helpers/translator'
 import './liveSessionTeacher.css';
 import logo from '../../../assets/header/logo.svg'
 import liveSessionTeacherSelector from '../../../selectors/live_session_teacher_selector'
+import appActions from '../../../actions/appActions'
+import bindActionsToDispatch from '../../../helpers/bindActionsToDispatch'
 import * as constants from '../../../constants/constants'
 import MemotestPiece from '../../../components/memotestPiece/memotestPiece'
 
 class LiveSessionTeacher extends Component {
 
+	componentDidMount(){
+	  if(this.props.slideId){
+	    this.props.actions.intializeMemotest(this.props.slideId, this.props.jwt)    
+	  }
+	}
+	
 	listMemotestPieces(pieces){
 	    let elements = []
 	    var _this = this
@@ -51,4 +59,10 @@ function mapStateToProps(state){
   return liveSessionTeacherSelector(state);
 }
 
-export default connect(mapStateToProps)(LiveSessionTeacher);
+function mapDispatchToProps(dispatch){
+    return bindActionsToDispatch({
+        intializeMemotest: appActions.intializeMemotest
+    }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LiveSessionTeacher);

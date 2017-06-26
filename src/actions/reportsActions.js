@@ -2,10 +2,10 @@ import * as types from '../constants/actionTypes'
 
 let reportsActions = {
 
-  getStudentResponses: function(response) {
+  getStudentResponses: function(jwt) {
     return { 
         type: types.GET_STUDENT_RESPONSES,
-        response: response
+        jwt: jwt
     }
   },
 

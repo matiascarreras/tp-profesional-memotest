@@ -17,8 +17,8 @@ const initialState = {
   selectedPieces: [],
   matches: [],
   slideId: 1000026,
-  jwt: '',
-  presentationId: 0,
+  jwt: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDVCIsImV4cCI6MjE0NzQ4MzY0NywiYXVkIjoiSW9zIiwidWlkIjoiIiwiaWF0IjoxNDk4NDQ1NjE2LCJpZCI6MTU0OTUsImVudiI6Imh0dHA6XC9cL2N0LmNvbVwvIn0.Wa8ApMPcybqKIQxx4fc9x1Q9zqTQZGuhu60t8MWvZP8',
+  presentationId: 106140,
 }
 
 const arrayPieces = []
@@ -30,6 +30,17 @@ initialState.pieces = arrayPieces
 
 function selectGridSize(state, action){
   let newState = {...state}
+  let newPieces = [...state.pieces]
+  if (action.gridSize == constants.MEDIUM_GRID_SIZE && newPieces.length < 16){
+   for (var i = 12; i < 16; i++) {
+     newPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_EMPTY,text:'',src:'',id:i,textStyle:''}
+    }
+   } else if (action.gridSize == constants.LARGE_GRID_SIZE && newPieces.length < 24){
+    for (var i = 24 - newPieces.length; i < 24; i++) {
+      newPieces[i] = {type:constants.MEMOTEST_PIECE_TYPE_EMPTY,text:'',src:'',id:i,textStyle:''}
+    }
+  }
+  newState.pieces = newPieces
   newState.gridSize = action.gridSize
   return newState
 }

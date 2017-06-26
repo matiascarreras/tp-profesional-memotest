@@ -5,7 +5,7 @@ let appActions = {
   selectGridSize: function(gridSize) {
     return { 
     	type: types.SELECT_GRID_SIZE,
-    	gridSize: gridSize
+    	gridSize: gridSize,
     }
   },
 

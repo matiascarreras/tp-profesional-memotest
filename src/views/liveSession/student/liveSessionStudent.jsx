@@ -8,6 +8,7 @@ import './liveSessionStudent.css';
 import logo from '../../../assets/header/logo.svg'
 import liveSessionStudentSelector from '../../../selectors/live_session_student_selector'
 import liveSessionStudentActions from '../../../actions/liveSessionStudentActions'
+import appActions from '../../../actions/appActions'
 import bindActionsToDispatch from '../../../helpers/bindActionsToDispatch'
 import * as constants from '../../../constants/constants'
 import MemotestPiece from '../../../components/memotestPiece/memotestPiece'
@@ -34,6 +35,12 @@ class LiveSessionStudent extends Component {
 	    }
 	}
 
+	componentDidMount(){
+	  if(this.props.slideId){
+	    this.props.actions.intializeMemotest(this.props.slideId, this.props.jwt)    
+	  }
+	}
+
 	listMemotestPieces(pieces){
 	    let elements = []
 	    var _this = this
@@ -50,7 +57,6 @@ class LiveSessionStudent extends Component {
 	        	</ReactCardFlip>
 	        )
 	    }
-	    //this.shuffle(elements)
 	    return elements
 	}
 
@@ -63,16 +69,6 @@ class LiveSessionStudent extends Component {
 	        )
 	    }
 	    return elements
-	}
-
-	shuffle(a) {
-	    var j, x, i;
-	    for (i = a.length; i; i--) {
-	        j = Math.floor(Math.random() * i);
-	        x = a[i - 1];
-	        a[i - 1] = a[j];
-	        a[j] = x;
-	    }
 	}
 
 	overlayButtonClick(){
@@ -93,7 +89,9 @@ class LiveSessionStudent extends Component {
 		this.props.actions.saveMemotestPieceSelected(pieceId)
 		setTimeout(()=>this.props.actions.validateMatch(),2000)
 		this.setState({ moves: this.state.moves + 1 })
-		//this.props.action.saveStudentResponse();
+		var array = [];
+		array["moves"] = this.state.moves + 1;
+		this.props.actions.saveStudentResponse(array, this.props.jwt);
 	}
 
 	triviaButtonClick(){
@@ -113,7 +111,10 @@ class LiveSessionStudent extends Component {
 				this.setState({ overlayInfoAfterTxt: ''})
 				this.setState({ overlayButton: localize('live_session_student_trivia_incorrect_answer_btn') })
 				this.setState({ finalQuestionAttemps: this.state.finalQuestionAttemps + 1 });
-				//this.props.action.saveStudentResponse();
+				var array = [];
+				array["moves"] = this.state.moves;
+				array["finalQuestionAttemps"] = this.state.finalQuestionAttemps + 1;
+				this.props.actions.saveStudentResponse(array, this.props.jwt);
 			}
 		} else {
 			this.setState({ showTriviaMissingAnswerMessage: true });
@@ -211,6 +212,7 @@ function mapDispatchToProps(dispatch){
         saveMemotestPieceSelected: liveSessionStudentActions.saveMemotestPieceSelected,
         validateMatch: liveSessionStudentActions.validateMatch,
         saveStudentResponse: liveSessionStudentActions.saveStudentResponse,
+        intializeMemotest: appActions.intializeMemotest,
     }, dispatch)
 }
 

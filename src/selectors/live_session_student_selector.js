@@ -25,7 +25,9 @@ const liveSessionStudentSelector = createSelector(
       triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
       selectedPieces: memotestData.selectedPieces,
       matches: memotestData.matches,
-      cantPieces: cantPieces
+      cantPieces: cantPieces,
+      jwt: memotestData.jwt,
+      slideId: memotestData.slideId
     }
   }
 )

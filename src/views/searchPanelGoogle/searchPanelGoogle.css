@@ -40,10 +40,9 @@
 }
 
 .google-images-loading{
-	top: -47px;
-    position: relative;
-    float: right;
-    right: 0px;
+    position: absolute;
+    top: 181px;
+    left: 198px;
     height: 24px;
     background: white;
     width: 24px;

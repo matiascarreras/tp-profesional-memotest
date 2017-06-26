@@ -31,11 +31,23 @@ class Memotest extends Component {
         if(!this.isMemotestCompleted(this.props.pieces, this.props.cantPieces)){
             this.setState({ showAlertMessage: true })
         } else {
+            this.props.pieces.splice(this.props.cantPieces)
+            this.shuffle(this.props.pieces)
             if(this.props.slideId){
                 this.props.actions.updateMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId)
             } else {
                 this.props.actions.saveMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt)            
             }
+        }
+    }
+
+    shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
         }
     }
 
@@ -66,6 +78,7 @@ class Memotest extends Component {
 
     listMemotestPieces(pieces, cantPieces){
         let elements = []
+        pieces.sort(function(a, b){return a.id -b.id})
         var _this = this
         for (var i = 0; i < cantPieces; i++) {
             elements.push(
@@ -113,7 +126,7 @@ class Memotest extends Component {
                     </div>
                 </div>
                 <div className="control-panel">
-                  <SwitchButton text={localize('final_question_switch')} onClick={this.handleTriviaQuestionClick.bind(this)}/>
+                  <SwitchButton isChecked={this.props.isTriviaQuestionEnable} text={localize('final_question_switch')} onClick={this.handleTriviaQuestionClick.bind(this)}/>
                   <TextButton text={localize('btn_next')} id="button-next" class={nextBtnClass} onClick={this.handleNextBtnClick.bind(this)}/>
                   <TextButton text={localize('btn_done')} id="button-done" class={doneBtnClass} onClick={this.handleDoneBtnClick.bind(this)}/>
                 </div>

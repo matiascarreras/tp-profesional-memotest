@@ -94,16 +94,13 @@ function updateMemotestData(presentationId, completed, title, data_all, data_tea
 	.catch(err => _genericCatch(err))
 }
 
-function saveStudentResponse(jwt) {
+function saveStudentResponse(response, jwt) {
 	return http_agent.post('http://ct.api.com/v1/hub/student/responses')
 	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
 	.set('JWT', jwt)
 	.send({
-		presentation_id: presentationId,
-		completed: completed,
-		title: title,
-		data_all: data_all,
-		data_teacher: data_teacher,
+		response_text: "",
+		response: response,
 	})
 	.withCredentials()
 	.use(superagentPromisePlugin)
@@ -115,7 +112,7 @@ function saveStudentResponse(jwt) {
 }
 
 function getStudentResponses(jwt) {
-	return http_agent.get('http://ct.api.com/v1/hub/teacher/responses' + id)
+	return http_agent.get('http://ct.api.com/v1/hub/teacher/responses')
 	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
 	.set('JWT', jwt)
 	.withCredentials()

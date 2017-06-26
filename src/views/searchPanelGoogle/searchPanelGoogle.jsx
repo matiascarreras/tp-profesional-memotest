@@ -72,8 +72,6 @@ class SearchPanelGoogle extends Component {
 
     render() {
 
-        var jwt = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDVCIsImV4cCI6MjE0NzQ4MzY0NywiYXVkIjoiSW9zIiwidWlkIjoiIiwiaWF0IjoxNDk3MjE5MDg2LCJpZCI6MTU0OTUsImVudiI6Imh0dHA6XC9cL2N0LmNvbVwvIn0.KRoWsjJsKl23VnZFcSmhH2fl6hbwL9k0xkqmKenfhRY'
-
         var googleImagesResultsClass = classnames({
             'googleImagesResults': true,
             'hide': !this.props.googleImagesResults,

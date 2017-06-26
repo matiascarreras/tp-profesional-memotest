@@ -7,14 +7,22 @@ import './reports.css';
 import logo from '../../assets/header/logo.svg'
 import reportsSelector from '../../selectors/reports_selector'
 import reportsActions from '../../actions/reportsActions'
+import appActions from '../../actions/appActions'
 import bindActionsToDispatch from '../../helpers/bindActionsToDispatch'
 import * as constants from '../../constants/constants'
 import MemotestPiece from '../../components/memotestPiece/memotestPiece'
 
 class Reports extends Component {
 
+	componentDidMount(){
+	  if(this.props.slideId){
+	    this.props.actions.intializeMemotest(this.props.slideId, this.props.jwt)    
+	  }
+	}
+
 	listMemotestPieces(pieces){
 	    let elements = []
+	    pieces.sort(function(a, b){return a.id -b.id})
 	    var _this = this
 	    for (var i = 0; i < pieces.length; i++) {
 	        elements.push(
@@ -22,6 +30,10 @@ class Reports extends Component {
 	        )
 	    }
 	    return elements
+	}
+
+	showStudentsResponsesTable(jwt){
+		this.props.actions.getStudentResponses(jwt)
 	}
 
 	render() {
@@ -49,6 +61,7 @@ class Reports extends Component {
 		    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
 		    		</div>
 		    		}
+		    		{this.showStudentsResponsesTable(this.props.jwt)}
 		    		<table className="memotest-reports-table">
 		    			<thead>
 		    				<tr>
@@ -89,6 +102,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
     return bindActionsToDispatch({
         getStudentResponses: reportsActions.getStudentResponses,
+        intializeMemotest: appActions.intializeMemotest
     }, dispatch)
 }
 
