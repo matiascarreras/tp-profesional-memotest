@@ -27,11 +27,9 @@ class App extends Component {
 
   componentDidMount(){
     let params = this.getUrlParams()
-    if((this.props.jwt == '' && !this.props.presentationId) || (this.props.jwt != params.jwt)){
-      this.props.actions.saveUrlParams(params.id, params.jwt)
-    }
-    if(this.props.slideId){
-      this.props.actions.intializeMemotest(this.props.slideId, params.jwt)    
+    this.props.actions.saveUrlParams(params.id, params.jwt, params.slideId)
+    if(params.slideId){
+      this.props.actions.intializeMemotest(params.slideId, params.jwt)    
     }
   }
 

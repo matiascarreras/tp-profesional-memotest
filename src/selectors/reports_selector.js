@@ -18,8 +18,6 @@ const reportsSelector = createSelector(
       pieces: memotestData.pieces,
       triviaQuestionText: memotestData.triviaQuestionText,
       triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
-      jwt: memotestData.jwt,
-      slideId: memotestData.slideId
     }
   }
 )

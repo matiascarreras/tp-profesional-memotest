@@ -26,8 +26,6 @@ const liveSessionStudentSelector = createSelector(
       selectedPieces: memotestData.selectedPieces,
       matches: memotestData.matches,
       cantPieces: cantPieces,
-      jwt: memotestData.jwt,
-      slideId: memotestData.slideId
     }
   }
 )

@@ -36,9 +36,16 @@ class LiveSessionStudent extends Component {
 	}
 
 	componentDidMount(){
-	  if(this.props.slideId){
-	    this.props.actions.intializeMemotest(this.props.slideId, this.props.jwt)    
-	  }
+	  let params = this.getUrlParams()
+	  this.props.actions.intializeMemotest(params.slideId, params.jwt)
+	}
+
+	getUrlParams() {
+	  var params = {};
+	  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+	    params[key] = value;
+	  });
+	  return params;
 	}
 
 	listMemotestPieces(pieces){
@@ -89,9 +96,9 @@ class LiveSessionStudent extends Component {
 		this.props.actions.saveMemotestPieceSelected(pieceId)
 		setTimeout(()=>this.props.actions.validateMatch(),2000)
 		this.setState({ moves: this.state.moves + 1 })
-		var array = [];
-		array["moves"] = this.state.moves + 1;
-		this.props.actions.saveStudentResponse(array, this.props.jwt);
+		var studentResponse["moves"] = this.state.moves + 1;
+		let params = this.getUrlParams()
+		this.props.actions.saveStudentResponse(studentResponse, params.jwt);
 	}
 
 	triviaButtonClick(){
@@ -111,10 +118,11 @@ class LiveSessionStudent extends Component {
 				this.setState({ overlayInfoAfterTxt: ''})
 				this.setState({ overlayButton: localize('live_session_student_trivia_incorrect_answer_btn') })
 				this.setState({ finalQuestionAttemps: this.state.finalQuestionAttemps + 1 });
-				var array = [];
-				array["moves"] = this.state.moves;
-				array["finalQuestionAttemps"] = this.state.finalQuestionAttemps + 1;
-				this.props.actions.saveStudentResponse(array, this.props.jwt);
+				var studentResponse = [];
+				studentResponse["moves"] = this.state.moves;
+				studentResponse["finalQuestionAttemps"] = this.state.finalQuestionAttemps + 1;
+				let params = this.getUrlParams()
+				this.props.actions.saveStudentResponse(studentResponse, params.jwt);
 			}
 		} else {
 			this.setState({ showTriviaMissingAnswerMessage: true });

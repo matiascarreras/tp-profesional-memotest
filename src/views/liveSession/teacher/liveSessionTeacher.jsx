@@ -13,11 +13,18 @@ import MemotestPiece from '../../../components/memotestPiece/memotestPiece'
 class LiveSessionTeacher extends Component {
 
 	componentDidMount(){
-	  if(this.props.slideId){
-	    this.props.actions.intializeMemotest(this.props.slideId, this.props.jwt)    
-	  }
+	  let params = this.getUrlParams()
+	  this.props.actions.intializeMemotest(params.slideId, params.jwt)
 	}
-	
+
+	getUrlParams() {
+	  var params = {};
+	  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+	    params[key] = value;
+	  });
+	  return params;
+	}
+
 	listMemotestPieces(pieces){
 	    let elements = []
 	    var _this = this

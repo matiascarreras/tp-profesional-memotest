@@ -15,9 +15,16 @@ import MemotestPiece from '../../components/memotestPiece/memotestPiece'
 class Reports extends Component {
 
 	componentDidMount(){
-	  if(this.props.slideId){
-	    this.props.actions.intializeMemotest(this.props.slideId, this.props.jwt)    
-	  }
+	  let params = this.getUrlParams()
+	  this.props.actions.intializeMemotest(params.slideId, params.jwt)
+	}
+
+	getUrlParams() {
+	  var params = {};
+	  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+	    params[key] = value;
+	  });
+	  return params;
 	}
 
 	listMemotestPieces(pieces){
@@ -32,8 +39,9 @@ class Reports extends Component {
 	    return elements
 	}
 
-	showStudentsResponsesTable(jwt){
-		this.props.actions.getStudentResponses(jwt)
+	showStudentsResponsesTable(){
+		let params = this.getUrlParams()
+		this.props.actions.getStudentResponses(params.jwt)
 	}
 
 	render() {
@@ -61,7 +69,7 @@ class Reports extends Component {
 		    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
 		    		</div>
 		    		}
-		    		{this.showStudentsResponsesTable(this.props.jwt)}
+		    		{this.showStudentsResponsesTable()}
 		    		<table className="memotest-reports-table">
 		    			<thead>
 		    				<tr>

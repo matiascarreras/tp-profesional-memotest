@@ -184,6 +184,7 @@ function saveUrlParams(state, action){
   let newState = {...state}
   newState.presentationId = parseInt(action.presentationId)
   newState.jwt = action.jwt
+  newState.slideId = parseInt(action.slideId)
   return newState
 }
 

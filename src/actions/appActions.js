@@ -36,11 +36,12 @@ let appActions = {
     }
   },
 
-  saveUrlParams: function(presentationId, jwt) {
+  saveUrlParams: function(presentationId, jwt, slideId) {
     return { 
       type: types.SAVE_URL_PARAMS,
       presentationId: presentationId,
-      jwt: jwt
+      jwt: jwt,
+      slideId: slideId
     }
   },
 
