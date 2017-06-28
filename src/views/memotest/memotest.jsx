@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import classnames from 'classnames'
+import SwitchButton from 'react-switch-button';
+import 'react-switch-button/dist/react-switch-button.css';
 
 import './memotest.css';
 import MemotestPiece from '../../components/memotestPiece/memotestPiece'
-import SwitchButton from '../../components/switchButton/switchButton'
 import TextButton from '../../components/textButton/textButton'
 import * as constants from '../../constants/constants'
 import memotestActions from '../../actions/memotestActions'
@@ -126,21 +127,21 @@ class Memotest extends Component {
                     </div>
                 </div>
                 <div className="control-panel">
-                  <SwitchButton isChecked={this.props.isTriviaQuestionEnable} text={localize('final_question_switch')} onClick={this.handleTriviaQuestionClick.bind(this)}/>
-                  <TextButton text={localize('btn_next')} id="button-next" class={nextBtnClass} onClick={this.handleNextBtnClick.bind(this)}/>
-                  <TextButton text={localize('btn_done')} id="button-done" class={doneBtnClass} onClick={this.handleDoneBtnClick.bind(this)}/>
+                    <SwitchButton name="final-question-switch" label={localize('final_question_switch')} defaultChecked={this.props.isTriviaQuestionEnable} onChange={this.handleTriviaQuestionClick.bind(this)}/>
+                    <TextButton text={localize('btn_next')} id="button-next" class={nextBtnClass} onClick={this.handleNextBtnClick.bind(this)}/>
+                    <TextButton text={localize('btn_done')} id="button-done" class={doneBtnClass} onClick={this.handleDoneBtnClick.bind(this)}/>
                 </div>
                 <div id="opacityModal" className={opacityModalClass}/>
                 <div className={alertMessageClass}>
-                  <span id="alert-message-closeBtn" onClick={this.handleCloseBtnClick.bind(this)}>
-                    <img alt="" src={closeImage} className="alert-message-closeBtn"/>
-                  </span>
-                  <div>
-                    <span>{localize('empty_pieces_error_msg')}</span>
-                  </div>
-                  <div className="buttons">
-                    <button type="button" className="btn-gotIt" onClick={this.handleGotItBtnClick.bind(this)} value={localize('btn_got_it')}>{localize('btn_got_it')}</button>
-                  </div>
+                    <span id="alert-message-closeBtn" onClick={this.handleCloseBtnClick.bind(this)}>
+                        <img alt="" src={closeImage} className="alert-message-closeBtn"/>
+                    </span>
+                    <div>
+                        <span>{localize('empty_pieces_error_msg')}</span>
+                    </div>
+                    <div className="buttons">
+                        <button type="button" className="btn-gotIt" onClick={this.handleGotItBtnClick.bind(this)} value={localize('btn_got_it')}>{localize('btn_got_it')}</button>
+                    </div>
                 </div>
         	</div>
         );
