@@ -79,7 +79,9 @@ class Memotest extends Component {
 
     listMemotestPieces(pieces, cantPieces){
         let elements = []
-        pieces.sort(function(a, b){return a.id -b.id})
+        if(pieces.length == cantPieces){
+            pieces.sort(function(a, b){return a.id -b.id})        
+        }
         var _this = this
         for (var i = 0; i < cantPieces; i++) {
             elements.push(

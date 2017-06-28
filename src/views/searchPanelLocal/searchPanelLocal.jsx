@@ -38,51 +38,51 @@ class SearchPanelLocal extends Component {
     }
 
     handleLocalUploadMouseOver() {
-        this.setState({ localIcon: localIconButtonHover });
+      this.setState({ localIcon: localIconButtonHover })
     }
 
     handleLocalUploadMouseOut() {
-        this.setState({ localIcon: localIconButton });
+      this.setState({ localIcon: localIconButton })
     }
 
     handleDropboxUploadMouseOver() {
-        this.setState({ dropboxIcon: dropboxIconButtonHover });
+      this.setState({ dropboxIcon: dropboxIconButtonHover })
     }
 
     handleDropboxUploadMouseOut() {
-        this.setState({ dropboxIcon: dropboxIconButton });
+      this.setState({ dropboxIcon: dropboxIconButton })
     }
 
     handleBoxUploadMouseOver() {
-        this.setState({ boxIcon: boxIconButtonHover });
+      this.setState({ boxIcon: boxIconButtonHover })
     }
 
     handleBoxUploadMouseOut() {
-        this.setState({ boxIcon: boxIconButton });
+      this.setState({ boxIcon: boxIconButton })
     }
 
     handleOneDriveUploadMouseOver() {
-        this.setState({ oneDriveIcon: oneDriveIconButtonHover });
+        this.setState({ oneDriveIcon: oneDriveIconButtonHover })
     }
 
     handleOneDriveUploadMouseOut() {
-        this.setState({ oneDriveIcon: oneDriveIconButton });
+        this.setState({ oneDriveIcon: oneDriveIconButton })
     }
 
     handleGdriveUploadMouseOver() {
-        this.setState({ gdriveIcon: gdriveIconButtonHover });
+        this.setState({ gdriveIcon: gdriveIconButtonHover })
     }
 
     handleGdriveUploadMouseOut() {
-        this.setState({ gdriveIcon: gdriveIconButton });
+        this.setState({ gdriveIcon: gdriveIconButton })
     }
 
     handleCloseBtnClick(){
-      this.setState({ showAlertMessage: false });
+      this.setState({ showAlertMessage: false })
     }
 
     handleGotItBtnClick(){
-      this.setState({ showAlertMessage: false });
+      this.setState({ showAlertMessage: false })
     }
 
     onDragStart(src, event) {
@@ -93,7 +93,7 @@ class SearchPanelLocal extends Component {
           textStyle: ''
         }
 
-        event.dataTransfer.setData('text', JSON.stringify(data)); 
+        event.dataTransfer.setData('text', JSON.stringify(data))
       }
     }
 
@@ -110,7 +110,7 @@ class SearchPanelLocal extends Component {
     }
 
     onDropRejected(files) {
-      this.setState({ showAlertMessage: true });
+      this.setState({ showAlertMessage: true })
     }
 
     openLocalUploadFiles() {
@@ -156,8 +156,28 @@ class SearchPanelLocal extends Component {
     }
 
     launchOneDrivePicker(odOptions){
-        OneDrive.open(odOptions);
-      }
+      OneDrive.open(odOptions);
+    }
+
+    oneDriveFilePickerSuccess(files) {
+      let filesArray = []
+      files.value.forEach(function(file){
+          filesArray.push({
+              size: file["size"],
+              name: file["name"],
+              link: file["@microsoft.graph.downloadUrl"]
+          })
+      })
+      this.props.actions.saveUploadersFiles(filesArray)
+    }
+
+    oneDriveFilePickerCancel(){
+
+    }
+
+    oneDriveFilePickerError(e){
+
+    }
 
     launchBoxPicker(boxOptions){
       var boxSelect = new BoxSelect(boxOptions);
@@ -189,9 +209,9 @@ class SearchPanelLocal extends Component {
           action: "download",
           multiSelect: true,
           advanced: {},
-          success: function(files) { /* success handler */ },
-          cancel: function() { /* cancel handler */ },
-          error: function(e) { /* error handler */ }
+          success: this.oneDriveFilePickerSuccess.bind(this),
+          cancel: this.oneDriveFilePickerCancel.bind(this),
+          error: this.oneDriveFilePickerError.bind(this)
         }
 
         var dropzoneClass = classnames({

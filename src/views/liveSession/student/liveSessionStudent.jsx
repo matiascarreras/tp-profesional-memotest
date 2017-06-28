@@ -96,7 +96,8 @@ class LiveSessionStudent extends Component {
 		this.props.actions.saveMemotestPieceSelected(pieceId)
 		setTimeout(()=>this.props.actions.validateMatch(),2000)
 		this.setState({ moves: this.state.moves + 1 })
-		var studentResponse["moves"] = this.state.moves + 1;
+		var studentResponse = [];
+		studentResponse["moves"] = this.state.moves + 1;
 		let params = this.getUrlParams()
 		this.props.actions.saveStudentResponse(studentResponse, params.jwt);
 	}
