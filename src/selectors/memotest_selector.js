@@ -19,7 +19,7 @@ const memotestSelector = createSelector(
     return {
       gridSize: memotestData.gridSize,
       pieces: memotestData.pieces,
-      isTriviaQuestionEnable: true,
+      isTriviaQuestionEnable: memotestData.isTriviaQuestionEnable,
       triviaQuestionText: memotestData.triviaQuestionText,
       triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
       showTrivia: memotestData.showTrivia,

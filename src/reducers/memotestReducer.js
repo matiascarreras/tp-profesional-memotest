@@ -16,9 +16,9 @@ const initialState = {
   showTrivia: false,
   selectedPieces: [],
   matches: [],
-  slideId: 1000026,
-  jwt: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJDVCIsImV4cCI6MjE0NzQ4MzY0NywiYXVkIjoiSW9zIiwidWlkIjoiIiwiaWF0IjoxNDk4NDQ1NjE2LCJpZCI6MTU0OTUsImVudiI6Imh0dHA6XC9cL2N0LmNvbVwvIn0.Wa8ApMPcybqKIQxx4fc9x1Q9zqTQZGuhu60t8MWvZP8',
-  presentationId: 106140,
+  slideId: "",
+  jwt: "",
+  presentationId: "",
 }
 
 const arrayPieces = []
