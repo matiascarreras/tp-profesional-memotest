@@ -33,7 +33,7 @@
 }
 
 #memotest-content #memotest .control-panel {
-    width: 915px;
+    width: 100%;
     height: 40px;
 }
 
@@ -56,6 +56,12 @@
 #memotest-content #memotest .control-panel #button-next,
 #memotest-content #memotest .control-panel #button-done {
     right: 0;
+}
+
+#memotest-content #memotest .control-panel .rsbc-switch-button {
+  position: absolute;
+  bottom: 24px;
+  right: 150px;
 }
 
 #memotest-content #memotest .control-panel .rsbc-switch-button.rsbc-switch-button-flat-round input[type="checkbox"] + label {
