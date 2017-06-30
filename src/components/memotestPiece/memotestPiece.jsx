@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './memotestPiece.css';
 import classnames from 'classnames';
 import Textarea from 'react-textarea-autosize';
+import { Textfit } from 'react-textfit';
 
 import * as constants from '../../constants/constants'
 

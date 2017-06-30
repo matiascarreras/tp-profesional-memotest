@@ -3,7 +3,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'VerdanaRegular', Arial, Helvetica, sans-serif;
+    font-family: '"avenir-light"', Arial, Helvetica, sans-serif;
     overflow: hidden;
     transform-origin: 0px 0px;
     -moz-transform-origin: 0px 0px;
@@ -67,7 +67,7 @@ h2#title {
     overflow: hidden;
     text-overflow: ellipsis;
     color: #888;
-    font-family: 'avenirroman', Arial, Helvetica, sans-serif;
+    font-family: 'avenir-roman', Arial, Helvetica, sans-serif;
     font-size: 20px;
     line-height: 75px;
     margin: 0;
@@ -160,7 +160,7 @@ h2#title {
     border-bottom: 1px solid #f3f3f3;
     font-size: 78%;
     vertical-align: middle;
-    font-family: "avenirmedium", Helvetica, Arial, sans-serif;
+    font-family: "avenir-medium", Helvetica, Arial, sans-serif;
     line-height: 12px;
     width: 20%;
     min-width: 150px;
@@ -181,7 +181,7 @@ h2#title {
 .memotest-reports-table tbody td {
     white-space: nowrap;
     overflow: hidden;
-    font-family: "avenirlight", Helvetica, Arial, sans-serif;
+    font-family: "avenir-light", Helvetica, Arial, sans-serif;
     text-align: center;
     vertical-align: middle;
     border: 1px solid #eaeef1;
@@ -200,7 +200,7 @@ h2#title {
     max-width: 986px;
     margin: 0 auto;
     color: #333;
-    font-family: 'avenirroman', Arial, Helvetica, sans-serif;
+    font-family: 'avenir-roman', Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: left;
     padding-top: 20px;

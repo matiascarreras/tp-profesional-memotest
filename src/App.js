@@ -85,7 +85,7 @@ class App extends Component {
         <Header title={localize('header_title')}/>
         <div id="menu" className={this.props.showTrivia ? "hide" : ""}>
           <button className={settingsBtnClass} onBlur={this.handleOnBlurGridMenu.bind(this)} onClick={this.openGridSizeMenu.bind(this)}>
-            {localize('btn_grid_size')}
+            <span>{localize('btn_grid_size')}</span>
             <img src={srcIcon} alt=""/>
             <ul id="item-list" className={this.state.showGridSizeMenu ? "" : "hide"}>
               <li className="memotest-size size_1" onClick={this.changeGridSize.bind(this, constants.SMALL_GRID_SIZE)}>

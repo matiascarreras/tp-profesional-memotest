@@ -3,10 +3,11 @@
 }
 
 #local-search-content {
-    height: 321px;
+    height: 240px;
     width: 240px;
     overflow: auto;
     float: left;
+    margin-top: 10px;
 }
 
 .spanLink {
@@ -39,11 +40,11 @@
 
 .uploadFile span {
     float: left;
-    width: 165px;
+    width: 176px;
     padding: 15px 0;
     color: #52585E;
     font-size: 14px;
-    font-family: arial;
+    font-family: "avenir-medium", arial;
     font-weight: bold;
 }
 
@@ -52,6 +53,11 @@
 }
 
 .drag-drop-zone{
+    border: none;
+    background: none;
+}
+
+.drag-drop-zone.empty{
     height: 160px;
     width: 100%;
     position: relative;
@@ -65,7 +71,7 @@
     border-color: #00a8ff;
 }
 
-.drag-drop-zone div{
+.drag-drop-zone .drag-drop-zone-text{
     text-align: center;
     position: relative;
     top: 37px;
@@ -73,6 +79,6 @@
     color: #313131;
 }
 
-.drag-drop-zone.active div{
+.drag-drop-zone.active .drag-drop-zone-text{
     color: #00a8ff;
 }

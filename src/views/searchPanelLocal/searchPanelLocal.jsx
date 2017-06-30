@@ -12,9 +12,9 @@ import dropboxIconButton from '../../assets/uploaderButton/dropboxIcon.svg'
 import dropboxIconButtonHover from '../../assets/uploaderButton/dropboxIcon-hover.svg'
 import boxIconButton from '../../assets/uploaderButton/boxIcon.svg'
 import boxIconButtonHover from '../../assets/uploaderButton/boxIcon-hover.svg'
-import oneDriveIconButton from '../../assets/uploaderButton/onedriveIcon.svg'
+import oneDriveIconButton from '../../assets/uploaderButton/onedriveIcon.png'
 import oneDriveIconButtonHover from '../../assets/uploaderButton/onedriveIcon-hover.png'
-import gdriveIconButton from '../../assets/uploaderButton/driveIcon.svg'
+import gdriveIconButton from '../../assets/uploaderButton/driveIcon.png'
 import gdriveIconButtonHover from '../../assets/uploaderButton/driveIcon-hover.png'
 import closeImage from '../../assets/searchPanelLocal/np-close-popup.svg'
 import './searchPanelLocal.css';
@@ -97,9 +97,10 @@ class SearchPanelLocal extends Component {
       }
     }
 
-    onDropAccepted(files) {
+    onDrop(acceptedFiles, rejectedFiles) {
+      if (acceptedFiles.length > 0) {
         let filesArray = []
-        files.forEach(function(file){
+        acceptedFiles.forEach(function(file){
             filesArray.push({
                 size: file.size,
                 name: file.name,
@@ -107,10 +108,9 @@ class SearchPanelLocal extends Component {
             })
         })
         this.props.actions.saveUploadersFiles(filesArray)
-    }
-
-    onDropRejected(files) {
-      this.setState({ showAlertMessage: true })
+      } else if (rejectedFiles.length > 0) {
+        this.setState({ showAlertMessage: true })
+      }
     }
 
     openLocalUploadFiles() {
@@ -216,7 +216,12 @@ class SearchPanelLocal extends Component {
 
         var dropzoneClass = classnames({
           'drag-drop-zone': true,
-          'hide': this.props.uploaderFiles.length > 0,
+          'empty': this.props.uploaderFiles.length === 0,
+        });
+
+        var dropzoneTextClass = classnames({
+          'drag-drop-zone-text': true,
+          'hide': this.props.uploaderFiles.length != 0,
         });
 
         var opacityModalClass = classnames({
@@ -230,7 +235,7 @@ class SearchPanelLocal extends Component {
         });
 
         var localSearchContentClass = classnames({
-            'hide': this.props.uploaderFiles.length === 0,
+          'hide': this.props.uploaderFiles.length === 0,
         });
 
         const CLIENT_ID = '843876855982-gr36gak7lm9pbitlcj4t5r7k6mosrrtc.apps.googleusercontent.com';
@@ -271,9 +276,6 @@ class SearchPanelLocal extends Component {
                               viewId={'DOCS'}>
                    <UploaderButton onMouseOver={this.handleGdriveUploadMouseOver.bind(this)} onMouseOut={this.handleGdriveUploadMouseOut.bind(this)} icon={this.state.gdriveIcon} id="browse-gdrive-file" text={localize('upload_gdrive')} name="googleDriveFile"/>
                 </GooglePicker>
-                <div id="local-search-content" className={localSearchContentClass}>
-                    {this.localSearchContentElements(this.props.uploaderFiles)}
-                </div>
                 <Dropzone 
                     ref={(node) => { this.dropzone = node; }}
                     className={dropzoneClass}
@@ -281,9 +283,11 @@ class SearchPanelLocal extends Component {
                     rejectClassName="active"
                     disableClick={true}
                     accept={"image/png, image/jpeg"}
-                    onDropAccepted={this.onDropAccepted.bind(this)}
-                    onDropRejected={this.onDropRejected.bind(this)}>
-                    <div>{localize('drag_and_drop')}</div>
+                    onDrop={this.onDrop.bind(this)}>
+                    <div id="local-search-content" className={localSearchContentClass}>
+                        {this.localSearchContentElements(this.props.uploaderFiles)}
+                    </div>
+                    <div className={dropzoneTextClass}>{localize('drag_and_drop')}</div>
                 </Dropzone>
                 <div id="opacityModal" className={opacityModalClass}/>
                 <div className={alertMessageClass}>

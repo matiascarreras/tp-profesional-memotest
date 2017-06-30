@@ -3,7 +3,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'VerdanaRegular', Arial, Helvetica, sans-serif;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
     overflow: hidden;
     transform-origin: 0px 0px;
     -moz-transform-origin: 0px 0px;
@@ -22,7 +22,7 @@
 }
 
 .overlayBox {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
     width: 635px;
     max-width: 635px;
     height: 300px;
@@ -41,14 +41,14 @@
     padding: 17px 0;
     font-size: 45px;
     color: #00a8ff;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
 }
 
 .overlayInfo {
     text-align: center;
     font-size: 19px;
     padding: 0 15px 36px 15px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
 }
 
 #triviaBox {
@@ -95,7 +95,7 @@
 
 .errorMessage {
     color: #F26C59;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
     margin: 15px 0;
 }
 
@@ -115,7 +115,7 @@
     display: block;
     padding: 10px 0;
     cursor: pointer;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
     font-size: 19px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -197,7 +197,7 @@ h2#title {
     overflow: hidden;
     text-overflow: ellipsis;
     color: #888;
-    font-family: 'avenirroman', Arial, Helvetica, sans-serif;
+    font-family: 'avenir-roman', Arial, Helvetica, sans-serif;
     font-size: 20px;
     line-height: 75px;
     margin: 0;

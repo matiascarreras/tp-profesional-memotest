@@ -1,9 +1,9 @@
 .button-icon{
     background-color: #ffffff;
 	width: 112px;
-    height: 38px;
+    height: 40px;
 	cursor: pointer;
-	font-family: 'roboto regular', Arial, Helvetica, sans-serif;
+	font-family: 'avenir-medium', Arial, Helvetica, sans-serif;
     font-size: 13px;
     -webkit-appearance: none;
 	padding: 10px 8px 7px 45px;
@@ -20,10 +20,15 @@
 	color: #ffffff;
 }
 
+.button-icon span {
+    top: 3px;
+    position: relative;
+}
+
 .button-icon img {
-    height: 38px;
+    height: 40px;
     left: -45px;
-    top: -25px;
+    top: -26px;
     position: relative;
     background-repeat: no-repeat;
 }

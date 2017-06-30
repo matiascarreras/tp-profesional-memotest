@@ -3,7 +3,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'VerdanaRegular', Arial, Helvetica, sans-serif;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
     overflow: hidden;
     transform-origin: 0px 0px;
     -moz-transform-origin: 0px 0px;
@@ -67,7 +67,7 @@ h2#title {
     overflow: hidden;
     text-overflow: ellipsis;
     color: #888;
-    font-family: 'avenirroman', Arial, Helvetica, sans-serif;
+    font-family: 'avenir-roman', Arial, Helvetica, sans-serif;
     font-size: 20px;
     line-height: 75px;
     margin: 0;
@@ -97,7 +97,7 @@ h2#title {
     max-width: 618px;
     margin: 0 auto;
     color: #333;
-    font-family: 'avenirroman', Arial, Helvetica, sans-serif;
+    font-family: 'avenir-roman', Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-align: left;
 }

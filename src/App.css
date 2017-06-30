@@ -31,16 +31,14 @@
 }
 
 #memotest-content #item-list {
-    top: -28px;
+    top: -31px;
     background-color: white;
     position: relative;
     left: -46px;
-    margin: 0 0 0 -1px;
-    padding: 0;
     list-style: none;
     margin: 0;
     padding: 0;
-    font-family: VerdanaRegular;
+    font-family: "avenir-light";
     font-size: 14px;
     color: #313131;
 }
@@ -53,7 +51,7 @@
     height: 38px;
     cursor: pointer;
     background-repeat: no-repeat;
-    width: 109px;
+    width: 110px;
     float: left;
     border: 1px solid black;
     border-top: none;
@@ -75,7 +73,7 @@
     width: 14px;
     height: 14px;
     position: absolute;
-    top: 5px;
+    top: 9px;
     left: 2px;
 }
 
@@ -117,7 +115,7 @@
 
 .alert-message span{
     color: #8b9195;
-    font-family: "avenirlight",Helvetica,Arial,sans-serif;
+    font-family: "avenir-light",Helvetica,Arial,sans-serif;
     font-size: 14px;
     line-height: 20px;
     margin-bottom: 20px;
@@ -136,7 +134,7 @@
     border-radius: 3px;
     cursor: pointer;
     display: block;
-    font-family: "avenirlight",Helvetica,Arial,sans-serif;
+    font-family: "avenir-light",Helvetica,Arial,sans-serif;
     font-weight: 200;
     text-align: center;
     line-height: 40px;
