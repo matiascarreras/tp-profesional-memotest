@@ -19,15 +19,15 @@ var publicPath, config
 switch (ENV) {
 	case 'local':
 		publicPath = '/assets/'
+		config = 'local'
+	break;
+	case 'ct':
+		publicPath = 'assets/'
+		config = 'ct'
 	break;
 	case 'dev':
-		publicPath = 'https://www-dev.nearpod.us/' + Date.now() + '/assets/'
-	break;
-	case 'test':
-		publicPath = 'https://www-test.nearpod.com/' + Date.now() + '/assets/'
-	break;
-	case 'prod':
-		publicPath = 'https://www.nearpod.com/' + Date.now() + '/assets/'
+		publicPath = 'assets/'
+		config = 'dev'
 	break;
 }
 
@@ -52,6 +52,9 @@ if(TARGET === 'start' || !TARGET) {
 		resolve: {
 			root: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')],
 			extensions: ['', '.js', '.jsx'],
+			alias: {
+				config: 'config/'+config+'.js'
+			}
 		},
 		module: {
 			loaders: [
@@ -126,6 +129,9 @@ if(TARGET === 'build') {
 		resolve: {
 			root: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')],
 			extensions: ['', '.js', '.jsx'],
+			alias: {
+				config: 'config/'+config+'.js'
+			}
 		},
 		module: {
 			loaders: [

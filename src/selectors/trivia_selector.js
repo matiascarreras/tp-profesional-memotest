@@ -26,7 +26,8 @@ const triviaSelector = createSelector(
       cantPieces:cantPieces,
       presentationId: memotestData.presentationId,
       jwt: memotestData.jwt,
-      slideId: memotestData.slideId
+      slideId: memotestData.slideId,
+      returnUrl: memotestData.returnUrl
     }
   }
 )

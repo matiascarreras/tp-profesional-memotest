@@ -19,6 +19,7 @@ const initialState = {
   slideId: "",
   jwt: "",
   presentationId: "",
+  returnUrl: "",
 }
 
 const arrayPieces = []
@@ -75,7 +76,7 @@ function saveUploadersFiles(state, action){
 
 function saveMemotestPiece(state, action){
   let newState = {...state}
-  let newPieces = {...state.pieces}
+  let newPieces = [...state.pieces]
   let newPiece = {...state.pieces[action.id]}
   newPiece.type = action.pieceType
   if(action.pieceType === constants.MEMOTEST_PIECE_TYPE_TEXT){
@@ -141,6 +142,7 @@ function getMemotestDataFailed(state, action){
 function saveMemotestDataSuccess(state, action){
   let newState = {...state}
   newState.slideId = action.payload.custom_slide.id
+  window.location(action.returnUrl)
   return newState
 }
 
@@ -184,7 +186,14 @@ function saveUrlParams(state, action){
   let newState = {...state}
   newState.presentationId = parseInt(action.presentationId)
   newState.jwt = action.jwt
-  newState.slideId = parseInt(action.slideId)
+  newState.returnUrl = action.returnUrl
+  return newState
+}
+
+function updateMemotestDataSuccess(state, action){
+  let newState = {...state}
+  newState.slideId = action.payload.custom_slide.id
+  window.location(action.returnUrl)
   return newState
 }
 
@@ -224,6 +233,8 @@ const memotestReducer = (state = initialState, action) => {
       return validateMatch(state, action)
     case types.SAVE_URL_PARAMS:
       return saveUrlParams(state, action)
+    case types.UPDATE_MEMOTEST_DATA_SUCCESS:
+      return updateMemotestDataSuccess(state, action)
     default:
       return state
   }

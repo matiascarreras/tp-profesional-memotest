@@ -4,6 +4,7 @@ import Dropzone from 'react-dropzone'
 import GooglePicker from 'react-google-picker'
 import DropboxChooser from 'react-dropbox-chooser'
 import classnames from 'classnames'
+import config from '../../config/dev.js'
 
 import UploaderButton from '../../components/uploaderButton/uploaderButton'
 import localIconButton from '../../assets/uploaderButton/localBtn.svg'
@@ -205,7 +206,7 @@ class SearchPanelLocal extends Component {
     render() {
 
         var odOptions = {
-          clientId: "47aff83b-5eee-41e8-a9b3-ef8c03adac9c",
+          clientId: config.oneDriveClientId,
           action: "download",
           multiSelect: true,
           advanced: {},
@@ -238,16 +239,16 @@ class SearchPanelLocal extends Component {
           'hide': this.props.uploaderFiles.length === 0,
         });
 
-        const CLIENT_ID = '843876855982-gr36gak7lm9pbitlcj4t5r7k6mosrrtc.apps.googleusercontent.com';
-        const DEVELOPER_KEY = 'AIzaSyBxKfnBnJNs0WoCvUo6As5kYpIGhjS2r4E';
+        const CLIENT_ID = config.googleDriveClientId;
+        const DEVELOPER_KEY = config.googleDriveDeveloperKey;
         const SCOPE = ['https://www.googleapis.com/auth/drive',
                 'https://www.googleapis.com/auth/userinfo.email',
                 'https://www.googleapis.com/auth/userinfo.profile'];
-        const APP_KEY = '158dtt39zf0zj9k';
-
+        
+        const APP_KEY = config.dropboxAppKey;
 
         var boxOptions = {
-            clientId: 'bfedi0ts41mxl9fo6avttlenvpfj9ap1',
+            clientId: config.boxClientId,
             linkType: 'direct',
             multiselect: 'true'
         };

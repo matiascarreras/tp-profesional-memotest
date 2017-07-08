@@ -17,7 +17,7 @@ let appActions = {
     }
   },
 
-  saveMemotestData: function(presentationId, completed, title, data_all, data_teacher, jwt) {
+  saveMemotestData: function(presentationId, completed, title, data_all, data_teacher, jwt, returnUrl) {
     return { 
       type: types.SAVE_MEMOTEST_DATA,
       presentationId: presentationId,
@@ -25,7 +25,8 @@ let appActions = {
       title: title,
       data_all: data_all,
       data_teacher: data_teacher,
-      jwt: jwt
+      jwt: jwt,
+      returnUrl: returnUrl
     }
   },
 
@@ -36,16 +37,16 @@ let appActions = {
     }
   },
 
-  saveUrlParams: function(presentationId, jwt, slideId) {
+  saveUrlParams: function(presentationId, jwt, returnUrl) {
     return { 
       type: types.SAVE_URL_PARAMS,
       presentationId: presentationId,
       jwt: jwt,
-      slideId: slideId
+      returnUrl: returnUrl
     }
   },
 
-  updateMemotestData: function(presentationId, completed, title, data_all, data_teacher, jwt, slideId) {
+  updateMemotestData: function(presentationId, completed, title, data_all, data_teacher, jwt, slideId, returnUrl) {
     return { 
       type: types.UPDATE_MEMOTEST_DATA,
       presentationId: presentationId,
@@ -54,7 +55,8 @@ let appActions = {
       data_all: data_all,
       data_teacher: data_teacher,
       jwt: jwt,
-      slideId: slideId
+      slideId: slideId,
+      returnUrl: returnUrl
     }
   },
 

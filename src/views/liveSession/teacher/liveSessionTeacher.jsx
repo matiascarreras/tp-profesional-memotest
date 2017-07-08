@@ -14,7 +14,9 @@ class LiveSessionTeacher extends Component {
 
 	componentDidMount(){
 	  let params = this.getUrlParams()
-	  this.props.actions.intializeMemotest(params.slideId, params.jwt)
+	    if(params.id){
+	  	  this.props.actions.intializeMemotest(params.id, params.jwt)  	
+	    }
 	}
 
 	getUrlParams() {

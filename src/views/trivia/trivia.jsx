@@ -47,9 +47,9 @@ class Trivia extends Component {
             this.props.pieces.splice(this.props.cantPieces)
             this.shuffle(this.props.pieces)
             if(this.props.slideId){
-                this.props.actions.updateMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId)
+                this.props.actions.updateMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId, this.props.returnUrl)
             } else {
-                this.props.actions.saveMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt)            
+                this.props.actions.saveMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.returnUrl)            
             }
         }
     }

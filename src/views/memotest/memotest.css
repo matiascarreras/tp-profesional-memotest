@@ -53,6 +53,17 @@
     background-color: #4cc2ff;
 }
 
+#memotest-content #memotest .control-panel .button-text.white{
+    background-color: #ffffff;
+    color: #00a8ff;
+    border: 2px solid #00a8ff;
+}
+
+#memotest-content #memotest .control-panel .button-text.white:hover{
+    background-color: #00a8ff;
+    color: #ffffff;
+}
+
 #memotest-content #memotest .control-panel #button-next,
 #memotest-content #memotest .control-panel #button-done {
     right: 0;

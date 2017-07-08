@@ -16,7 +16,9 @@ class Reports extends Component {
 
 	componentDidMount(){
 	  let params = this.getUrlParams()
-	  this.props.actions.intializeMemotest(params.slideId, params.jwt)
+	  if(params.id){
+	  	this.props.actions.intializeMemotest(params.id, params.jwt)
+	  }
 	}
 
 	getUrlParams() {
@@ -41,7 +43,9 @@ class Reports extends Component {
 
 	showStudentsResponsesTable(){
 		let params = this.getUrlParams()
-		this.props.actions.getStudentResponses(params.jwt)
+		if(params.jwt){
+			this.props.actions.getStudentResponses(params.jwt)		
+		}
 	}
 
 	render() {
