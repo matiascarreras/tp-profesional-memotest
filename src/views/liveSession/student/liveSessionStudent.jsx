@@ -82,7 +82,7 @@ class LiveSessionStudent extends Component {
 
 	overlayButtonClick(){
 		this.setState({ showOverlayBox: false });
-		if(this.props.triviaQuestionText && (this.state.overlayInfoAfterTxt || this.state.triviaAnswer)){
+		if(this.props.isTriviaQuestionEnable && (this.state.overlayInfoAfterTxt || this.state.triviaAnswer)){
 			this.setState({ showTriviaBox: true });
 		} else {
 			this.setState({ showOverlay: false });
@@ -98,10 +98,12 @@ class LiveSessionStudent extends Component {
 		this.props.actions.saveMemotestPieceSelected(pieceId)
 		setTimeout(()=>this.props.actions.validateMatch(),2000)
 		this.setState({ moves: this.state.moves + 1 })
+		var moves = Math.floor((this.state.moves + 1) / 2)
 		var studentResponse = [];
-		studentResponse["moves"] = this.state.moves + 1;
+		studentResponse["moves"] = moves;
+		var responseText = "moves: " + moves
 		let params = this.getUrlParams()
-		this.props.actions.saveStudentResponse(studentResponse, params.jwt);
+		this.props.actions.saveStudentResponse(responseText, studentResponse, params.jwt);
 	}
 
 	triviaButtonClick(){
@@ -120,12 +122,15 @@ class LiveSessionStudent extends Component {
 				this.setState({ overlayInfoBeforeTxt: localize('live_session_student_trivia_incorrect_answer_message') })
 				this.setState({ overlayInfoAfterTxt: ''})
 				this.setState({ overlayButton: localize('live_session_student_trivia_incorrect_answer_btn') })
-				this.setState({ finalQuestionAttemps: this.state.finalQuestionAttemps + 1 });
+				var finalQuestionAttemps = this.state.finalQuestionAttemps + 1
+				this.setState({ finalQuestionAttemps: finalQuestionAttemps });
 				var studentResponse = [];
-				studentResponse["moves"] = this.state.moves;
-				studentResponse["finalQuestionAttemps"] = this.state.finalQuestionAttemps + 1;
+				var moves = Math.floor(this.state.moves / 2)
+				studentResponse["moves"] = moves;
+				studentResponse["finalQuestionAttemps"] = finalQuestionAttemps;
+				var responseText = "moves: " + moves + ", final question attemps: " + finalQuestionAttemps
 				let params = this.getUrlParams()
-				this.props.actions.saveStudentResponse(studentResponse, params.jwt);
+				this.props.actions.saveStudentResponse(responseText, studentResponse, params.jwt);
 			}
 		} else {
 			this.setState({ showTriviaMissingAnswerMessage: true });
@@ -155,7 +160,7 @@ class LiveSessionStudent extends Component {
 			'hide': !this.state.showOverlay,
 		})
 
-		if(this.props.triviaQuestionText && this.state.overlayInfoAfterTxt){
+		if(this.props.isTriviaQuestionEnable && this.state.overlayInfoAfterTxt){
 			this.state.overlayButton =  localize('live_session_student_overlay_button_show_question')
 		}
 

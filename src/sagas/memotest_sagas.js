@@ -117,7 +117,7 @@ function *updateMemotestData(action){
 
 function *saveStudentResponse(action){
 	try {
-		const response = yield call(memotestSync.saveStudentResponse, action.response, action.jwt)
+		const response = yield call(memotestSync.saveStudentResponse, action.responseText, action.response, action.jwt)
 		if(response.error_code === 0) {
 			yield put({ 
 				type: types.SAVE_STUDENT_RESPONSE_SUCCESS,

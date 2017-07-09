@@ -70,7 +70,7 @@ class Memotest extends Component {
     }
 
     handleCancelBtnClick(){
-      window.location.href = this.props.returnUrl
+      window.top.location.href = this.props.returnUrl
     }
 
     handleOnDrop(id, type, textStyle, src){

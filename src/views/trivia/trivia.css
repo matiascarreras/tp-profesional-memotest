@@ -81,3 +81,7 @@
 #memotest-content #trivia .control-panel #button-done-trivia {
     right: 0;
 }
+
+#memotest-content #trivia .control-panel #button-cancel {
+    right: 110px;
+}

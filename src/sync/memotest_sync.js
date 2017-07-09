@@ -94,13 +94,13 @@ function updateMemotestData(presentationId, completed, title, data_all, data_tea
 	.catch(err => _genericCatch(err))
 }
 
-function saveStudentResponse(response, jwt) {
+function saveStudentResponse(responseText, response, jwt) {
 	return http_agent.post('https://api-dev.nearpod.us/v1/hub/student/responses')
 	//return http_agent.post('http://ct.api.com/v1/hub/student/responses')
 	.set('x-api-key', '7dabac64681a7c12c1cb97183c44de93')
 	.set('JWT', jwt)
 	.send({
-		response_text: "",
+		response_text: responseText,
 		response: response,
 	})
 	.use(superagentPromisePlugin)

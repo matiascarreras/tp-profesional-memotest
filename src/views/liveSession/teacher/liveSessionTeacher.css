@@ -107,12 +107,12 @@ h2#title {
 }
 
 #live-session-teacher #memotest-pieces-main .memotest-piece{
-    border:5px transparent solid;
+    border: none;
     box-sizing: border-box;
 }
 
 #live-session-teacher #memotest-pieces-main .memotest-piece.selected{
-    border-color: #00a8ff;
+    border: 5px #00a8ff solid;
 }
 
 #live-session-teacher #memotest-pieces-container.medium {
@@ -125,7 +125,7 @@ h2#title {
     width: 120px;
     max-height: 120px;
     margin-top: 40px;
-    padding: 0px;
+    padding: 5px;
 }
 
 #live-session-teacher #memotest-pieces-container.medium .memotest-piece.text textarea,
@@ -133,5 +133,5 @@ h2#title {
     width: 75px;
     max-height: 75px;
     margin-top: 15px;
-    padding: 0px;
+    padding: 5px;
 }

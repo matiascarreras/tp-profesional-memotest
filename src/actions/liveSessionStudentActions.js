@@ -15,9 +15,10 @@ let liveSessionStudentActions = {
    	}
   },
 
-  saveStudentResponse: function(response, jwt) {
+  saveStudentResponse: function(responseText, response, jwt) {
     return { 
         type: types.SAVE_STUDENT_RESPONSE,
+        responseText: responseText,
         response: response, 
         jwt: jwt
     }
