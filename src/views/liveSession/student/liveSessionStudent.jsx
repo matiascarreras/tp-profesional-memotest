@@ -99,8 +99,7 @@ class LiveSessionStudent extends Component {
 		setTimeout(()=>this.props.actions.validateMatch(),2000)
 		this.setState({ moves: this.state.moves + 1 })
 		var moves = Math.floor((this.state.moves + 1) / 2)
-		var studentResponse = [];
-		studentResponse["moves"] = moves;
+		var studentResponse = { moves: moves }
 		var responseText = "moves: " + moves
 		let params = this.getUrlParams()
 		this.props.actions.saveStudentResponse(responseText, studentResponse, params.jwt);
@@ -126,8 +125,7 @@ class LiveSessionStudent extends Component {
 				this.setState({ finalQuestionAttemps: finalQuestionAttemps });
 				var studentResponse = [];
 				var moves = Math.floor(this.state.moves / 2)
-				studentResponse["moves"] = moves;
-				studentResponse["finalQuestionAttemps"] = finalQuestionAttemps;
+				var studentResponse = { moves: moves, finalQuestionAttemps: finalQuestionAttemps }
 				var responseText = "moves: " + moves + ", final question attemps: " + finalQuestionAttemps
 				let params = this.getUrlParams()
 				this.props.actions.saveStudentResponse(responseText, studentResponse, params.jwt);
@@ -195,7 +193,7 @@ class LiveSessionStudent extends Component {
 			        <div id="overlayInfo" className="overlayInfo">
 			        	{this.state.overlayInfoBeforeTxt}
 			        	{this.state.overlayInfoAfterTxt
-			        	&& <span className="timetxt">{this.state.moves}</span>
+			        	&& <span className="timetxt">{Math.floor(this.state.moves / 2)}</span>
 			        	}
 			        	{this.state.overlayInfoAfterTxt}
 			        </div>

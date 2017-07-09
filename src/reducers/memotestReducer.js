@@ -186,7 +186,7 @@ function saveUrlParams(state, action){
   let newState = {...state}
   newState.presentationId = parseInt(action.presentationId)
   newState.jwt = action.jwt
-  newState.returnUrl = action.returnUrl
+  newState.returnUrl = decodeURIComponent(action.returnUrl)
   return newState
 }
 

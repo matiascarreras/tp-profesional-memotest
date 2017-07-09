@@ -30,21 +30,22 @@
 
 #trivia-pieces-container.small {
     height: 486px;
-    padding: 0px 53px;
+    padding: 0px 58px;
 }
 
 #trivia-pieces-container.medium {
     height: 424px;
-    padding: 0px 191px;
+    padding: 0px 196px;
 }
 
 #trivia-pieces-container.large {
     height: 424px;
-    padding: 0px 84px;
+    padding: 0px 91px;
 }
 
 #trivia-pieces-container .memotest-piece.selected{
     border: 4px #00a8ff solid;
+    box-sizing: border-box;
 }
 
 #memotest-content #trivia .control-panel {

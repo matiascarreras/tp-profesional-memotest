@@ -14,7 +14,7 @@ const liveSessionStudentSelector = createSelector(
     } else if (memotestData.gridSize === constants.MEDIUM_GRID_SIZE){
         memotestData.pieces.splice(16)
         cantPieces = 16
-    } else if (this.props.gridSize === constants.LARGE_GRID_SIZE){
+    } else if (memotestData.gridSize === constants.LARGE_GRID_SIZE){
         cantPieces = 24
     }
 
