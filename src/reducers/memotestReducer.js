@@ -142,7 +142,7 @@ function getMemotestDataFailed(state, action){
 function saveMemotestDataSuccess(state, action){
   let newState = {...state}
   newState.slideId = action.payload.custom_slide.id
-  window.location(action.returnUrl)
+  window.location.href = action.returnUrl
   return newState
 }
 
@@ -193,7 +193,7 @@ function saveUrlParams(state, action){
 function updateMemotestDataSuccess(state, action){
   let newState = {...state}
   newState.slideId = action.payload.custom_slide.id
-  window.location(action.returnUrl)
+  window.location.href = action.returnUrl
   return newState
 }
 

@@ -27,7 +27,7 @@ class App extends Component {
 
   componentDidMount(){
     window.top.postMessage({type: 'change_iframe_height', height: '718px'}, '*')
-    window.top.postMessage({type: 'change_iframe_width', height: '960px'}, '*')
+    window.top.postMessage({type: 'change_iframe_width', width: '960px'}, '*')
     let params = this.getUrlParams()
     this.props.actions.saveUrlParams(params.presentation_id, params.jwt, params.returnUrl)
     if(params.id){

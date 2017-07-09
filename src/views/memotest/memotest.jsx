@@ -69,6 +69,10 @@ class Memotest extends Component {
         }
     }
 
+    handleCancelBtnClick(){
+      window.location.href = this.props.returnUrl
+    }
+
     handleOnDrop(id, type, textStyle, src){
         this.props.actions.saveMemotestPiece(id, type, textStyle, src)
     }
@@ -130,6 +134,7 @@ class Memotest extends Component {
                 </div>
                 <div className="control-panel">
                     <SwitchButton name="final-question-switch" label={localize('final_question_switch')} defaultChecked={this.props.isTriviaQuestionEnable} onChange={this.handleTriviaQuestionClick.bind(this)}/>
+                    <TextButton text={localize('btn_cancel')} id="button-cancel" class="button-text white" onClick={this.handleCancelBtnClick.bind(this)}/>
                     <TextButton text={localize('btn_next')} id="button-next" class={nextBtnClass} onClick={this.handleNextBtnClick.bind(this)}/>
                     <TextButton text={localize('btn_done')} id="button-done" class={doneBtnClass} onClick={this.handleDoneBtnClick.bind(this)}/>
                 </div>
