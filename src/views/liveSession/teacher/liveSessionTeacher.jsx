@@ -14,7 +14,9 @@ class LiveSessionTeacher extends Component {
 
 	componentDidMount(){
 	  let params = this.getUrlParams()
-	  this.props.actions.intializeMemotest(params.slideId, params.jwt)
+	    if(params.id){
+	  	  this.props.actions.intializeMemotest(params.id, params.jwt)  	
+	    }
 	}
 
 	getUrlParams() {
@@ -30,7 +32,7 @@ class LiveSessionTeacher extends Component {
 	    var _this = this
 	    for (var i = 0; i < pieces.length; i++) {
 	        elements.push(
-	        	<MemotestPiece key={i} disabled="true" correctAnswer={this.props.triviaQuestionCorrectAnswer} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
+	        	<MemotestPiece key={i} disabled="true" correctAnswer={(this.props.isTriviaQuestionEnable)?this.props.triviaQuestionCorrectAnswer:""} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
 	        )
 	    }
 	    return elements
@@ -51,7 +53,7 @@ class LiveSessionTeacher extends Component {
 	    		        {this.listMemotestPieces(this.props.pieces)}
 	    		    </div>
 	    		</div>
-	    		{this.props.triviaQuestionText
+	    		{this.props.isTriviaQuestionEnable
 	    		&& <div id="memotest-final-question" className={this.props.gridSize}>
 	    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
 	    		</div>

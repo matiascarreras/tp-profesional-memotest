@@ -30,7 +30,8 @@ function *saveMemotestData(action){
 		if(response.error_code === 0) {
 			yield put({ 
 				type: types.SAVE_MEMOTEST_DATA_SUCCESS,
-				payload: response.payload
+				payload: response.payload,
+				returnUrl: action.returnUrl
 			})
 		} else if(response.error_code === 1){
 			yield put({ 
@@ -99,7 +100,8 @@ function *updateMemotestData(action){
 		if(response.error_code === 0) {
 			yield put({ 
 				type: types.UPDATE_MEMOTEST_DATA_SUCCESS,
-				payload: response.payload
+				payload: response.payload,
+				returnUrl: action.returnUrl
 			})
 		} else if(response.error_code === 1){
 			yield put({ 
@@ -115,7 +117,7 @@ function *updateMemotestData(action){
 
 function *saveStudentResponse(action){
 	try {
-		const response = yield call(memotestSync.saveStudentResponse, action.response, action.jwt)
+		const response = yield call(memotestSync.saveStudentResponse, action.responseText, action.response, action.jwt)
 		if(response.error_code === 0) {
 			yield put({ 
 				type: types.SAVE_STUDENT_RESPONSE_SUCCESS,

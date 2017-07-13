@@ -1,5 +1,5 @@
 .memotest-piece{
-    border: 1px solid #5E5E5E;
+    border: none;
     display: inline-block;
     border-radius: 9px;
     background-size: 61%;
@@ -15,7 +15,8 @@
 
 .memotest-piece.drag-over{
     border: 1px dashed #5E5E5E;
-    opacity: 0.7;
+    box-sizing: border-box;
+    opacity: 0.6;
 }
 
 .memotest-piece.image img{

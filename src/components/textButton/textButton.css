@@ -1,10 +1,10 @@
 .button-text{
     width: 98px;
     border: 0;
-    padding: 13px;
+    padding: 11px;
     border-radius: 4px;
     font-size: 100%;
-    height: auto;
+    height: 40px;
     cursor: pointer;
     outline: none;
     font-family: 'avenir-medium'

@@ -16,7 +16,9 @@ class Reports extends Component {
 
 	componentDidMount(){
 	  let params = this.getUrlParams()
-	  this.props.actions.intializeMemotest(params.slideId, params.jwt)
+	  if(params.id){
+	  	this.props.actions.intializeMemotest(params.id, params.jwt)
+	  }
 	}
 
 	getUrlParams() {
@@ -33,7 +35,7 @@ class Reports extends Component {
 	    var _this = this
 	    for (var i = 0; i < pieces.length; i++) {
 	        elements.push(
-	        	<MemotestPiece key={i} disabled="true" correctAnswer={this.props.triviaQuestionCorrectAnswer} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
+	        	<MemotestPiece key={i} disabled="true" correctAnswer={(this.props.isTriviaQuestionEnable)?this.props.triviaQuestionCorrectAnswer:""} id={pieces[i].id} type={pieces[i].type} text={pieces[i].text} src={pieces[i].src} textStyle={pieces[i].textStyle}/>
 	        )
 	    }
 	    return elements
@@ -41,13 +43,15 @@ class Reports extends Component {
 
 	showStudentsResponsesTable(){
 		let params = this.getUrlParams()
-		this.props.actions.getStudentResponses(params.jwt)
+		if(params.jwt){
+			this.props.actions.getStudentResponses(params.jwt)		
+		}
 	}
 
 	render() {
 
 		var memotestPiecesMainClass = classnames(this.props.gridSize, {
-		    'no-final-question': !this.props.triviaQuestionText,
+		    'no-final-question': !this.props.isTriviaQuestionEnable,
 		});
 
 	    return (
@@ -64,7 +68,7 @@ class Reports extends Component {
 		    		        {this.listMemotestPieces(this.props.pieces)}
 		    		    </div>
 		    		</div>
-		    		{this.props.triviaQuestionText
+		    		{this.props.isTriviaQuestionEnable
 		    		&& <div id="memotest-final-question">
 		    			{localize('live_session_final_question')} {this.props.triviaQuestionText}
 		    		</div>
@@ -75,7 +79,7 @@ class Reports extends Component {
 		    				<tr>
 		    					<th>{localize('reports_student_nickname')}</th>
 		    				   	<th>{localize('reports_moves')}</th> 
-		    				    {this.props.triviaQuestionText
+		    				    {this.props.isTriviaQuestionEnable
 		    				    && <th>{localize('reports_final_question_trials')}</th>
 		    					}
 		    				</tr>
@@ -84,14 +88,14 @@ class Reports extends Component {
 		    		  		<tr>
 		    		  			<td>Mati</td>
 		    		  		    <td>14</td> 
-		    		  		    {this.props.triviaQuestionText
+		    		  		    {this.props.isTriviaQuestionEnable
 		    		  		    && <td>2</td>
 		    		  			}
 		    		  		</tr>
 		    		  		<tr>
 		    		  			<td>Alario</td>
 		    		  		    <td>10</td> 
-		    		  		    {this.props.triviaQuestionText
+		    		  		    {this.props.isTriviaQuestionEnable
 		    		  		    && <td>3</td>
 		    		  			}
 		    		  		</tr>

@@ -26,10 +26,12 @@ class App extends Component {
   }
 
   componentDidMount(){
+    window.top.postMessage({type: 'change_iframe_height', height: '718px'}, '*')
+    window.top.postMessage({type: 'change_iframe_width', width: '960px'}, '*')
     let params = this.getUrlParams()
-    this.props.actions.saveUrlParams(params.id, params.jwt, params.slideId)
-    if(params.slideId){
-      this.props.actions.intializeMemotest(params.slideId, params.jwt)    
+    this.props.actions.saveUrlParams(params.presentation_id, params.jwt, params.returnUrl)
+    if(params.id){
+      this.props.actions.intializeMemotest(params.id, params.jwt)    
     }
   }
 

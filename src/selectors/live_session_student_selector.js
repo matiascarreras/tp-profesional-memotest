@@ -14,13 +14,14 @@ const liveSessionStudentSelector = createSelector(
     } else if (memotestData.gridSize === constants.MEDIUM_GRID_SIZE){
         memotestData.pieces.splice(16)
         cantPieces = 16
-    } else if (this.props.gridSize === constants.LARGE_GRID_SIZE){
+    } else if (memotestData.gridSize === constants.LARGE_GRID_SIZE){
         cantPieces = 24
     }
 
     return {
       gridSize: memotestData.gridSize,
       pieces: memotestData.pieces,
+      isTriviaQuestionEnable: memotestData.isTriviaQuestionEnable,
       triviaQuestionText: memotestData.triviaQuestionText,
       triviaQuestionCorrectAnswer: memotestData.triviaQuestionCorrectAnswer,
       selectedPieces: memotestData.selectedPieces,

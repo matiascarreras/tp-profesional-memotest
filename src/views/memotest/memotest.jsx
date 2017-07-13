@@ -35,9 +35,9 @@ class Memotest extends Component {
             this.props.pieces.splice(this.props.cantPieces)
             this.shuffle(this.props.pieces)
             if(this.props.slideId){
-                this.props.actions.updateMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId)
+                this.props.actions.updateMemotestData(this.props.presentationId, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId, this.props.returnUrl)
             } else {
-                this.props.actions.saveMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt)            
+                this.props.actions.saveMemotestData(this.props.presentationId, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.returnUrl)            
             }
         }
     }
@@ -67,6 +67,10 @@ class Memotest extends Component {
         } else {
             this.props.actions.showTrivia(true)
         }
+    }
+
+    handleCancelBtnClick(){
+      window.top.location.href = this.props.returnUrl
     }
 
     handleOnDrop(id, type, textStyle, src){
@@ -130,6 +134,7 @@ class Memotest extends Component {
                 </div>
                 <div className="control-panel">
                     <SwitchButton name="final-question-switch" label={localize('final_question_switch')} defaultChecked={this.props.isTriviaQuestionEnable} onChange={this.handleTriviaQuestionClick.bind(this)}/>
+                    <TextButton text={localize('btn_cancel')} id="button-cancel" class="button-text white" onClick={this.handleCancelBtnClick.bind(this)}/>
                     <TextButton text={localize('btn_next')} id="button-next" class={nextBtnClass} onClick={this.handleNextBtnClick.bind(this)}/>
                     <TextButton text={localize('btn_done')} id="button-done" class={doneBtnClass} onClick={this.handleDoneBtnClick.bind(this)}/>
                 </div>

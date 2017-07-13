@@ -3,7 +3,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: '"avenir-light"', Arial, Helvetica, sans-serif;
+    font-family: "avenir-light", Arial, Helvetica, sans-serif;
     overflow: hidden;
     transform-origin: 0px 0px;
     -moz-transform-origin: 0px 0px;
@@ -102,7 +102,7 @@ h2#title {
 }
 
 #reports #memotest-pieces-main.large{
-    max-width: 782px;
+    max-width: 764px;
     height: 310px;
 }
 
@@ -115,7 +115,7 @@ h2#title {
     height: 75px;
     margin: 5px;
     background-size: 75px 75px;
-    border:1px black solid;
+    border:none;
     box-sizing: border-box;
 }
 
@@ -133,15 +133,16 @@ h2#title {
 #reports #memotest-pieces-container.medium .memotest-piece.text textarea,
 #reports #memotest-pieces-container.large .memotest-piece.text textarea {
     width: 63px;
-    max-height: 63px;
+    max-height: 52px;
     margin-top: 11px;
     padding: 5px;
+    font-size: 16px;
 }
 
 .memotest-reports-table{
     display: block;
     overflow: auto;
-    width: calc(100% - 120px);
+    width: 810px;
     margin: auto;
     margin-bottom: 10px;
     border-collapse: collapse;
@@ -197,7 +198,7 @@ h2#title {
 }
 
 #reports #memotest-final-question{
-    max-width: 986px;
+    max-width: 810px;
     margin: 0 auto;
     color: #333;
     font-family: 'avenir-roman', Arial, Helvetica, sans-serif;

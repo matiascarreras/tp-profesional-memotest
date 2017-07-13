@@ -41,7 +41,9 @@
   },
   "scripts": {
     "start": "webpack-dev-server --watch-poll --content-base src",
-    "build": "webpack --progress",
+    "build:local": "webpack --progress",
+    "build:ct": "webpack --progress",
+    "build:dev": "webpack --progress",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }

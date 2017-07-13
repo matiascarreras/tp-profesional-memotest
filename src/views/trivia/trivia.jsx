@@ -36,6 +36,10 @@ class Trivia extends Component {
         this.props.actions.showTrivia(false)
     }
 
+    handleCancelBtnClick(){
+      window.top.location.href = this.props.returnUrl
+    }
+    
     handleDoneBtnClick(){
         if(this.props.triviaQuestionText === ""){
             this.setState({ showAlertMessage: true });
@@ -47,10 +51,20 @@ class Trivia extends Component {
             this.props.pieces.splice(this.props.cantPieces)
             this.shuffle(this.props.pieces)
             if(this.props.slideId){
-                this.props.actions.updateMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId)
+                this.props.actions.updateMemotestData(this.props.presentationId, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId, this.props.returnUrl)
             } else {
-                this.props.actions.saveMemotestData(106140, 1, "Memory Test", this.props, this.props, this.props.jwt)            
+                this.props.actions.saveMemotestData(this.props.presentationId, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.returnUrl)            
             }
+        }
+    }
+
+    shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
         }
     }
 
@@ -95,6 +109,7 @@ class Trivia extends Component {
                 </div>
                 <div className="control-panel">
                   <TextButton text={localize('btn_back')} id="button-back" class="button-text white" onClick={this.handleBackBtnClick.bind(this)}/>
+                  <TextButton text={localize('btn_cancel')} id="button-cancel" class="button-text white" onClick={this.handleCancelBtnClick.bind(this)}/>
                   <TextButton text={localize('btn_done')} id="button-done-trivia" class="button-text blue" onClick={this.handleDoneBtnClick.bind(this)}/>
                 </div>
                 <div id="opacityModal" className={opacityModalClass}/>
