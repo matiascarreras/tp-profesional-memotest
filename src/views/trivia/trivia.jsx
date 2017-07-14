@@ -49,22 +49,11 @@ class Trivia extends Component {
             this.setState({ alertMessageText: localize('empty_final_question_correct_answer') });
         } else {
             this.props.pieces.splice(this.props.cantPieces)
-            this.shuffle(this.props.pieces)
             if(this.props.slideId){
                 this.props.actions.updateMemotestData(this.props.presentationId, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId, this.props.returnUrl)
             } else {
                 this.props.actions.saveMemotestData(this.props.presentationId, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.returnUrl)            
             }
-        }
-    }
-
-    shuffle(a) {
-        var j, x, i;
-        for (i = a.length; i; i--) {
-            j = Math.floor(Math.random() * i);
-            x = a[i - 1];
-            a[i - 1] = a[j];
-            a[j] = x;
         }
     }
 

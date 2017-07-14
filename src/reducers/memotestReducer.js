@@ -130,8 +130,21 @@ function getMemotestDataSuccess(state, action){
   newState.isTriviaQuestionEnable = action.payload.custom_slide.data_all.isTriviaQuestionEnable
   newState.triviaQuestionText = action.payload.custom_slide.data_all.triviaQuestionText
   newState.triviaQuestionCorrectAnswer = action.payload.custom_slide.data_all.triviaQuestionCorrectAnswer
+  if(action.isStudent){
+    shuffle(action.payload.custom_slide.data_all.pieces)
+  }
   newState.pieces = action.payload.custom_slide.data_all.pieces
   return newState
+}
+
+function shuffle(a) {
+    var j, x, i;
+    for (i = a.length; i; i--) {
+        j = Math.floor(Math.random() * i);
+        x = a[i - 1];
+        a[i - 1] = a[j];
+        a[j] = x;
+    }
 }
 
 function getMemotestDataFailed(state, action){

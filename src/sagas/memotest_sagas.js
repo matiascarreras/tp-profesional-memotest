@@ -9,7 +9,8 @@ function *getMemotestData(action){
 		if(response.error_code === 0) {
 			yield put({ 
 				type: types.GET_MEMOTEST_DATA_SUCCESS,
-				payload: response.payload
+				payload: response.payload,
+				isStudent: action.isStudent
 			})
 		} else if(response.error_code === 1){
 			yield put({ 

@@ -38,7 +38,7 @@ class LiveSessionStudent extends Component {
 	componentDidMount(){
 	  let params = this.getUrlParams()
 	  if(params.id){
-		  this.props.actions.intializeMemotest(params.id, params.jwt)  	
+		  this.props.actions.intializeMemotest(params.id, params.jwt, true)  	
 	  }
 	}
 
@@ -107,6 +107,14 @@ class LiveSessionStudent extends Component {
 
 	triviaButtonClick(){
 		this.setState({ showTriviaMissingAnswerMessage: false });
+		var finalQuestionAttemps = this.state.finalQuestionAttemps + 1
+		this.setState({ finalQuestionAttemps: finalQuestionAttemps });
+		var studentResponse = [];
+		var moves = Math.floor(this.state.moves / 2)
+		var studentResponse = { moves: moves, finalQuestionAttemps: finalQuestionAttemps }
+		var responseText = "moves: " + moves + ", final question attemps: " + finalQuestionAttemps
+		let params = this.getUrlParams()
+		this.props.actions.saveStudentResponse(responseText, studentResponse, params.jwt);
 		if(this.state.triviaAnswer){
 			this.setState({ showTriviaBox: false })
 			this.setState({ showOverlayBox: true })
@@ -121,14 +129,6 @@ class LiveSessionStudent extends Component {
 				this.setState({ overlayInfoBeforeTxt: localize('live_session_student_trivia_incorrect_answer_message') })
 				this.setState({ overlayInfoAfterTxt: ''})
 				this.setState({ overlayButton: localize('live_session_student_trivia_incorrect_answer_btn') })
-				var finalQuestionAttemps = this.state.finalQuestionAttemps + 1
-				this.setState({ finalQuestionAttemps: finalQuestionAttemps });
-				var studentResponse = [];
-				var moves = Math.floor(this.state.moves / 2)
-				var studentResponse = { moves: moves, finalQuestionAttemps: finalQuestionAttemps }
-				var responseText = "moves: " + moves + ", final question attemps: " + finalQuestionAttemps
-				let params = this.getUrlParams()
-				this.props.actions.saveStudentResponse(responseText, studentResponse, params.jwt);
 			}
 		} else {
 			this.setState({ showTriviaMissingAnswerMessage: true });

@@ -33,22 +33,11 @@ class Memotest extends Component {
             this.setState({ showAlertMessage: true })
         } else {
             this.props.pieces.splice(this.props.cantPieces)
-            this.shuffle(this.props.pieces)
             if(this.props.slideId){
                 this.props.actions.updateMemotestData(this.props.presentationId, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.slideId, this.props.returnUrl)
             } else {
                 this.props.actions.saveMemotestData(this.props.presentationId, 1, "Memory Test", this.props, this.props, this.props.jwt, this.props.returnUrl)            
             }
-        }
-    }
-
-    shuffle(a) {
-        var j, x, i;
-        for (i = a.length; i; i--) {
-            j = Math.floor(Math.random() * i);
-            x = a[i - 1];
-            a[i - 1] = a[j];
-            a[j] = x;
         }
     }
 
@@ -83,9 +72,6 @@ class Memotest extends Component {
 
     listMemotestPieces(pieces, cantPieces){
         let elements = []
-        if(pieces.length == cantPieces){
-            pieces.sort(function(a, b){return a.id -b.id})        
-        }
         var _this = this
         for (var i = 0; i < cantPieces; i++) {
             elements.push(

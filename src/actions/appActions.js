@@ -9,11 +9,12 @@ let appActions = {
     }
   },
 
-  intializeMemotest: function(id, jwt) {
+  intializeMemotest: function(id, jwt, isStudent) {
     return { 
       type: types.INITIALIZE_MEMOTEST,
       id: id,
-      jwt: jwt
+      jwt: jwt,
+      isStudent: isStudent
     }
   },
 

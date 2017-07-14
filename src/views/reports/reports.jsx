@@ -31,7 +31,6 @@ class Reports extends Component {
 
 	listMemotestPieces(pieces){
 	    let elements = []
-	    pieces.sort(function(a, b){return a.id -b.id})
 	    var _this = this
 	    for (var i = 0; i < pieces.length; i++) {
 	        elements.push(
