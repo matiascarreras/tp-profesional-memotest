@@ -113,6 +113,7 @@
 .memotest-piece.text.font1 > textarea{
     background-color: #ffffff;
     color: #000000;
+    -webkit-text-fill-color: #000000;
     font-family: Dosis;
     font-size: 26px;
 }
@@ -120,6 +121,7 @@
 .memotest-piece.text.font2 > textarea{
     background-color: #737373;
     color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     font-family: Dosis;
     font-size: 26px;
     opacity: 1;
@@ -128,6 +130,7 @@
 .memotest-piece.text.font3 > textarea{
     background-color: #FFB583;
     color: #000000;
+    -webkit-text-fill-color: #000000;
     font-family: "Grand Hotel";
     font-size: 33px;
 }
@@ -135,6 +138,7 @@
 .memotest-piece.text.font4 > textarea{
     background-color: #F45656;
     color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     font-family: "Grand Hotel";
     font-size: 33px;
     opacity: 1;
@@ -143,6 +147,7 @@
 .memotest-piece.text.font5 > textarea{
     background-color: #9EFACB;
     color: #000000;
+    -webkit-text-fill-color: #000000;
     font-family: Arial;
     font-size: 22px;
 }
@@ -150,6 +155,7 @@
 .memotest-piece.text.font6 > textarea{
     background-color: #4FCD8D;
     color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     font-family: Arial;
     font-size: 22px;
     opacity: 1;
@@ -158,6 +164,7 @@
 .memotest-piece.text.font7 > textarea{
     background-color: #AADAFF;
     color: #000000;
+    -webkit-text-fill-color: #000000;
     font-family: Times;
     font-size: 24px;
     opacity: 1;
@@ -166,6 +173,7 @@
 .memotest-piece.text.font8 > textarea{
     background-color: #579BE0;
     color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     font-family: Times;
     font-size: 24px;
     opacity: 1;
@@ -174,6 +182,7 @@
 .memotest-piece.text.font9 > textarea{
     background-color: #FFF9B7;
     color: #000000;
+    -webkit-text-fill-color: #000000;
     font-family: "Great Vibes";
     font-size: 33px;
 }
@@ -181,6 +190,7 @@
 .memotest-piece.text.font10 > textarea{
     background-color: #C5A8F0;
     color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
     font-family: "Great Vibes";
     font-size: 33px;
     opacity: 1;

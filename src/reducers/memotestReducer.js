@@ -178,19 +178,22 @@ function saveMemotestPieceSelected(state, action){
 
 function validateMatch(state, action){
   let newState = {...state}
-  let firstPieceId = state.selectedPieces[0]
-  let secondPieceId = state.selectedPieces[1]
-  let newMatches = state.matches
-  if(firstPieceId != undefined && secondPieceId != undefined){
-    if(Math.abs(firstPieceId - secondPieceId) === 1){
-      if(firstPieceId % 2 === 1 && firstPieceId > secondPieceId ||
-        secondPieceId % 2 === 1 && secondPieceId > firstPieceId){
-        newMatches = newMatches.concat(firstPieceId)
-        newMatches = newMatches.concat(secondPieceId)
+  let newSelectedPieces = [...state.selectedPieces]
+  let newMatches = [...state.matches]
+  if(newSelectedPieces.length >= 2){
+    let firstPieceId = newSelectedPieces.shift()
+    let secondPieceId = newSelectedPieces.shift()
+    if(firstPieceId != undefined && secondPieceId != undefined){
+      if(Math.abs(firstPieceId - secondPieceId) === 1){
+        if(firstPieceId % 2 === 1 && firstPieceId > secondPieceId ||
+          secondPieceId % 2 === 1 && secondPieceId > firstPieceId){
+          newMatches = newMatches.concat(firstPieceId)
+          newMatches = newMatches.concat(secondPieceId)
+        }
       }
     }
-    newState.selectedPieces = [] 
   }
+  newState.selectedPieces = newSelectedPieces
   newState.matches = newMatches
   return newState
 }
